@@ -28,7 +28,7 @@
         <version>6.0.0.redhat-00001</version>
         <relativePath/>
     </parent>
-    <artifactId>tp3</artifactId>
+    <artifactId>Volundr</artifactId>
     <version>8.0.0.GA</version>
     <packaging>war</packaging>
     <name>Quickstart: helloworld</name>
