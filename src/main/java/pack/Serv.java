@@ -2,6 +2,7 @@ package pack;
 
 import java.io.IOException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.ejb.EJB;
 // import jakarta.ejb.EJB;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -12,19 +13,59 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/Serv")
 public class Serv extends HttpServlet {
 
+  @EJB
+  Facade facade;
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-    throws ServletException, IOException {
+      throws ServletException, IOException {
 
-    RequestDispatcher rd = req.getRequestDispatcher("index.html");
+    RequestDispatcher rd = req.getRequestDispatcher("login.html");
+    // String op = req.getParameter("op");
     rd.forward(req, resp);
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-    throws ServletException, IOException {
+      throws ServletException, IOException {
 
-    RequestDispatcher rd = req.getRequestDispatcher("index.html");
-    rd.forward(req, resp);
+    switch (req.getParameter("op")) {
+      case "chargerutilisateur":
+        String mail = req.getParameter("mail");
+        String password = req.getParameter("password");
+        if (facade.verifierUtilisateur(mail, password)) {
+          req.getRequestDispatcher("default.html").forward(req, resp);
+        } else {
+          req.getRequestDispatcher("testlogin.html").forward(req, resp);
+        }
+        break;
+      case "inscrireutilisateur":
+        String nom = req.getParameter("nom");
+        String prenom = req.getParameter("prenom");
+        String newmail = req.getParameter("newmail");
+        String cmail = req.getParameter("cmail");
+        String newpassword = req.getParameter("newpassword");
+        String cword = req.getParameter("cword");
+        if (newmail.equals(cmail) && newpassword.equals(cword)) {
+          if (facade.verifierMail(cmail)) {
+            req.getRequestDispatcher("inscription3.html").forward(req, resp);
+          } else {
+            facade.ajoutUtilisateur(nom, prenom, newmail, newpassword);
+            req.getRequestDispatcher("index.html").forward(req, resp);
+          }
+        } else {
+          req.getRequestDispatcher("testinscription.html").forward(req, resp);
+        }
+
+        break;
+      case "creerutilisateur":
+        req.getRequestDispatcher("inscription.html").forward(req, resp);
+        break;
+      case "retournerarriere":
+        req.getRequestDispatcher("index.html").forward(req, resp);
+        break;
+    }
+
+    // req.forward(req, resp);
   }
 }
