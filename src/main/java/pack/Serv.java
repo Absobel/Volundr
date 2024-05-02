@@ -34,7 +34,8 @@ public class Serv extends HttpServlet {
         String mail = req.getParameter("mail");
         String password = req.getParameter("password");
         if (facade.verifierUtilisateur(mail, password)) {
-          req.getRequestDispatcher("default.html").forward(req, resp);
+          req.setAttribute("userSession", facade.getUserSession());
+          req.getRequestDispatcher("default.jsp").forward(req, resp);
         } else {
           req.getRequestDispatcher("testlogin.html").forward(req, resp);
         }
@@ -63,6 +64,23 @@ public class Serv extends HttpServlet {
         break;
       case "retournerarriere":
         req.getRequestDispatcher("index.html").forward(req, resp);
+        break;
+      case "creeretablissement":
+        req.getRequestDispatcher("ajoutEtablissement.html").forward(req, resp);
+        break;
+      case "ajoutetablissement":
+        String ename = req.getParameter("nomEtablissement");
+        facade.ajoutEtablissement(ename);
+        req.setAttribute("userSession", facade.getUserSession());
+        req.getRequestDispatcher("default.jsp").forward(req, resp);
+        break;
+      case "listeetablissements":
+        req.setAttribute("listeetablissements", facade.listeEtablissements());
+        req.getRequestDispatcher("listeretablissements.jsp").forward(req, resp);
+        break;
+      case "listeutilisateurs":
+        req.setAttribute("listeutilisateurs", facade.listeUsers());
+        req.getRequestDispatcher("listerutilisateurs.jsp").forward(req, resp);
         break;
     }
 
