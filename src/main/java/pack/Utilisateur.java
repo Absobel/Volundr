@@ -2,6 +2,7 @@ package pack;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Utilisateur {
@@ -14,6 +15,9 @@ public class Utilisateur {
     private String prenom;
 
     private String password; /* probablement à changer */
+
+    @ManyToOne
+    private Etablissement etablissement;
 
     public String getMail() {
         return mail;
@@ -45,6 +49,14 @@ public class Utilisateur {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Etablissement getEtablissement() {
+        return etablissement;
+    }
+
+    public void setEtablissement(Etablissement etablissement) {
+        this.etablissement = etablissement;
     }
 
 }
