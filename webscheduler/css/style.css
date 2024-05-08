@@ -1,0 +1,107 @@
+main {
+  height: 50vh;
+  width: 70vw;
+}
+
+.scheduler {
+  height: 100%;
+  width: 100%;
+}
+
+.scheduler li {
+  list-style: none;
+}
+
+.scheduler ul {
+  padding: 0;
+}
+
+.scheduler .salles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(autof, 1fr);
+}
+
+.scheduler .salles > li {
+  border : solid thin;
+  flex-grow: 1;
+  
+  /* on change la position pour pouvoir
+     placer les creneaux par rapport à la salle */
+  position: relative;
+}
+
+.scheduler .salles .spacer {
+  flex-grow: 0.1;
+  border: none;
+}
+
+.scheduler .cases {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.scheduler .cases > li {
+  border-top : solid thin grey;
+  flex-grow: 1;
+}
+
+.scheduler .cases > li:hover {
+  background : yellow;
+}
+
+.scheduler .creneaux {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(8, 1fr);
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+  
+  /* on superpose les creneaux sur les heures */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.scheduler .creneaux > li {  
+  /* position relative pour pouvoir position absolute dedans */
+  position: relative;
+}
+
+.scheduler .creneaux > li > div {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  right: 0.2rem;
+  bottom: 0.2rem;
+  border-radius: 0.3rem;
+  
+  background: red;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.2rem;
+  
+  pointer-events: auto;
+}
+
+.scheduler .creneaux > li > div:hover {
+  background: yellow;
+}
+
+.scheduler .creneaux > li > div * {
+  min-width: 0;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  text-align: center;
+  margin: 0;
+}
