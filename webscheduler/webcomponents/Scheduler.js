@@ -19,6 +19,12 @@ export default class Scheduler extends HTMLElement {
     });
 
     this.appendChild(this.salles);
+
+    this.lastHover = null;
+
+    /* Liste de fonctions de callback pour quand on passe la souris sur
+     * une horaire */
+    this.caseHoverCallback = [];
   }
 
 }

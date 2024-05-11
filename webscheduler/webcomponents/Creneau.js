@@ -11,10 +11,12 @@ export default class Creneau extends HTMLElement {
 
   constructor () {
     super();
-    this.time = 0;
-    this.duration = 0;
     this.room = null;
   }
+
+  get time () { return toTime(this.getAttribute('data-time')) }
+
+  get duration () { return toTime(this.getAttribute('data-duration')) }
 
   static get observedAttributes() { return ['data-time', 'data-duration']; }
 
@@ -26,14 +28,12 @@ export default class Creneau extends HTMLElement {
     switch (name) {
       case 'data-time':
         var timeStart = toTime(this.room.getAttribute('data-time-start'));
-        this.time = toTime(newValue);
 
         /* attention grid-row-start doit commencer à 1 */
         this.parentElement.style.gridRowStart = `${this.time - timeStart + 1}`;
         break;
 
       case 'data-duration':
-        this.duration = toTime(newValue);
         this.parentElement.style.gridRowEnd = `span ${this.duration}`;
         break;
     }
@@ -42,7 +42,6 @@ export default class Creneau extends HTMLElement {
   }
 
   connectedCallback() {
-    let oldRoom = this.room;
     this.room = this.closest('volundr-room');
     Creneau.observedAttributes.map(x => this.setAttribute(x, this.getAttribute(x)))
 

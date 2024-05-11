@@ -95,7 +95,7 @@ volundr-creneau {
   justify-content: center;
   padding: 0.2rem;
   
-  pointer-events: auto;
+  /* pointer-events: auto;*/
 }
 
 volundr-creneau:hover {

@@ -34,6 +34,8 @@ export default class Room extends HTMLElement {
   constructor () {
     super();
 
+    this.scheduler = this.closest('volundr-scheduler');
+
     this.cases = document.createElement('ul');
     this.cases.classList.add('cases');
 
@@ -42,18 +44,20 @@ export default class Room extends HTMLElement {
 
     this.nbCreneaux = 0;
 
-    this.updateCreneauxList();
+    /** Ne pas l'appeler dans le constructeur
+     * sinon le webcomponent creneau n'a pas le temps de bien charger
+    this.updateCreneauxList(); */
 
     this.appendChild(this.cases);
     this.appendChild(this.creneaux);
   }
 
-  /** Nettoyer la liste des créneaux quand un nouveau fils
+  /** Nettoyer et actualiser la liste des créneaux quand un nouveau fils
    * est ajouté ou supprimé */
   updateCreneauxList () {
 
     /* supprimer les li vides ou elements qui ont rien à faire là */
-    Array.from(this.creneaux.children).forEach(element => {
+    for (let element of this.creneaux.children) {
 
       switch (element.tagName) {
         case "LI":
@@ -62,7 +66,6 @@ export default class Room extends HTMLElement {
           }
           break;
         case "VOLUNDR-CRENEAU":
-          console.log("test");
           let creneau = document.createElement('li');
           creneau.appendChild(element);
           this.creneaux.appendChild(creneau);
@@ -71,14 +74,26 @@ export default class Room extends HTMLElement {
           element.remove();
           break;
       }
-    });
+    }
 
     /* ajouter les nouveaux créneaux à la liste des créneaux */
     Array.from(this.children).forEach(element => {
       if (element.tagName === "VOLUNDR-CRENEAU") {
         let creneau = document.createElement('li');
         creneau.appendChild(element);
-        this.creneaux.appendChild(creneau);
+
+        /* le but est d'insérer en respectant l'ordre des temps de début */
+        let existing = null; /* l'élément avant lequel on doit insérer */
+        for (let el of this.creneaux.getElementsByTagName('volundr-creneau')) {
+          if (existing === null || (el.time < existing.time)) {
+            if (element.time < el.time) {
+              existing = el;
+            }
+          }
+        }
+
+        this.creneaux.insertBefore(creneau,
+          existing === null ? null : existing.parentElement);
       }
     });
 
@@ -89,6 +104,12 @@ export default class Room extends HTMLElement {
 
   static get observedAttributes() { return ['data-name', 'data-time-start', 'data-time-end']; }
 
+  /** L'heure du début du temps affiché pour placer des créneaux */
+  get timeStart() { return toTime(this.getAttribute('data-time-end')) }
+
+  /** L'heure de la fin du temps affiché pour placer des créneaux */
+  get timeEnd() { return toTime(this.getAttribute('data-time-end')) }
+
   attributeChangedCallback (name, oldValue, newValue) {
     if (newValue === null) {
       return
@@ -96,18 +117,40 @@ export default class Room extends HTMLElement {
 
     switch (name) {
       case 'data-time-start', 'data-time-end':
+
+        /* on ne peut pas utiliser this.timeStart/End car récursion infinie */
         let nbCases = toTime(this.getAttribute('data-time-end'))
           - toTime(this.getAttribute('data-time-start'));
 
         this.creneaux.style.gridTemplateRows = `repeat(${nbCases}, 1fr)`;
 
+        /* on change le nombre de balises li dans le tableau des cases.
+         * ça sert à l'affichage et à pouvoir sélectionner l'heure ou placer
+         * le créneau quand on passe la souris dessus */
         let nbLi = Math.ceil(nbCases / 15);
 
+        /* On supprime ceux en trop */
         while (this.cases.childElementCount > nbLi) {
-          this.cases.removeChild(this.cases.lastChild);
+          let lastChild = this.cases.lastChild;
+          this.cases.removeChild(lastChild);
         }
+
+        /* On rajoute ceux qui manquent */
         while (this.cases.childElementCount < nbLi) {
-          this.cases.appendChild(document.createElement('li'));
+          let newLi = document.createElement('li');
+          let time = this.cases.childElementCount * 15 +
+            toTime(this.getAttribute('data-time-start'));
+
+          /* événement au survol, on peut le récupérer dans nos scripts
+           * via le tableau de fonctions de callback de l'objet Scheduler */
+          newLi.addEventListener("mousemove", () => {
+            if (this.scheduler.lastHover !== newLi) {
+              this.scheduler.caseHoverCallback.map(x => x(this, time));
+            }
+            this.scheduler.lastHover = newLi;
+          });
+
+          this.cases.appendChild(newLi);
         }
 
         break;
