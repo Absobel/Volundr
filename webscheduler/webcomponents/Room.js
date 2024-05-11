@@ -34,19 +34,19 @@ export default class Room extends HTMLElement {
   constructor () {
     super();
 
-    this.scheduler = this.closest('volundr-scheduler');
-
     this.cases = document.createElement('ul');
     this.cases.classList.add('cases');
 
     this.creneaux = document.createElement('ul');
     this.creneaux.classList.add('creneaux');
 
-    this.nbCreneaux = 0;
-
     /** Ne pas l'appeler dans le constructeur
      * sinon le webcomponent creneau n'a pas le temps de bien charger
     this.updateCreneauxList(); */
+  }
+
+  connectedCallback() {
+    this.scheduler = this.closest('volundr-scheduler');
 
     this.appendChild(this.cases);
     this.appendChild(this.creneaux);

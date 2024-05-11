@@ -2,7 +2,9 @@ export default class Scheduler extends HTMLElement {
 
   constructor () {
     super();
+  }
 
+  connectedCallback() {
     this.salles = document.createElement('ul');
     this.salles.classList.add('salles');
 
@@ -27,9 +29,8 @@ export default class Scheduler extends HTMLElement {
     /* Liste de fonctions de callback pour quand on passe la souris sur
      * une horaire */
     this.caseHoverCallback = [];
-  }
 
-  connectedCallback() {
+
     /* On conseille de forcer le display à none dans
      * le html pour éviter que ça clignote. On rend à nouveau visible ici */
     this.style = "";
