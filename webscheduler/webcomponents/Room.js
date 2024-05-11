@@ -105,7 +105,7 @@ export default class Room extends HTMLElement {
   static get observedAttributes() { return ['data-name', 'data-time-start', 'data-time-end']; }
 
   /** L'heure du début du temps affiché pour placer des créneaux */
-  get timeStart() { return toTime(this.getAttribute('data-time-end')) }
+  get timeStart() { return toTime(this.getAttribute('data-time-start')) }
 
   /** L'heure de la fin du temps affiché pour placer des créneaux */
   get timeEnd() { return toTime(this.getAttribute('data-time-end')) }
@@ -115,54 +115,46 @@ export default class Room extends HTMLElement {
       return
     }
 
-    switch (name) {
-      case 'data-time-start', 'data-time-end':
+    /* on ne peut pas utiliser this.timeStart/End car récursion infinie */
+    let nbCases = toTime(this.getAttribute('data-time-end'))
+      - toTime(this.getAttribute('data-time-start'));
 
-        /* on ne peut pas utiliser this.timeStart/End car récursion infinie */
-        let nbCases = toTime(this.getAttribute('data-time-end'))
-          - toTime(this.getAttribute('data-time-start'));
+    this.creneaux.style.gridTemplateRows = `repeat(${nbCases}, 1fr)`;
 
-        this.creneaux.style.gridTemplateRows = `repeat(${nbCases}, 1fr)`;
-
-        /* on change le nombre de balises li dans le tableau des cases.
+    /* on change le nombre de balises li dans le tableau des cases.
          * ça sert à l'affichage et à pouvoir sélectionner l'heure ou placer
          * le créneau quand on passe la souris dessus */
-        let nbLi = Math.ceil(nbCases / 15);
+    let nbLi = Math.ceil(nbCases / 15);
 
-        /* On supprime ceux en trop */
-        while (this.cases.childElementCount > nbLi) {
-          let lastChild = this.cases.lastChild;
-          this.cases.removeChild(lastChild);
-        }
-
-        /* On rajoute ceux qui manquent */
-        while (this.cases.childElementCount < nbLi) {
-          let newLi = document.createElement('li');
-          let time = this.cases.childElementCount * 15 +
-            toTime(this.getAttribute('data-time-start'));
-
-          /* événement au survol, on peut le récupérer dans nos scripts
-           * via le tableau de fonctions de callback de l'objet Scheduler */
-          newLi.addEventListener("mousemove", () => {
-            if (this.scheduler.lastHover !== newLi) {
-              this.scheduler.caseHoverCallback.map(x => x(this, time));
-            }
-            this.scheduler.lastHover = newLi;
-          });
-
-          /* Ajouter le texte de l'heure */
-          if (time % 60 === 0) {
-            let hourSpan = document.createElement('span');
-            hourSpan.textContent = `${time / 60}h`;
-            newLi.appendChild(hourSpan);
-          }
-
-          this.cases.appendChild(newLi);
-        }
-
-        break;
+    /* On supprime tout */
+    while (this.cases.childElementCount > 0) {
+      this.cases.removeChild(this.cases.lastChild);
     }
 
+    /* On rajoute ceux qui manquent */
+    while (this.cases.childElementCount < nbLi) {
+      let newLi = document.createElement('li');
+      let time = this.cases.childElementCount * 15 +
+        toTime(this.getAttribute('data-time-start'));
+
+      /* événement au survol, on peut le récupérer dans nos scripts
+           * via le tableau de fonctions de callback de l'objet Scheduler */
+      newLi.addEventListener("mousemove", () => {
+        if (this.scheduler.lastHover !== newLi) {
+          this.scheduler.caseHoverCallback.map(x => x(this, time));
+        }
+        this.scheduler.lastHover = newLi;
+      });
+
+      /* Ajouter le texte de l'heure */
+      if (time % 60 === 0) {
+        let hourSpan = document.createElement('span');
+        hourSpan.textContent = `${time / 60}h`;
+        newLi.appendChild(hourSpan);
+      }
+
+      this.cases.appendChild(newLi);
+    }
   }
 
   /** mettre le bon nombre de colonnes à la grille css des créneaux
