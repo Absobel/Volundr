@@ -150,6 +150,13 @@ export default class Room extends HTMLElement {
             this.scheduler.lastHover = newLi;
           });
 
+          /* Ajouter le texte de l'heure */
+          if (time % 60 === 0) {
+            let hourSpan = document.createElement('span');
+            hourSpan.textContent = `${time / 60}h`;
+            newLi.appendChild(hourSpan);
+          }
+
           this.cases.appendChild(newLi);
         }
 

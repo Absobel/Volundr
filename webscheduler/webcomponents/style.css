@@ -34,7 +34,7 @@ volundr-scheduler .salles > li {
 }
 
 volundr-scheduler .salles .spacer {
-  flex-grow: 0.1;
+  flex-grow: 0.2;
   border: none;
 }
 
@@ -47,6 +47,15 @@ volundr-scheduler .cases {
 volundr-scheduler .cases > li {
   border-top : solid thin grey;
   flex-grow: 1;
+  
+  /* position relative pour pouvoir position absolute dedans */
+  position: relative;
+}
+
+volundr-scheduler .cases > li span {
+  position: absolute;
+  right: calc(0.3rem + 100%);
+  top: 0;
 }
 
 volundr-scheduler .cases > li:nth-child(8n+1),
