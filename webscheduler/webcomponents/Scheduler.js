@@ -27,4 +27,10 @@ export default class Scheduler extends HTMLElement {
     this.caseHoverCallback = [];
   }
 
+  connectedCallback() {
+    /* On conseille de forcer le display à none dans
+     * le html pour éviter que ça clignote. On rend à nouveau visible ici */
+    this.style = "";
+  }
+
 }
