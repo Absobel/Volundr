@@ -23,11 +23,16 @@ export default class Scheduler extends HTMLElement {
     /* On conseille de forcer le display à none dans
      * le html pour éviter que ça clignote. On rend à nouveau visible ici */
     this.style = "";
+
+    this.lock = false;
   }
 
   /** Nettoyer et actualiser la liste des salles quand un nouveau fils
    * est ajouté ou supprimé */
   updateSallesList () {
+    if (this.lock) { return }
+    this.lock = true;
+
     /* supprimer les li vides ou elements qui ont rien à faire là */
     let isPreviousSpacer = false; /* on supprime les spacer
                                      que s'il y en a 2 d'affilée */
@@ -61,16 +66,20 @@ export default class Scheduler extends HTMLElement {
     aSupprimer.map(x => x.remove());
 
     /* ajouter les nouvelles salles à la liste des salles */
+    let aAppend = [];
     for (let element of this.children) {
       if (element.tagName === "VOLUNDR-ROOM") {
         let salle = document.createElement('li');
         salle.appendChild(element);
-        this.salles.appendChild(salle);
+        aAppend.push(salle);
 
         let spacer = document.createElement('li');
         spacer.classList.add('spacer');
-        this.salles.appendChild(spacer);
+        aAppend.push(spacer);
       }
     }
+    aAppend.map(x => this.salles.appendChild(x));
+
+    this.lock = false;
   }
 }

@@ -13,6 +13,7 @@ test.textContent = 'téo pisenti';
 document.getElementsByTagName('volundr-scheduler')[0].caseHoverCallback = [
   ((room, time) => {
     if ((time + test.duration) <= room.timeEnd) {
+      test.remove();
       test.setAttribute('data-time', time);
       room.appendChild(test);
     }

@@ -21,7 +21,7 @@ export default class Creneau extends HTMLElement {
   static get observedAttributes() { return ['data-time', 'data-duration']; }
 
   attributeChangedCallback (name, oldValue, newValue) {
-    if (newValue === null || this.room === null) {
+    if (newValue === null || this.room === null || this.parentElement === null) {
       return
     }
 
