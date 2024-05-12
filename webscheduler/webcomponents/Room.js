@@ -118,13 +118,15 @@ export default class Room extends HTMLElement {
   get timeEnd() { return toTime(this.getAttribute('data-time-end')) }
 
   attributeChangedCallback (name, oldValue, newValue) {
-    if (newValue === null) {
+    let timeEnd = this.getAttribute('data-time-end');
+    let timeStart = this.getAttribute('data-time-start');
+
+    if (newValue === null || timeStart === null || timeEnd === null) {
       return
     }
 
     /* on ne peut pas utiliser this.timeStart/End car récursion infinie */
-    let nbCases = toTime(this.getAttribute('data-time-end'))
-      - toTime(this.getAttribute('data-time-start'));
+    let nbCases = toTime(timeEnd) - toTime(timeStart);
 
     this.creneaux.style.gridTemplateRows = `repeat(${nbCases}, 1fr)`;
 
