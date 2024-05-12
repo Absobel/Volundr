@@ -47,9 +47,16 @@ export default class Room extends HTMLElement {
 
   connectedCallback() {
     this.scheduler = this.closest('volundr-scheduler');
+    this.scheduler.updateSallesList();
 
     this.appendChild(this.cases);
     this.appendChild(this.creneaux);
+  }
+
+  disconnectedCallback () {
+    if (this.scheduler !== null) {
+      this.scheduler.updateSallesList();
+    }
   }
 
   /** Nettoyer et actualiser la liste des créneaux quand un nouveau fils
