@@ -155,6 +155,10 @@ export default class Room extends HTMLElement {
         this.scheduler.lastHover = newLi;
       });
 
+      newLi.addEventListener("click", () => {
+          this.scheduler.caseClickCallback.map(x => x(this, time));
+      });
+
       /* Ajouter le texte de l'heure */
       if (time % 60 === 0) {
         let hourSpan = document.createElement('span');

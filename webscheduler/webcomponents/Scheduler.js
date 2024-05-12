@@ -11,6 +11,10 @@ export default class Scheduler extends HTMLElement {
     /* Liste de fonctions de callback pour quand on passe la souris sur
      * une horaire */
     this.caseHoverCallback = [];
+
+    /* Liste de fonctions de callback pour quand on clique sur
+     * une horaire */
+    this.caseClickCallback = [];
   }
 
   connectedCallback() {
