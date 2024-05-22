@@ -1,5 +1,8 @@
 package pack;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Collection;
 
 import jakarta.ejb.Singleton;
@@ -64,9 +67,27 @@ public class Facade {
                 Utilisateur.class).getResultList();
     }
 
-    public Collection<Etablissement> listeEtablissements(){
+    public Collection<Etablissement> listeEtablissements() {
         return em.createQuery("SELECT e FROM Etablissement e",
-        Etablissement.class).getResultList();
+                Etablissement.class).getResultList();
+    }
+
+    public void userLoader() {
+        try (BufferedReader userReader = new BufferedReader(new FileReader("Volundr/src/main/webapp/user.txt"))) {
+            String ligne;
+
+            while ((ligne = userReader.readLine()) != null) {
+                String[] mots = ligne.split(" ");
+                String prenom = mots[0];
+                String nom = mots[1];
+                String mail = mots[2];
+                String password = mots[3];
+                ajoutUtilisateur(nom, prenom, mail, password);
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
-

@@ -17,6 +17,11 @@ public class Serv extends HttpServlet {
   Facade facade;
 
   @Override
+  public void init() {
+    facade.userLoader();
+  }
+
+  @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
 
