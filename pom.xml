@@ -119,6 +119,12 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+          <groupId>jakarta.platform</groupId>
+          <artifactId>jakarta.jakartaee-api</artifactId>
+          <version>10.0.0</version>
+          <scope>provided</scope>
+        </dependency>
         <!-- Import the Servlet API, we use provided scope as the API is included in the server -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
