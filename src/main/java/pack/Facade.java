@@ -35,6 +35,11 @@ public class Facade {
         em.persist(user);
     }
 
+    public void ajoutUtilisateur(Utilisateur user) {
+        //user = em.merge(user);
+        em.persist(user);
+    }
+
     public boolean verifierUtilisateur(String mail, String password) {
         Utilisateur user = em.find(Utilisateur.class, mail);
         if (user != null) {
