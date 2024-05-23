@@ -38,4 +38,9 @@ public class Rest {
     return Response.status(204).build();
   }
 
+  @POST
+  @Path("creerEvent")
+  public Evenement creerEvent(String name) {
+    return facade.ajoutEvenement(name);
+  }
 }
