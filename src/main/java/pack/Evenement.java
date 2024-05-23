@@ -1,6 +1,7 @@
 package pack;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,7 +28,7 @@ public class Evenement {
      * Liste des cases composant l'évènement.
      */
     @OneToMany(mappedBy = "evenementC", fetch = FetchType.EAGER)
-    private List<Case> cases;
+    private Set<Case> cases;
 
     /**
      * Nom de l'évènement.
@@ -50,11 +51,11 @@ public class Evenement {
         this.groupeE = groupeE;
     }
 
-    public List<Case> getCases() {
+    public Set<Case> getCases() {
         return cases;
     }
 
-    public void setCases(List<Case> cases) {
+    public void setCases(Set<Case> cases) {
         this.cases = cases;
     }
 
