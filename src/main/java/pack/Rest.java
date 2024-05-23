@@ -40,6 +40,7 @@ public class Rest {
 
   @POST
   @Path("creerEvent")
+  @Produces("application/json")
   public Evenement creerEvent(String name) {
     return facade.ajoutEvenement(name);
   }

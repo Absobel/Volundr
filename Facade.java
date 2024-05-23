@@ -93,15 +93,14 @@ public interface Facade {
   /* attention on rentre dans la partie chiante: la gestion par les admins */
   
   /* je vais écrire les specs, mais en gros il va falloir les fonctions:
-   * - créerEvent
+   * - créerEvent -done-
    * - getEventSettings
    * - setEventSettings
-   * - getUsersGroup (obtenir les users d'un groupe)
+   * - getUsersGroup (obtenir les users d'un groupe)  -done-
    * - addGroupUser (ajouter un user à un groupe)
-   * - addEventCreneau (ajouter un créneau à un event)
-   * - addEventSalle (ajouter une salle à un event)
-   * - delGroupUser (même chose mais pour supprimer)
-   * - delEventCreneau
-   * - delEventSalle
+   * - addEventCreneau (ajouter un créneau à un event) -done ?-
+   * - delGroupUser (même chose mais pour supprimer) -done-
+   * - delEventCreneau  -done-
+   * - delEventSalle     -done ?- -> comme Salle est dans un créneau pour le moment , il suffit de mettre à null...
    */
 }
