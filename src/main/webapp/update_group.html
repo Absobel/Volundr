@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>update group</title>
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+  </head>
+  <body>
+
+    <main>
+      <input type="text" id="email" name="email" required minlength="4" maxlength="8" size="10">
+
+      <a href="#add" id="add">add user to group</a>
+      <a href="#">del user to group</a>
+
+      <textarea id="affichage" rows="5" cols="33" readonly>
+        petit texte de test
+      </textarea>
+    </main>
+
+  </body>
+
+  <script>
+
+  document.getElementById("add").addEventListener("click", () => {
+
+    // Appel à l'api pour ajouter une personne à la BDD
+    fetch("http://localhost:8080/Volundr/rest/tutorial/addUserGroup", {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+
+      //make sure to serialize your JSON body
+      body: JSON.stringify({
+        "admin": false,
+        "mail": document.getElementById("email").value,
+        "nom": "b",
+        "prenom": document.getElementById("email").value,
+        "password": "abc"
+      })
+
+    }).then( (response) => { 
+        //do something awesome that makes the world a better place
+        console.log(response)
+
+        // Appel à l'api pour update l'affichage
+        fetch("http://localhost:8080/Volundr/rest/tutorial/getGroup")
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            document.getElementById('affichage').innerText = data.reduce((accumulator, currentValue) => accumulator + "--" + currentValue.prenom,"")
+          })
+      });
+  });
+
+  </script>
+</html>
