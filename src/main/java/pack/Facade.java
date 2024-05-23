@@ -36,8 +36,15 @@ public class Facade {
     }
 
     public void ajoutUtilisateur(Utilisateur user) {
-        //user = em.merge(user);
+        // user = em.merge(user);
         em.persist(user);
+    }
+
+    public Evenement ajoutEvenement(String name) {
+        Evenement event = new Evenement();
+        event.setNom(name);
+        em.persist(event);
+        return event;
     }
 
     public boolean verifierUtilisateur(String mail, String password) {
