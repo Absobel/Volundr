@@ -3,7 +3,8 @@ package pack;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
@@ -85,14 +86,27 @@ public class Facade {
         em.persist(salle);
     }
 
-    public Collection<Utilisateur> listeUsers() {
+    public List<Utilisateur> listeUsers() {
         return em.createQuery("SELECT u FROM Utilisateur u",
                 Utilisateur.class).getResultList();
     }
 
-    public Collection<Etablissement> listeEtablissements() {
+    public List<Etablissement> listeEtablissements() {
         return em.createQuery("SELECT e FROM Etablissement e",
                 Etablissement.class).getResultList();
+    }
+
+    public List<Utilisateur> getUsersGroup(Groupe groupe) {
+        return groupe.getUtilisateurs();
+    }
+
+    public void addCaseToEvent(Evenement event, Set<Case> cases) {
+        event.getCases().addAll(cases);
+        // em.merge(event);
+    }
+
+    public void addSalleToCase(Case creneau, Salle salle) {
+        creneau.setSalleC(salle);
     }
 
     public void userLoader() {
