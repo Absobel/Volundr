@@ -17,11 +17,21 @@ Liste des etablissements : <br>
 Collection<Etablissement> es = (Collection<Etablissement>) request.getAttribute("listeetablissements");
 for(Etablissement e : es) {		
 	
-	String s = e.getNom() ;
+	String s = e.getNom() + " " + e.getId() ;
 	
 %>
 <%= s %> <br>
-<%
+    <blockquote><p>
+<%  
+    for (Salle sa : e.getSalles()){
+        String numSalle = sa.getBatiment() + sa.getNumero() + " : " + sa.getCapacite() + " places";
+        %>
+        <%= numSalle %> <br>
+        <%
+    }
+    %> 
+    </p></blockquote>
+    <%
 }
 %>
 

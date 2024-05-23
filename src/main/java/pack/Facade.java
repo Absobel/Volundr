@@ -62,6 +62,17 @@ public class Facade {
         em.persist(etab);
     }
 
+    public void ajoutSalle(String bat, int num, int cap, int idEtab) {
+        Salle salle = new Salle();
+        salle.setBatiment(bat);
+        salle.setNumero(num);
+        salle.setCapacite(cap);
+        Etablissement etab = em.find(Etablissement.class, idEtab);
+        salle.setEtablissementS(etab);
+        salle = em.merge(salle);
+        em.persist(salle);
+    }
+
     public Collection<Utilisateur> listeUsers() {
         return em.createQuery("SELECT u FROM Utilisateur u",
                 Utilisateur.class).getResultList();
@@ -83,6 +94,41 @@ public class Facade {
                 String mail = mots[2];
                 String password = mots[3];
                 ajoutUtilisateur(nom, prenom, mail, password);
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void etablissementLoader() {
+        try (BufferedReader etablissementReader = new BufferedReader(
+                new FileReader("Volundr/src/main/webapp/etablissement.txt"))) {
+            String ligne;
+
+            while ((ligne = etablissementReader.readLine()) != null) {
+                ajoutEtablissement(ligne);
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void salleLoader() {
+        try (BufferedReader etablissementReader = new BufferedReader(
+                new FileReader("Volundr/src/main/webapp/salle.txt"))) {
+            String ligne;
+
+            while ((ligne = etablissementReader.readLine()) != null) {
+                String[] mots = ligne.split(" ");
+                int etab = Integer.parseInt(mots[0]);
+                String bat = mots[1];
+                int num = Integer.parseInt(mots[2]);
+                int cap = Integer.parseInt(mots[3]);
+                ajoutSalle(bat, num, cap, etab);
             }
 
         } catch (IOException e) {
