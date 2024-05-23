@@ -107,6 +107,26 @@ public class Facade {
 
     public void addSalleToCase(Case creneau, Salle salle) {
         creneau.setSalleC(salle);
+        // em.merge(creneau);
+    }
+
+    public void delUserFromGroup(Groupe groupe, Utilisateur user) {
+        if (groupe.getUtilisateurs().contains(user)) {
+            groupe.getUtilisateurs().remove(user);
+            // em.merge(groupe); ?
+        }
+    }
+
+    public void delCaseFromEvent(Evenement event, Case creneau) {
+        if (event.getCases().contains(creneau)) {
+            event.getCases().remove(creneau);
+            // em.merge(event); ?
+        }
+    }
+
+    public void delSalleFromCase(Case creneau) {
+        creneau.setSalleC(null);
+
     }
 
     public void userLoader() {
