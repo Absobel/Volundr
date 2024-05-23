@@ -1,11 +1,17 @@
 package pack;
 
+import java.io.Serializable;
+import java.util.List;
+
 import jakarta.persistence.Entity;
+//import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
-public class Utilisateur {
+public class Utilisateur implements Serializable {
 
     @Id
     private String mail;
@@ -15,6 +21,48 @@ public class Utilisateur {
     private String prenom;
 
     private String password; /* probablement à changer */
+
+    /**
+     * Groupes auxquels l'usager appartient.
+     */
+    @ManyToMany
+    private List<Groupe> groupesU;
+
+    /**
+     * Choix faits et à faire.
+     */
+    @OneToMany(mappedBy = "utilisateurCh")
+    private List<Choix> choix;
+
+    /**
+     * Cases accessibles à l'usager.
+     */
+    @ManyToMany(mappedBy = "utilisateursC")
+    private List<Case> cases;
+
+    public List<Groupe> getGroupesU() {
+        return groupesU;
+    }
+
+    public void setGroupesU(List<Groupe> groupesU) {
+        this.groupesU = groupesU;
+    }
+
+    public List<Choix> getChoix() {
+        return choix;
+    }
+
+    public void setChoix(List<Choix> choix) {
+        this.choix = choix;
+    }
+
+    public List<Case> getCases() {
+        return cases;
+    }
+
+    public void setCases(List<Case> cases) {
+        this.cases = cases;
+    }
 
     @ManyToOne
     private Etablissement etablissement;
