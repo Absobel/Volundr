@@ -124,11 +124,6 @@ public class Facade {
         }
     }
 
-    public void delSalleFromCase(Case creneau) {
-        creneau.setSalleC(null);
-
-    }
-
     public void userLoader() {
         try (BufferedReader userReader = new BufferedReader(new FileReader("Volundr/src/main/webapp/user.txt"))) {
             String ligne;
