@@ -1,6 +1,5 @@
 package pack;
 
-import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
