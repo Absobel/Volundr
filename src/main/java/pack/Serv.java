@@ -18,9 +18,8 @@ public class Serv extends HttpServlet {
 
   @Override
   public void init() {
-    facade.userLoader();
-    facade.etablissementLoader();
-    facade.salleLoader();
+    facade.loader();
+
   }
 
   @Override

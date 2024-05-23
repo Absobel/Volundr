@@ -136,4 +136,12 @@ public class Facade {
             e.printStackTrace();
         }
     }
+
+    public void loader() {
+        if (em.find(Etablissement.class, 1) == null) {
+            userLoader();
+            etablissementLoader();
+            salleLoader();
+        }
+    }
 }
