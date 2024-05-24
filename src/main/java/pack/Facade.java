@@ -45,6 +45,13 @@ public class Facade {
         Evenement event = new Evenement();
         event.setNom(name);
         em.persist(event);
+
+        MaCase c = new MaCase();
+        c.setDebutCreneau(0);
+        c.setFinCreneau(1);
+        c.setEvenementC(event);
+        em.persist(c);
+
         return event;
     }
 
@@ -96,16 +103,25 @@ public class Facade {
                 Etablissement.class).getResultList();
     }
 
+    public List<Evenement> listeEvenements() {
+        return em.createQuery("SELECT e FROM Evenement e",
+                Evenement.class).getResultList();
+    }
+
+    public Evenement trouverEvenement(int eventid) {
+      return em.find(Evenement.class, eventid);
+    }
+
     public List<Utilisateur> getUsersGroup(Groupe groupe) {
         return groupe.getUtilisateurs();
     }
 
-    public void addCaseToEvent(Evenement event, Set<Case> cases) {
+    public void addCaseToEvent(Evenement event, Set<MaCase> cases) {
         event.getCases().addAll(cases);
         // em.merge(event);
     }
 
-    public void addSalleToCase(Case creneau, Salle salle) {
+    public void addSalleToCase(MaCase creneau, Salle salle) {
         creneau.setSalleC(salle);
         // em.merge(creneau);
     }
@@ -117,7 +133,7 @@ public class Facade {
         }
     }
 
-    public void delCaseFromEvent(Evenement event, Case creneau) {
+    public void delCaseFromEvent(Evenement event, MaCase creneau) {
         if (event.getCases().contains(creneau)) {
             event.getCases().remove(creneau);
             // em.merge(event); ?
