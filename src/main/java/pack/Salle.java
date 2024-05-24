@@ -27,7 +27,7 @@ public class Salle {
      * Liste des cases pour cette salle.
      */
     @OneToMany(mappedBy = "salleC")
-    private List<Case> cases;
+    private List<MaCase> cases;
 
     /**
      * Bâtiment de la salle.
@@ -60,11 +60,11 @@ public class Salle {
         this.etablissementS = etablissementS;
     }
 
-    public List<Case> getCases() {
+    public List<MaCase> getCases() {
         return cases;
     }
 
-    public void setCases(List<Case> cases) {
+    public void setCases(List<MaCase> cases) {
         this.cases = cases;
     }
 

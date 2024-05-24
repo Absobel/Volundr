@@ -23,7 +23,7 @@ public class Choix {
      * Case visée par le choix.
      */
     @ManyToOne
-    private Case caseCh;
+    private MaCase caseCh;
 
     /**
      * Note attribuée à la case.
@@ -46,11 +46,11 @@ public class Choix {
         this.utilisateurCh = utilisateurCh;
     }
 
-    public Case getCaseCh() {
+    public MaCase getCaseCh() {
         return caseCh;
     }
 
-    public void setCaseCh(Case caseCh) {
+    public void setCaseCh(MaCase caseCh) {
         this.caseCh = caseCh;
     }
 
