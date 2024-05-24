@@ -11,8 +11,26 @@
     <main>
       <input type="text" id="name" name="name" required minlength="4" maxlength="8" size="10">
 
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">créer event</a>
+      <a href="#create" id="create">créer event</a>
     </main>
-  
+
   </body>
+
+  <script>
+
+  document.getElementById('create').addEventListener('click', () => {
+  // Appel à l'api pour ajouter une personne à la BDD
+  fetch("http://localhost:8080/Volundr/rest/tutorial/creerEvent", {
+    method: "post",
+
+    // Make sure to serialize your JSON body
+    body: document.getElementById("name").value
+
+  }).then( async (response) => { 
+      // Do something awesome that makes the world a better place
+      window.location = `http://localhost:8080/Volundr/rest/tutorial/getCasesEvent/${(await response.json()).id}`;
+    });
+  });
+
+  </script>
 </html>
