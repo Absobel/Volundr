@@ -1,7 +1,9 @@
 package pack;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import jakarta.ejb.EJB;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -28,6 +30,30 @@ public class Rest {
   @Produces("application/json")
   public Collection<Utilisateur> getGroup() {
     return facade.listeUsers();
+  }
+
+  @GET
+  @Path("getEvent")
+  @Produces("application/json")
+  public String getEvent() {
+    String s = "noms";
+    for (Evenement e : facade.listeEvenements()) {
+      s = s + ":" + e.getNom();
+      for (MaCase c : e.getCases())
+        s = s + "(" + c.getDebutCreneau() + "|" + c.getFinCreneau() + ")";
+    }
+    return s;
+  }
+
+  @GET
+  @Path("getCasesEvent/{event}")
+  @Produces("application/json")
+  public Collection<MaCaseDTO> getEvents(@PathParam("event") int event) {
+    Evenement e = facade.trouverEvenement(event);
+    Collection<MaCaseDTO> res = new ArrayList<>();
+    for (MaCase c : e.getCases())
+      res.add(new MaCaseDTO(c));
+    return res;
   }
 
   @POST
