@@ -1,6 +1,5 @@
 package pack;
 
-import java.sql.Time;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -13,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Case {
+public class MaCase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,12 +42,12 @@ public class Case {
     /**
      * Début du créneau de la case.
      */
-    private Time debutCreaneau;
+    private int debutCreneau;
 
     /**
      * Fin du créneau de la case.
      */
-    private Time finCreneau;
+    private int finCreneau;
 
     /**
      * Usager choisi par l'algorithme de décision.
@@ -95,22 +94,6 @@ public class Case {
         this.evenementC = evenementC;
     }
 
-    public Time getDebutCreaneau() {
-        return debutCreaneau;
-    }
-
-    public void setDebutCreaneau(Time debutCreaneau) {
-        this.debutCreaneau = debutCreaneau;
-    }
-
-    public Time getFinCreneau() {
-        return finCreneau;
-    }
-
-    public void setFinCreneau(Time finCreneau) {
-        this.finCreneau = finCreneau;
-    }
-
     public Utilisateur getUsagerChoisi() {
         return usagerChoisi;
     }
@@ -119,4 +102,19 @@ public class Case {
         this.usagerChoisi = usagerChoisi;
     }
 
+    public int getDebutCreneau() {
+      return debutCreneau;
+    }
+
+    public void setDebutCreneau(int debutCreneau) {
+      this.debutCreneau = debutCreneau;
+    }
+
+    public int getFinCreneau() {
+      return finCreneau;
+    }
+
+    public void setFinCreneau(int finCreneau) {
+      this.finCreneau = finCreneau;
+    }
 }

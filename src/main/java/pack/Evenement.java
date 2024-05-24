@@ -27,7 +27,7 @@ public class Evenement {
      * Liste des cases composant l'évènement.
      */
     @OneToMany(mappedBy = "evenementC", fetch = FetchType.EAGER)
-    private Set<Case> cases;
+    private Set<MaCase> cases;
 
     /**
      * Nom de l'évènement.
@@ -50,11 +50,11 @@ public class Evenement {
         this.groupeE = groupeE;
     }
 
-    public Set<Case> getCases() {
+    public Set<MaCase> getCases() {
         return cases;
     }
 
-    public void setCases(Set<Case> cases) {
+    public void setCases(Set<MaCase> cases) {
         this.cases = cases;
     }
 

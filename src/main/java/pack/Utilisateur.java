@@ -38,7 +38,7 @@ public class Utilisateur implements Serializable {
      * Cases accessibles à l'usager.
      */
     @ManyToMany(mappedBy = "utilisateursC")
-    private List<Case> cases;
+    private List<MaCase> cases;
 
     public List<Groupe> getGroupesU() {
         return groupesU;
@@ -56,11 +56,11 @@ public class Utilisateur implements Serializable {
         this.choix = choix;
     }
 
-    public List<Case> getCases() {
+    public List<MaCase> getCases() {
         return cases;
     }
 
-    public void setCases(List<Case> cases) {
+    public void setCases(List<MaCase> cases) {
         this.cases = cases;
     }
 
