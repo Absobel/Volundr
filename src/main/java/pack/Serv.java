@@ -88,6 +88,14 @@ public class Serv extends HttpServlet {
         req.setAttribute("listeutilisateurs", facade.listeUsers());
         req.getRequestDispatcher("listerutilisateurs.jsp").forward(req, resp);
         break;
+      case "listeevenements":
+        req.setAttribute("listeevenements", facade.listeEvenements());
+        req.getRequestDispatcher("listeevenement.jsp").forward(req, resp);
+        break;
+      case "listegroupes":
+        req.setAttribute("listegroupes", facade.listeGroupes());
+        req.getRequestDispatcher("listegroupes.jsp").forward(req, resp);
+        break;
       case "creerEvenement":
         req.getRequestDispatcher("creer_event.html").forward(req, resp);
         break;
