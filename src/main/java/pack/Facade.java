@@ -3,6 +3,7 @@ package pack;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -42,8 +43,13 @@ public class Facade {
     }
 
     public Evenement ajoutEvenement(String name) {
+        Groupe g = new Groupe();
+        g.setNom(name);
+        em.persist(g);
+
         Evenement event = new Evenement();
         event.setNom(name);
+        event.setGroupeE(g);
         em.persist(event);
 
         MaCase c = new MaCase();
@@ -112,7 +118,11 @@ public class Facade {
       return em.find(Evenement.class, eventid);
     }
 
-    public List<Utilisateur> getUsersGroup(Groupe groupe) {
+    public Utilisateur trouverUtilisateur(String email) {
+      return em.find(Utilisateur.class, email);
+    }
+
+    public Set<Utilisateur> getUsersGroup(Groupe groupe) {
         return groupe.getUtilisateurs();
     }
 
@@ -124,6 +134,22 @@ public class Facade {
     public void addSalleToCase(MaCase creneau, Salle salle) {
         creneau.setSalleC(salle);
         // em.merge(creneau);
+    }
+
+    public Collection<Utilisateur> addUserEvent(int event, String email) {
+      Evenement e = this.trouverEvenement(event);
+      Utilisateur u = this.trouverUtilisateur(email);
+      Groupe g = e.getGroupeE();
+      g.addUser(u);
+      return g.getUtilisateurs();
+    }
+
+    public Collection<Utilisateur> delUserEvent(int event, String email) {
+      Evenement e = this.trouverEvenement(event);
+      Utilisateur u = this.trouverUtilisateur(email);
+      Groupe g = e.getGroupeE();
+      g.delUser(u);
+      return g.getUtilisateurs();
     }
 
     public void delUserFromGroup(Groupe groupe, Utilisateur user) {

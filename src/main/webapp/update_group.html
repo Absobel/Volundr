@@ -9,10 +9,15 @@
   <body>
 
     <main>
-      <input type="text" id="email" name="email" required minlength="4" maxlength="8" size="10">
+
+      <form>
+        <label for="email">Choisir un email :</label>
+        <select name="cars" id="email">
+        </select>
+      </form>
 
       <a href="#add" id="add">add user to group</a>
-      <a href="#">del user to group</a>
+      <a href="#del" id="del">del user to group</a>
 
       <textarea id="affichage" rows="5" cols="33" readonly>
         petit texte de test
@@ -22,43 +27,81 @@
   </body>
 
   <script>
+  /* l'id de l'event qu'on modifie */
+  const id = new URLSearchParams(window.location.search).get('id');
+
+  /* l'objet html pour selectionner un email */
+  const emailSelector = document.getElementById('email');
+
+  /* l'objet html pour visualiser le groupe */
+  const affichageTextarea = document.getElementById('affichage');
+
+  function updateAffichage() {
+    // Récupérer la liste des utilisateurs du groupe associé à l'event
+    fetch(`http://localhost:8080/Volundr/rest/tutorial/getUsersEvent/${id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        affichageTextarea.innerText = data.reduce((accumulator, currentValue) => accumulator + "--" + currentValue,"")
+      })
+
+    // Récupérer la liste de tous les utilisateurs de la base de donnée pour pouvoir les selectionner
+    fetch(`http://localhost:8080/Volundr/rest/tutorial/getUsers`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        emailSelector.innerHTML = "";
+        data.map(currentValue => {
+          let newOption = document.createElement('option');
+          newOption.setAttribute('value', currentValue.mail);
+          newOption.innerText = currentValue.mail;
+          emailSelector.appendChild(newOption);
+        })
+      })
+
+  }
 
   document.getElementById("add").addEventListener("click", () => {
 
     // Appel à l'api pour ajouter une personne à la BDD
-    fetch("http://localhost:8080/Volundr/rest/tutorial/addUserGroup", {
+    fetch(`http://localhost:8080/Volundr/rest/tutorial/addUserEvent/${id}`, {
       method: "post",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-
-      //make sure to serialize your JSON body
-      body: JSON.stringify({
-        "admin": false,
-        "mail": document.getElementById("email").value,
-        "nom": "b",
-        "prenom": document.getElementById("email").value,
-        "password": "abc"
-      })
+      body: emailSelector.value
 
     }).then( (response) => { 
         //do something awesome that makes the world a better place
         console.log(response)
 
         // Appel à l'api pour update l'affichage
-        fetch("http://localhost:8080/Volundr/rest/tutorial/getGroup")
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then(data => {
-            document.getElementById('affichage').innerText = data.reduce((accumulator, currentValue) => accumulator + "--" + currentValue.prenom,"")
-          })
+        updateAffichage();
       });
   });
 
+  document.getElementById("del").addEventListener("click", () => {
+
+    // Appel à l'api pour ajouter une personne à la BDD
+    fetch(`http://localhost:8080/Volundr/rest/tutorial/delUserEvent/${id}`, {
+      method: "post",
+      body: emailSelector.value
+
+    }).then( (response) => { 
+        //do something awesome that makes the world a better place
+        console.log(response)
+
+        // Appel à l'api pour update l'affichage
+        updateAffichage();
+      });
+  });
+
+  // actualiser l'affichage au chargement de la page
+  window.onload = updateAffichage;
   </script>
 </html>

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 //import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -25,7 +26,7 @@ public class Utilisateur implements Serializable {
     /**
      * Groupes auxquels l'usager appartient.
      */
-    @ManyToMany
+    @ManyToMany(mappedBy = "Utilisateurs", fetch = FetchType.EAGER)
     private List<Groupe> groupesU;
 
     /**

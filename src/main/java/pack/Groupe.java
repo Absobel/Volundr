@@ -1,6 +1,7 @@
 package pack;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,8 +21,8 @@ public class Groupe {
     /**
      * Liste des Utilisateurs du groupe.
      */
-    @ManyToMany(mappedBy = "groupesU")
-    private List<Utilisateur> Utilisateurs;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Utilisateur> Utilisateurs;
 
     /**
      * Liste des évènements auxquels le groupe participe.
@@ -42,11 +43,11 @@ public class Groupe {
         this.id = id;
     }
 
-    public List<Utilisateur> getUtilisateurs() {
+    public Set<Utilisateur> getUtilisateurs() {
         return Utilisateurs;
     }
 
-    public void setUtilisateurs(List<Utilisateur> Utilisateurs) {
+    public void setUtilisateurs(Set<Utilisateur> Utilisateurs) {
         this.Utilisateurs = Utilisateurs;
     }
 
@@ -64,6 +65,14 @@ public class Groupe {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public void addUser(Utilisateur user) {
+      this.getUtilisateurs().add(user);
+    }
+
+    public void delUser(Utilisateur user) {
+      this.getUtilisateurs().remove(user);
     }
 
 }
