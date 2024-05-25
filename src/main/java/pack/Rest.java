@@ -38,6 +38,19 @@ public class Rest {
   }
 
   @GET
+  @Path("getGroups")
+  @Produces("application/json")
+  public Collection<GroupeDTO> getGroups() {
+    List<GroupeDTO> result = new ArrayList<>();
+    for (Groupe groupe : facade.listeGroupes()) {
+      if (groupe.getIsNotEventGroup()) {
+        result.add(new GroupeDTO(groupe));
+      }
+    }
+    return result;
+  }
+
+  @GET
   @Path("getSalles")
   @Produces("application/json")
   public Collection<SalleDTO> getSalles() {
@@ -116,7 +129,7 @@ public class Rest {
     // /* on récupère les vraies cases */
     // Set<MaCase> realCases = new HashSet<>();
     // for (MaCaseDTO c : cases) {
-    //   realCases.add(facade.toMaCase(c));
+    // realCases.add(facade.toMaCase(c));
     // }
     facade.addCaseToEvent(realEvent, cases);
     return Response.status(200).build();
@@ -147,5 +160,19 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  @POST
+  @Path("delUsersFromGroupEvent/{event}")
+  @Produces("application/json")
+  public Response delUsersFromGroupEvent(@PathParam("event") int event, int groupId) {
+    facade.delUsersFromGroupEvent(event, groupId);
+    return Response.status(200).build();
+  }
 
+  @POST
+  @Path("addUserFromGroupEvent/{event}")
+  @Produces("application/json")
+  public Response addUserFromGroupEvent(@PathParam("event") int event, int groupeId) {
+    facade.addUserFromGroup(event, groupeId);
+    return Response.status(200).build();
+  }
 }

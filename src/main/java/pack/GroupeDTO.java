@@ -1,34 +1,21 @@
 package pack;
 
-import java.util.List;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+public class GroupeDTO {
 
-@Entity
-public class Groupe {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     /**
      * Liste des Utilisateurs du groupe.
      */
-    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Utilisateur> Utilisateurs;
 
     /**
      * Liste des évènements auxquels le groupe participe.
      */
-    @OneToMany(mappedBy = "groupeE", fetch = FetchType.EAGER)
-    private List<Evenement> evenements;
+    // @OneToMany(mappedBy = "groupeE", fetch = FetchType.EAGER)
+    // private List<Evenement> evenements;
 
     /**
      * Nom du groupe.
@@ -36,6 +23,13 @@ public class Groupe {
     private String nom;
 
     public boolean isNotEventGroup = false;
+
+    public GroupeDTO(Groupe groupe) {
+        this.id = groupe.getId();
+        this.nom = groupe.getNom();
+        this.isNotEventGroup = groupe.getIsNotEventGroup();
+        this.Utilisateurs = groupe.getUtilisateurs();
+    }
 
     public int getId() {
         return id;
@@ -61,13 +55,15 @@ public class Groupe {
         this.Utilisateurs = Utilisateurs;
     }
 
-    public List<Evenement> getEvenements() {
-        return evenements;
-    }
-
-    public void setEvenements(List<Evenement> evenements) {
-        this.evenements = evenements;
-    }
+    /*
+     * public List<Evenement> getEvenements() {
+     * return evenements;
+     * }
+     *
+     * public void setEvenements(List<Evenement> evenements) {
+     * this.evenements = evenements;
+     * }
+     */
 
     public String getNom() {
         return nom;

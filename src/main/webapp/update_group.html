@@ -19,6 +19,15 @@
       <a href="#add" id="add">add user to group</a>
       <a href="#del" id="del">del user to group</a>
 
+    <form>
+      <label for="group">Choisir un groupe :</label>
+      <select name="groupe" id="groupe">
+      </select>
+    </form>
+
+    <a href="#addG" id="add">add users of the group</a>
+    <a href="#delG" id="del">del users of to group</a>
+
       <textarea id="affichage" rows="5" cols="33" readonly>
         petit texte de test
       </textarea>
@@ -32,6 +41,8 @@
 
   /* l'objet html pour selectionner un email */
   const emailSelector = document.getElementById('email');
+
+  const groupSelector = document.getElementById('group');
 
   /* l'objet html pour visualiser le groupe */
   const affichageTextarea = document.getElementById('affichage');
@@ -64,6 +75,23 @@
           newOption.setAttribute('value', currentValue.mail);
           newOption.innerText = currentValue.mail;
           emailSelector.appendChild(newOption);
+        })
+      })
+
+      fetch(`http://localhost:8080/Volundr/rest/tutorial/getGroups`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        groupSelector.innerHTML = "";
+        data.map(currentValue => {
+          let newOption = document.createElement('option');
+          newOption.setAttribute('value', currentValue.id);
+          newOption.innerText = currentValue.id;
+          groupSelector.appendChild(newOption);
         })
       })
 
@@ -100,6 +128,38 @@
         updateAffichage();
       });
   });
+
+  document.getElementById("addG").addEventListener("click", () => {
+
+// Appel à l'api pour ajouter une personne à la BDD
+fetch(`http://localhost:8080/Volundr/rest/tutorial/addUserFromGroupEvent/${id}`, {
+  method: "post",
+  body: groupSelector.value
+
+}).then( (response) => { 
+    //do something awesome that makes the world a better place
+    console.log(response)
+
+    // Appel à l'api pour update l'affichage
+    updateAffichage();
+  });
+});
+
+document.getElementById("delG").addEventListener("click", () => {
+
+// Appel à l'api pour ajouter une personne à la BDD
+fetch(`http://localhost:8080/Volundr/rest/tutorial/delUsersFromGroupEvent/${id}`, {
+  method: "post",
+  body: groupSelector.value
+
+}).then( (response) => { 
+    //do something awesome that makes the world a better place
+    console.log(response)
+
+    // Appel à l'api pour update l'affichage
+    updateAffichage();
+  });
+});
 
   // actualiser l'affichage au chargement de la page
   window.onload = updateAffichage;

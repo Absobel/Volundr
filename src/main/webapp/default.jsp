@@ -34,7 +34,13 @@
                 Liste Etablissements
             </button>
             <button type="submit" name="op" value="listeutilisateurs">
-                Liste utilisateur
+                Liste Utilisateurs
+            </button>
+            <button type="submit" name="op" value="listeevenements">
+                Liste Evenements
+            </button>
+            <button type="submit" name="op" value="listegroupes">
+                Liste Groupes
             </button>
         </form>  
         <%
