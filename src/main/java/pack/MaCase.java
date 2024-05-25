@@ -54,52 +54,56 @@ public class MaCase {
      */
     private Utilisateur usagerChoisi;
 
+    public MaCase() {
+      /* ne pas oublier de recréer le constructeur vide pour JBoss */
+    }
+
     public int getId() {
-        return id;
+      return id;
     }
 
     public void setId(int id) {
-        this.id = id;
+      this.id = id;
     }
 
     public Salle getSalleC() {
-        return salleC;
+      return salleC;
     }
 
     public void setSalleC(Salle salleC) {
-        this.salleC = salleC;
+      this.salleC = salleC;
     }
 
     public List<Choix> getChoix() {
-        return choix;
+      return choix;
     }
 
     public void setChoix(List<Choix> choix) {
-        this.choix = choix;
+      this.choix = choix;
     }
 
     public List<Utilisateur> getutilisateursC() {
-        return utilisateursC;
+      return utilisateursC;
     }
 
     public void setutilisateursC(List<Utilisateur> utilisateursC) {
-        this.utilisateursC = utilisateursC;
+      this.utilisateursC = utilisateursC;
     }
 
     public Evenement getEvenementC() {
-        return evenementC;
+      return evenementC;
     }
 
     public void setEvenementC(Evenement evenementC) {
-        this.evenementC = evenementC;
+      this.evenementC = evenementC;
     }
 
     public Utilisateur getUsagerChoisi() {
-        return usagerChoisi;
+      return usagerChoisi;
     }
 
     public void setUsagerChoisi(Utilisateur usagerChoisi) {
-        this.usagerChoisi = usagerChoisi;
+      this.usagerChoisi = usagerChoisi;
     }
 
     public int getDebutCreneau() {

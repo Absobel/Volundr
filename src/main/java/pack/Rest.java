@@ -3,6 +3,7 @@ package pack;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
+
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.GET;
@@ -33,6 +34,16 @@ public class Rest {
     List<UtilisateurDTO> result = new ArrayList<>();
     for (Utilisateur user : facade.listeUsers())
       result.add(new UtilisateurDTO(user));
+    return result;
+  }
+
+  @GET
+  @Path("getSalles")
+  @Produces("application/json")
+  public Collection<SalleDTO> getSalles() {
+    List<SalleDTO> result = new ArrayList<>();
+    for (Salle s : facade.listeSalles())
+      result.add(new SalleDTO(s));
     return result;
   }
 
@@ -86,6 +97,38 @@ public class Rest {
   @Produces("application/json")
   public Evenement creerEvent(String name) {
     return facade.ajoutEvenement(name);
+  }
+
+  @POST
+  @Path("creerSalle")
+  @Produces("application/json")
+  public Response creerSalle(Salle salle) {
+    facade.creerSalle(salle);
+    // https://developer.mozilla.org/fr/docs/Web/HTTP/Status/204
+    return Response.status(204).build();
+  }
+
+  @POST
+  @Path("addCasesEvent/{event}")
+  @Produces("application/json")
+  public Response addCasesEvent(@PathParam("event") int event, Collection<MaCase> cases) {
+    Evenement realEvent = facade.trouverEvenement(event);
+    // /* on récupère les vraies cases */
+    // Set<MaCase> realCases = new HashSet<>();
+    // for (MaCaseDTO c : cases) {
+    //   realCases.add(facade.toMaCase(c));
+    // }
+    facade.addCaseToEvent(realEvent, cases);
+    return Response.status(200).build();
+  }
+
+  @POST
+  @Path("delCasesEvent/{event}")
+  @Produces("application/json")
+  public Response delCasesEvent(@PathParam("event") int event, Collection<MaCase> cases) {
+    Evenement realEvent = facade.trouverEvenement(event);
+    facade.delCaseToEvent(realEvent, cases);
+    return Response.status(200).build();
   }
 
   @POST
