@@ -1,5 +1,6 @@
 package pack;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import jakarta.ejb.EJB;
@@ -26,10 +27,26 @@ public class Rest {
   }
 
   @GET
-  @Path("getGroup")
+  @Path("getUsers")
   @Produces("application/json")
-  public Collection<Utilisateur> getGroup() {
-    return facade.listeUsers();
+  public Collection<UtilisateurDTO> getUsers() {
+    List<UtilisateurDTO> result = new ArrayList<>();
+    for (Utilisateur user : facade.listeUsers())
+      result.add(new UtilisateurDTO(user));
+    return result;
+  }
+
+  @GET
+  @Path("getUsersEvent/{event}")
+  @Produces("application/json")
+  public Collection<String> getUsersEvent(@PathParam("event") int event) {
+    // Evenement e = facade.trouverEvenement(event);
+    // return e.getGroupeE().getUtilisateurs();
+
+    List<String> test = new ArrayList<>();
+    for (Utilisateur u : facade.trouverEvenement(event).getGroupeE().getUtilisateurs())
+      test.add(u.getMail());
+    return test;
   }
 
   @GET
@@ -57,8 +74,8 @@ public class Rest {
   }
 
   @POST
-  @Path("addUserGroup")
-  public Response addUserGroup(Utilisateur user) {
+  @Path("addUser")
+  public Response addUser(Utilisateur user) {
     facade.ajoutUtilisateur(user);
     // https://developer.mozilla.org/fr/docs/Web/HTTP/Status/204
     return Response.status(204).build();
@@ -70,4 +87,22 @@ public class Rest {
   public Evenement creerEvent(String name) {
     return facade.ajoutEvenement(name);
   }
+
+  @POST
+  @Path("addUserEvent/{event}")
+  @Produces("application/json")
+  public Response addUserEvent(@PathParam("event") int event, String email) {
+    facade.addUserEvent(event, email);
+    return Response.status(200).build();
+  }
+
+  @POST
+  @Path("delUserEvent/{event}")
+  @Produces("application/json")
+  public Response delUserEvent(@PathParam("event") int event, String email) {
+    facade.delUserEvent(event, email);
+    return Response.status(200).build();
+  }
+
+
 }
