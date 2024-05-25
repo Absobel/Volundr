@@ -13,83 +13,89 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Salle {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
-    /**
-     * Etablissement de la salle.
-     */
-    @ManyToOne
-    private Etablissement etablissementS;
+  /**
+   * Etablissement de la salle.
+   */
+  @ManyToOne
+  private Etablissement etablissementS;
 
-    /**
-     * Liste des cases pour cette salle.
-     */
-    @OneToMany(mappedBy = "salleC")
-    private List<MaCase> cases;
+  /**
+   * Liste des cases pour cette salle.
+   */
+  @OneToMany(mappedBy = "salleC")
+  private List<MaCase> cases;
 
-    /**
-     * Bâtiment de la salle.
-     */
-    private String batiment;
+  /**
+   * Bâtiment de la salle.
+   */
+  private String batiment;
 
-    /**
-     * Numéro de la salle;
-     */
-    private int numero;
+  /**
+   * Numéro de la salle;
+   */
+  private int numero;
 
-    /**
-     * Capacité de la salle.
-     */
-    private int capacite;
+  /**
+   * Capacité de la salle.
+   */
+  private int capacite;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public Salle() {
+    /* ne pas oublier de recréer le constructeur vide pour JBoss */
+  }
 
-    public Etablissement getEtablissementS() {
-        return etablissementS;
-    }
 
-    public void setEtablissementS(Etablissement etablissementS) {
-        this.etablissementS = etablissementS;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public List<MaCase> getCases() {
-        return cases;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setCases(List<MaCase> cases) {
-        this.cases = cases;
-    }
+  public Etablissement getEtablissementS() {
+    return etablissementS;
+  }
 
-    public String getBatiment() {
-        return batiment;
-    }
+  public void setEtablissementS(Etablissement etablissementS) {
+    this.etablissementS = etablissementS;
+  }
 
-    public void setBatiment(String batiment) {
-        this.batiment = batiment;
-    }
+  public List<MaCase> getCases() {
+    return cases;
+  }
 
-    public int getNumero() {
-        return numero;
-    }
+  public void setCases(List<MaCase> cases) {
+    this.cases = cases;
+  }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
+  public String getBatiment() {
+    return batiment;
+  }
 
-    public int getCapacite() {
-        return capacite;
-    }
+  public void setBatiment(String batiment) {
+    this.batiment = batiment;
+  }
 
-    public void setCapacite(int capacite) {
-        this.capacite = capacite;
-    }
+  public int getNumero() {
+    return numero;
+  }
+
+  public void setNumero(int numero) {
+    this.numero = numero;
+  }
+
+  public int getCapacite() {
+    return capacite;
+  }
+
+  public void setCapacite(int capacite) {
+    this.capacite = capacite;
+  }
 
 }
