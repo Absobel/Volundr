@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html lang="fr"><head>
+<html lang="fr">
+
+<head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>scheduler html/css</title>
   <link href="./style.css" rel="stylesheet">
   <script type="module" src="./page_ajout_creneaux.js"></script>
 </head>
+
 <body>
 
-<main>
+  <main>
 
-  <volundr-scheduler id="scheduler" class="click-creneau" style="display:none;">
-  </volundr-scheduler>
+    <volundr-scheduler id="scheduler" class="click-creneau" style="display:none;">
+    </volundr-scheduler>
 
-  <input type="text" id="duree-creneau" name="duree-creneau" required minlength="4" maxlength="8" size="10">
+    <input type="text" id="duree-creneau" name="duree-creneau" required minlength="4" maxlength="8" size="10">
 
-  <a href="#add-creneau" id="add-creneau">ajouter un creneau</a>
+    <a href="#add-creneau" id="add-creneau">ajouter un creneau</a>
 
 
-  <form>
-    <label for="choix-salle">Choisir une salle :</label>
-    <select name="choix-salle" id="choix-salle">
-    </select>
-  </form>
+    <form>
+      <label for="choix-salle">Choisir une salle :</label>
+      <select name="choix-salle" id="choix-salle">
+      </select>
+    </form>
 
-  <a href="#add-salle" id="add-salle">ajouter une salle</a>
+    <a href="#add-salle" id="add-salle">ajouter une salle</a>
 
-</main>
+  </main>

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>update group</title>
-    <!-- <link href="css/style.css" rel="stylesheet"> -->
-  </head>
-  <body>
 
-    <main>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>update group</title>
+  <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
 
-      <form>
-        <label for="email">Choisir un email :</label>
-        <select name="cars" id="email">
-        </select>
-      </form>
+<body>
 
-      <a href="#add" id="add">add user to group</a>
-      <a href="#del" id="del">del user to group</a>
+  <main>
+
+    <form>
+      <label for="email">Choisir un email :</label>
+      <select name="cars" id="email">
+      </select>
+    </form>
+
+    <a href="#add" id="add">add user to group</a>
+    <a href="#del" id="del">del user to group</a>
 
     <form>
       <label for="group">Choisir un groupe :</label>
@@ -28,14 +30,14 @@
     <a href="#addG" id="addG">add users of the group</a>
     <a href="#delG" id="delG">del users of the group</a>
 
-      <textarea id="affichage" rows="5" cols="33" readonly>
+    <textarea id="affichage" rows="5" cols="33" readonly>
         petit texte de test
       </textarea>
-    </main>
+  </main>
 
-  </body>
+</body>
 
-  <script>
+<script>
   /* l'id de l'event qu'on modifie */
   const id = new URLSearchParams(window.location.search).get('id');
 
@@ -57,7 +59,7 @@
         return response.json();
       })
       .then(data => {
-        affichageTextarea.innerText = data.reduce((accumulator, currentValue) => accumulator + "--" + currentValue,"")
+        affichageTextarea.innerText = data.reduce((accumulator, currentValue) => accumulator + "--" + currentValue, "")
       })
 
     // Récupérer la liste de tous les utilisateurs de la base de donnée pour pouvoir les selectionner
@@ -78,7 +80,7 @@
         })
       })
 
-      fetch(`http://localhost:8080/Volundr/rest/tutorial/getGroups`)
+    fetch(`http://localhost:8080/Volundr/rest/tutorial/getGroups`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -104,13 +106,13 @@
       method: "post",
       body: emailSelector.value
 
-    }).then( (response) => { 
-        //do something awesome that makes the world a better place
-        console.log(response)
+    }).then((response) => {
+      //do something awesome that makes the world a better place
+      console.log(response)
 
-        // Appel à l'api pour update l'affichage
-        updateAffichage();
-      });
+      // Appel à l'api pour update l'affichage
+      updateAffichage();
+    });
   });
 
   document.getElementById("del").addEventListener("click", () => {
@@ -120,48 +122,49 @@
       method: "post",
       body: emailSelector.value
 
-    }).then( (response) => { 
-        //do something awesome that makes the world a better place
-        console.log(response)
+    }).then((response) => {
+      //do something awesome that makes the world a better place
+      console.log(response)
 
-        // Appel à l'api pour update l'affichage
-        updateAffichage();
-      });
+      // Appel à l'api pour update l'affichage
+      updateAffichage();
+    });
   });
 
   document.getElementById("addG").addEventListener("click", () => {
 
-// Appel à l'api pour ajouter une personne à la BDD
-fetch(`http://localhost:8080/Volundr/rest/tutorial/addUserFromGroupEvent/${id}`, {
-  method: "post",
-  body: groupSelector.value
+    // Appel à l'api pour ajouter une personne à la BDD
+    fetch(`http://localhost:8080/Volundr/rest/tutorial/addUserFromGroupEvent/${id}`, {
+      method: "post",
+      body: groupSelector.value
 
-}).then( (response) => { 
-    //do something awesome that makes the world a better place
-    console.log(response)
+    }).then((response) => {
+      //do something awesome that makes the world a better place
+      console.log(response)
 
-    // Appel à l'api pour update l'affichage
-    updateAffichage();
+      // Appel à l'api pour update l'affichage
+      updateAffichage();
+    });
   });
-});
 
-document.getElementById("delG").addEventListener("click", () => {
+  document.getElementById("delG").addEventListener("click", () => {
 
-// Appel à l'api pour ajouter une personne à la BDD
-fetch(`http://localhost:8080/Volundr/rest/tutorial/delUsersFromGroupEvent/${id}`, {
-  method: "post",
-  body: groupSelector.value
+    // Appel à l'api pour ajouter une personne à la BDD
+    fetch(`http://localhost:8080/Volundr/rest/tutorial/delUsersFromGroupEvent/${id}`, {
+      method: "post",
+      body: groupSelector.value
 
-}).then( (response) => { 
-    //do something awesome that makes the world a better place
-    console.log(response)
+    }).then((response) => {
+      //do something awesome that makes the world a better place
+      console.log(response)
 
-    // Appel à l'api pour update l'affichage
-    updateAffichage();
+      // Appel à l'api pour update l'affichage
+      updateAffichage();
+    });
   });
-});
 
   // actualiser l'affichage au chargement de la page
   window.onload = updateAffichage;
-  </script>
+</script>
+
 </html>

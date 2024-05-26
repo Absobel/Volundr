@@ -1,6 +1,6 @@
 export default class Scheduler extends HTMLElement {
 
-  constructor () {
+  constructor() {
     super();
 
     this.salles = document.createElement('ul');
@@ -33,7 +33,7 @@ export default class Scheduler extends HTMLElement {
 
   /** Nettoyer et actualiser la liste des salles quand un nouveau fils
    * est ajouté ou supprimé */
-  updateSallesList () {
+  updateSallesList() {
     if (this.lock) { return }
     this.lock = true;
 

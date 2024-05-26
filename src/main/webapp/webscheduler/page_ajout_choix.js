@@ -53,11 +53,11 @@ function updateScore(creneau) {
     },
     body: currentNote
 
-  }).then( (response) => { 
-      //do something awesome that makes the world a better place
-      console.log(response)
-      creneau.style.backgroundColor = scoreToColor(currentNote);
-    });
+  }).then((response) => {
+    //do something awesome that makes the world a better place
+    console.log(response)
+    creneau.style.backgroundColor = scoreToColor(currentNote);
+  });
 }
 
 

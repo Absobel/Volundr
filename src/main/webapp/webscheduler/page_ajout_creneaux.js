@@ -93,7 +93,7 @@ function updateAffichage() {
 
 /** Envoyer une requête au serveur pour supprimer le créneau passé en paramètre
  * puis update l'affichage */
-function supprimerCreneau (creneauElement) {
+function supprimerCreneau(creneauElement) {
   // Appel à l'api pour ajouter une personne à la BDD
   fetch(`http://localhost:8080/Volundr/rest/tutorial/delCasesEvent/${id}`, {
     method: "post",
@@ -103,27 +103,27 @@ function supprimerCreneau (creneauElement) {
     },
     /* seul l'id est utile à envoyer pour la suppression
      * attention: c'est une liste qu'il faut envoyer même si un seul élément */
-    body: JSON.stringify([{ "id" : creneauElement.getAttribute('data-id') }])
+    body: JSON.stringify([{ "id": creneauElement.getAttribute('data-id') }])
 
-  }).then( (response) => { 
-      //do something awesome that makes the world a better place
-      console.log(response)
+  }).then((response) => {
+    //do something awesome that makes the world a better place
+    console.log(response)
 
-      // Appel à l'api pour update l'affichage
-      updateAffichage();
-    });
+    // Appel à l'api pour update l'affichage
+    updateAffichage();
+  });
 }
 
 
 /** Renvoie le JSON à envoyer pour la requête de création de créneaux */
 function addCreneauxReqJSON() {
   return Array.from(scheduler.getElementsByTagName('volundr-room')).flatMap(room => {
-    let roomJSON = { "id" : room.getAttribute('data-id') };
+    let roomJSON = { "id": room.getAttribute('data-id') };
     return Array.from(room.getElementsByTagName('volundr-creneau'), c => {
       let result = {
-        "debutCreneau" : c.time,
-        "finCreneau" : c.time + c.duration,
-        "salleC" : roomJSON
+        "debutCreneau": c.time,
+        "finCreneau": c.time + c.duration,
+        "salleC": roomJSON
       };
 
       /* important de récupérer l'id sinon quand on va rappeler le serveur
@@ -186,13 +186,13 @@ addCreneau.addEventListener('click', () => {
         },
         body: JSON.stringify(addCreneauxReqJSON())
 
-      }).then( (response) => { 
-          //do something awesome that makes the world a better place
-          console.log(response)
+      }).then((response) => {
+        //do something awesome that makes the world a better place
+        console.log(response)
 
-          // Appel à l'api pour update l'affichage
-          updateAffichage();
-        });
+        // Appel à l'api pour update l'affichage
+        updateAffichage();
+      });
     })
   ]
 
