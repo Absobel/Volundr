@@ -251,12 +251,22 @@ public class Facade {
     }
   }
 
-  public void addChoixToUser(String mail, int caseId, int note) {
-    Choix newChoix = new Choix();
-    newChoix.setUtilisateurCh(trouverUtilisateur(mail));
-    newChoix.setCaseCh(trouverMaCase(caseId));
-    newChoix.setNote(note);
-    em.merge(newChoix);
+  public void addChoixToUser(String mail, int caseId, int note) throws PermissionRefuseeException {
+    MaCase c = trouverMaCase(caseId);
+    Utilisateur u = trouverUtilisateur(mail);
+
+    /* on verifie d'abord si l'utilisateur appartient bien au groupe
+     * de l'événement pour avoir le droit de faire cette opération */
+    Groupe groupeEvent = c.getEvenementC().getGroupeE();
+    if (groupeEvent.getUtilisateurs().contains(u)) {
+      Choix newChoix = new Choix();
+      newChoix.setUtilisateurCh(u);
+      newChoix.setCaseCh(c);
+      newChoix.setNote(note);
+      em.merge(newChoix);
+    } else {
+      throw new PermissionRefuseeException("ERROR: Permission denied : not in event group");
+    }
   }
 
   public void delCaseToEvent(Evenement event, Collection<MaCase> cases) {
@@ -395,7 +405,7 @@ public class Facade {
 
   public void etablissementLoader() {
     try (BufferedReader etablissementReader = new BufferedReader(
-        new FileReader("Volundr/src/main/webapp/etablissement.txt"))) {
+          new FileReader("Volundr/src/main/webapp/etablissement.txt"))) {
       String ligne;
 
       while ((ligne = etablissementReader.readLine()) != null) {
@@ -410,7 +420,7 @@ public class Facade {
 
   public void salleLoader() {
     try (BufferedReader etablissementReader = new BufferedReader(
-        new FileReader("Volundr/src/main/webapp/salle.txt"))) {
+          new FileReader("Volundr/src/main/webapp/salle.txt"))) {
       String ligne;
 
       while ((ligne = etablissementReader.readLine()) != null) {
@@ -429,7 +439,7 @@ public class Facade {
 
   public void groupLoader() {
     try (BufferedReader etablissementReader = new BufferedReader(
-        new FileReader("Volundr/src/main/webapp/groupe.txt"))) {
+          new FileReader("Volundr/src/main/webapp/groupe.txt"))) {
       String ligne;
 
       while ((ligne = etablissementReader.readLine()) != null) {

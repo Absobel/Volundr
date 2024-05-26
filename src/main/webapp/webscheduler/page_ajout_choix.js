@@ -56,7 +56,11 @@ function updateScore(creneau) {
   }).then((response) => {
     //do something awesome that makes the world a better place
     console.log(response)
-    creneau.style.backgroundColor = scoreToColor(currentNote);
+    if (response.ok) {
+      creneau.style.backgroundColor = scoreToColor(currentNote);
+    } else {
+      response.text().then(data => alert(data));
+    }
   });
 }
 
