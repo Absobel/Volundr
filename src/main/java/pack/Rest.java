@@ -140,7 +140,7 @@ public class Rest {
   @POST
   @Path("creerSalle")
   @Produces("application/json")
-  public Response creerSalle(Salle salle) {
+  public Response creerSalle(SalleDTO salle) {
     facade.creerSalle(salle);
     // https://developer.mozilla.org/fr/docs/Web/HTTP/Status/204
     return Response.status(204).build();

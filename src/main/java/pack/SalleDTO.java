@@ -62,4 +62,24 @@ public class SalleDTO implements Serializable {
     return capacite;
   }
 
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public void setEtablissementS(int etablissementS) {
+    this.etablissementS = etablissementS;
+  }
+
+  public void setBatiment(String batiment) {
+    this.batiment = batiment;
+  }
+
+  public void setNumero(int numero) {
+    this.numero = numero;
+  }
+
+  public void setCapacite(int capacite) {
+    this.capacite = capacite;
+  }
+
 }

@@ -105,10 +105,7 @@ public class Facade {
     s.setNumero(salleDTO.getNumero());
     s.setCapacite(salleDTO.getCapacite());
 
-    System.out.println("num" + salleDTO.getNumero());
-    System.out.println("num2" + s.getNumero());
-
-    em.persist(s);
+    em.merge(s);
     return s;
   }
 
