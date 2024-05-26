@@ -94,7 +94,7 @@ public class Facade {
   }
 
   public void creerSalle(Salle s) {
-    em.persist(s);
+    em.merge(s);
   }
 
   public Salle creerSalle(SalleDTO salleDTO) {
