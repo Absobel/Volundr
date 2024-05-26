@@ -248,7 +248,7 @@ public class Rest {
   @Path("delUsersFromGroupOfGroup/{groupe}")
   @Produces("application/json")
   public Response delUsersFromGroupOfGroup(@PathParam("groupe") int groupe, int groupId) {
-    facade.delUsersFromGroupEvent(groupe, groupId);
+    facade.delUsersFromGroupOfGroup(groupe, groupId);
     return Response.status(200).build();
   }
 
