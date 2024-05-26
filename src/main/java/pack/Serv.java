@@ -9,12 +9,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/Serv")
 public class Serv extends HttpServlet {
 
   @EJB
   Facade facade;
+
+  HttpSession session;
 
   @Override
   public void init() {
@@ -26,7 +29,7 @@ public class Serv extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
 
-    RequestDispatcher rd = req.getRequestDispatcher("login.html");
+    RequestDispatcher rd = req.getRequestDispatcher("index.html");
     // String op = req.getParameter("op");
     rd.forward(req, resp);
   }
@@ -40,7 +43,8 @@ public class Serv extends HttpServlet {
         String mail = req.getParameter("mail");
         String password = req.getParameter("password");
         if (facade.verifierUtilisateur(mail, password)) {
-          req.setAttribute("userSession", facade.getUserSession());
+          session = req.getSession();
+          session.setAttribute("userSession", facade.getUserSession());
           req.getRequestDispatcher("default.jsp").forward(req, resp);
         } else {
           req.getRequestDispatcher("testlogin.html").forward(req, resp);
