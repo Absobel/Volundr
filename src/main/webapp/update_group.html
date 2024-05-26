@@ -42,7 +42,7 @@
   /* l'objet html pour selectionner un email */
   const emailSelector = document.getElementById('email');
 
-  const groupSelector = document.getElementById('group');
+  const groupSelector = document.getElementById('groupe');
 
   /* l'objet html pour visualiser le groupe */
   const affichageTextarea = document.getElementById('affichage');
@@ -90,7 +90,7 @@
         data.map(currentValue => {
           let newOption = document.createElement('option');
           newOption.setAttribute('value', currentValue.id);
-          newOption.innerText = currentValue.id;
+          newOption.innerText = currentValue.nom;
           groupSelector.appendChild(newOption);
         })
       })

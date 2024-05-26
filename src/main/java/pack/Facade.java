@@ -38,6 +38,11 @@ public class Facade {
     em.persist(user);
   }
 
+
+  public void ajoutGroupe(Groupe groupe) {
+    em.merge(groupe);
+  }
+
   public void ajoutGroupe(String groupeName, Set<Utilisateur> users) {
     Groupe groupe = new Groupe();
     groupe.setNom(groupeName);
