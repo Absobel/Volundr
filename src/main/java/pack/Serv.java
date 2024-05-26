@@ -99,6 +99,9 @@ public class Serv extends HttpServlet {
       case "creerEvenement":
         req.getRequestDispatcher("creer_event.html").forward(req, resp);
         break;
+      case "creerGroupe":
+        req.getRequestDispatcher("creer_groupe.html").forward(req, resp);
+        break;
     }
 
     // req.forward(req, resp);

@@ -1,6 +1,32 @@
-<meta charset="UTF-8">
-<form action="Serv" method="post">
-    <input type="hidden" name="op" value="ajoutetablissement">
-    <label for="nomEtablissement">Nom du Groupe :</label> <input type="text" name="nomEtablissement" id="nomEtablissement" required><br>
-    <input type="submit" value="OK">
-</form>
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>creer event</title>
+    <!-- link href="css/style.css" rel="stylesheet"> -->
+  </head>
+  <body>
+    <input type="text" id="name" name="name" required minlength="4" maxlength="12" size="10">
+    <a href="#creerGroupe" id="creerGroupe">créer Groupe</a>
+
+  </body>
+
+  <script>
+
+  document.getElementById('creerGroupe').addEventListener('click', () => {
+  
+  fetch("http://localhost:8080/Volundr/rest/tutorial/creerGroupeVide", {
+    method: "post",
+
+    // Make sure to serialize your JSON body
+    body: document.getElementById("name").value
+
+  }).then( async (response) => { 
+      // Do something awesome that makes the world a better place
+      window.location = `http://localhost:8080/Volundr/update_groupe.html?id=${(await response.json()).id}`;
+    });
+  });
+
+  </script>
+</html>

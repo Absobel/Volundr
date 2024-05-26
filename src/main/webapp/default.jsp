@@ -23,30 +23,43 @@
     </div>
 </form>
 
+<form action="Serv" method="post">
+    <div class="rectangle">
+        <div class="header">Groupe</div>
+        <button type="submit" name="op" value="listeUserGroupe">
+            Mes Groupes 
+        </button>
+        <button type="submit" name="op" value="creerGroupe">
+            Créer 
+        </button>
+    </div>
+</form>
+
 <% Utilisateur user = (Utilisateur) request.getAttribute("userSession");
-    if (user.getMail().equals("olivierblot@gmail.com")){
-        %> 
-        <form action="Serv" method="post">
-            <button type="submit" name="op" value="creeretablissement">
-                Creer Etablissement
-            </button>
-            <button type="submit" name="op" value="listeetablissements">
-                Liste Etablissements
-            </button>
-            <button type="submit" name="op" value="listeutilisateurs">
-                Liste Utilisateurs
-            </button>
-            <button type="submit" name="op" value="listeevenements">
-                Liste Evenements
-            </button>
-            <button type="submit" name="op" value="listegroupes">
-                Liste Groupes
-            </button>
-        </form>  
-        <%
+    if (!(user == null)){
+        if (user.getMail().equals("olivierblot@gmail.com")){
+            %> 
+            <form action="Serv" method="post">
+                <button type="submit" name="op" value="creeretablissement">
+                    Creer Etablissement
+                </button>
+                <button type="submit" name="op" value="listeetablissements">
+                    Liste Etablissements
+                </button>
+                <button type="submit" name="op" value="listeutilisateurs">
+                    Liste Utilisateurs
+                </button>
+                <button type="submit" name="op" value="listeevenements">
+                    Liste Evenements
+                </button>
+                <button type="submit" name="op" value="listegroupes">
+                    Liste Groupes
+                </button>
+            </form>  
+            <%
+        }
     }
  %>
-
 </html>
 
 
