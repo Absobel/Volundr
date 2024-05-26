@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>creer event</title>
+    <!-- link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+    Bâtiment : <input type="text" id="batiment" name="batiment" required><br>
+    Numéro : <input type="text" id="num" name="num" required><br>
+    Capacité : <input type="text" id="capacite" name="capacite" required><br>
+    Etablissement : <select id="selectetab"></select><br>
+    <button id="creerSalle">créer Salle</button>
+</body>
+
+<script>
+    fetch("http://localhost:8080/Volundr/rest/tutorial/getEtablissements", {
+        method: "get"
+    }).then(async (response) => {
+        const etablissements = await response.json();
+        const etablissementSelect = document.getElementById("selectetab");
+        etablissements.forEach((etablissement) => {
+            const option = document.createElement("option");
+            option.value = etablissement.id;
+            option.text = etablissement.nom;
+            etablissementSelect.appendChild(option);
+        });
+
+        document.getElementById('creerSalle').addEventListener('click', () => {
+            if (document.getElementById("batiment").value === "" || document.getElementById("num").value === "" || document.getElementById("capacite").value === "" || document.getElementById("selectetab").value === "") {
+                alert("Veuillez remplir tous les champs");
+                return;
+            }
+
+            const body = {
+                "batiment": document.getElementById("batiment").value,
+                "numero": document.getElementById("num").value,
+                "capacite": document.getElementById("capacite").value,
+                "etablissementS": etablissementSelect.value
+            };
+
+            // DEBUG
+            console.log(JSON.stringify(body));
+
+            fetch("http://localhost:8080/Volundr/rest/tutorial/creerSalle", {
+                method: "post",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            }).then((response) => {
+                window.location = `http://localhost:8080/Volundr/listersalles.html`;
+            });
+        });
+    });
+</script>
+
+</html>
