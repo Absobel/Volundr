@@ -254,7 +254,7 @@ public class Rest {
   @Path("addUsersFromGroupToGroup/{groupe}")
   @Produces("application/json")
   public Response addUsersFromGroupToGroup(@PathParam("groupe") int groupe, int groupeId) {
-    facade.addUserFromGroup(groupe, groupeId);
+    facade.addUsersFromGroupToGroup(groupe, groupeId);
     return Response.status(200).build();
   }
 }
