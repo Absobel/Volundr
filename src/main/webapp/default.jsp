@@ -37,7 +37,7 @@
         </div>
     </form>
 
-    <% Utilisateur user=(Utilisateur) request.getAttribute("userSession"); if (!(user==null)){ if
+    <% Utilisateur user=(Utilisateur) session.getAttribute("userSession"); if (!(user==null)){ if
         (user.getMail().equals("olivierblot@gmail.com")){ %>
         <form action="Serv" method="post">
             <button type="submit" name="op" value="creeretablissement">
