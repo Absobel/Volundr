@@ -75,6 +75,19 @@ public class Rest {
   }
 
   @GET
+  @Path("getUsersGroup/{groupe}")
+  @Produces("application/json")
+  public Collection<String> getUsersGroup(@PathParam("groupe") int groupe) {
+    // Evenement e = facade.trouverEvenement(event);
+    // return e.getGroupeE().getUtilisateurs();
+
+    List<String> users = new ArrayList<>();
+    for (Utilisateur u : facade.trouverGroupe(groupe).getUtilisateurs())
+      users.add(u.getMail());
+    return users;
+  }
+
+  @GET
   @Path("getEvent")
   @Produces("application/json")
   public String getEvent() {
@@ -134,12 +147,21 @@ public class Rest {
   }
 
   @POST
-  @Path("creerGroupe")
+  @Path("creerGroupe/{groupe}")
   @Produces("application/json")
-  public Response creerGroupe(Groupe groupe) {
+  public Response creerGroupe(@PathParam("groupe") int groupeId) {
+    Groupe groupe = facade.trouverGroupe(groupeId);
     facade.ajoutGroupe(groupe);
     // https://developer.mozilla.org/fr/docs/Web/HTTP/Status/204
     return Response.status(204).build();
+  }
+
+  @POST
+  @Path("creerGroupeVide")
+  @Produces("application/json")
+  public Groupe creerGroupeVide(String groupeName) {
+    return facade.ajoutGroupe(groupeName);
+    // https://developer.mozilla.org/fr/docs/Web/HTTP/Status/204
   }
 
   @POST
@@ -181,10 +203,26 @@ public class Rest {
   }
 
   @POST
+  @Path("addUserGroup/{groupe}")
+  @Produces("application/json")
+  public Response addUserGroup(@PathParam("groupe") int groupe, String email) {
+    facade.addUserToGroup(groupe, email);
+    return Response.status(200).build();
+  }
+
+  @POST
   @Path("delUserEvent/{event}")
   @Produces("application/json")
   public Response delUserEvent(@PathParam("event") int event, String email) {
     facade.delUserEvent(event, email);
+    return Response.status(200).build();
+  }
+
+  @POST
+  @Path("delUserGroup/{groupe}")
+  @Produces("application/json")
+  public Response delUserGroupe(@PathParam("groupe") int groupe, String email) {
+    facade.delUserOfGroup(groupe, email);
     return Response.status(200).build();
   }
 
@@ -197,10 +235,26 @@ public class Rest {
   }
 
   @POST
+  @Path("delUsersFromGroupOfGroup/{groupe}")
+  @Produces("application/json")
+  public Response delUsersFromGroupOfGroup(@PathParam("groupe") int groupe, int groupId) {
+    facade.delUsersFromGroupEvent(groupe, groupId);
+    return Response.status(200).build();
+  }
+
+  @POST
   @Path("addUserFromGroupEvent/{event}")
   @Produces("application/json")
   public Response addUserFromGroupEvent(@PathParam("event") int event, int groupeId) {
     facade.addUserFromGroup(event, groupeId);
+    return Response.status(200).build();
+  }
+
+  @POST
+  @Path("addUsersFromGroupToGroup/{groupe}")
+  @Produces("application/json")
+  public Response addUsersFromGroupToGroup(@PathParam("groupe") int groupe, int groupeId) {
+    facade.addUserFromGroup(groupe, groupeId);
     return Response.status(200).build();
   }
 }

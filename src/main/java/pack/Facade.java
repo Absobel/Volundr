@@ -8,11 +8,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import jakarta.ejb.Stateless;
+import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
-@Stateless
+@Singleton
 public class Facade {
 
   @PersistenceContext
@@ -38,9 +38,16 @@ public class Facade {
     em.persist(user);
   }
 
-
   public void ajoutGroupe(Groupe groupe) {
     em.merge(groupe);
+  }
+
+  public Groupe ajoutGroupe(String groupeName) {
+    Groupe groupe = new Groupe();
+    groupe.setNom(groupeName);
+    // em.merge(groupe);
+    em.persist(groupe);
+    return groupe;
   }
 
   public void ajoutGroupe(String groupeName, Set<Utilisateur> users) {
@@ -209,7 +216,8 @@ public class Facade {
   }
 
   public List<Choix> listeChoixEventUser(int eventId, String mail) {
-    return em.createQuery("SELECT c FROM Choix c JOIN c.utilisateurCh user JOIN c.caseCh caseselect JOIN caseselect.evenementC ev WHERE user.mail=:usermail AND ev.id=:eventid",
+    return em.createQuery(
+        "SELECT c FROM Choix c JOIN c.utilisateurCh user JOIN c.caseCh caseselect JOIN caseselect.evenementC ev WHERE user.mail=:usermail AND ev.id=:eventid",
         Choix.class).setParameter("usermail", mail).setParameter("eventid", eventId).getResultList();
   }
 
@@ -231,6 +239,10 @@ public class Facade {
 
   public MaCase trouverMaCase(int caseId) {
     return em.find(MaCase.class, caseId);
+  }
+
+  public Groupe trouverGroupe(int groupeId) {
+    return em.find(Groupe.class, groupeId);
   }
 
   public Set<Utilisateur> getUsersGroup(Groupe groupe) {
@@ -292,6 +304,28 @@ public class Facade {
     }
   }
 
+  public void addUsersFromGroupToGroup(int newGroupeId, int groupeId) {
+    Groupe newGroupe = trouverGroupe(newGroupeId);
+    Groupe groupe = trouverGroupe(groupeId);
+    if (!(newGroupe == null)) {
+      if (!(groupe == null)) {
+        for (Utilisateur u : groupe.getUtilisateurs()) {
+          newGroupe.addUser(u);
+        }
+      }
+    }
+  }
+
+  public void addUserToGroup(int groupeId, String mail) {
+    Groupe groupe = em.find(Groupe.class, groupeId);
+    Utilisateur user = em.find(Utilisateur.class, mail);
+    if (!(groupe == null)) {
+      if (!(user == null)) {
+        groupe.getUtilisateurs().add(user);
+      }
+    }
+  }
+
   public void delUsersFromGroupEvent(int eventId, int groupeId) {
     Evenement event = em.find(Evenement.class, eventId);
     Groupe groupe = em.find(Groupe.class, groupeId);
@@ -306,10 +340,31 @@ public class Facade {
     }
   }
 
+  public void delUsersFromGroupOfGroup(int newGroupeId, int groupeId) {
+    Groupe newGroupe = trouverGroupe(newGroupeId);
+    Groupe groupe = trouverGroupe(groupeId);
+    if (!(groupe == null)) {
+      if (!(newGroupe == null)) {
+        for (Utilisateur u : groupe.getUtilisateurs()) {
+          if (newGroupe.getUtilisateurs().contains(u)) {
+            newGroupe.delUser(u);
+          }
+        }
+      }
+    }
+  }
+
   public Collection<Utilisateur> delUserEvent(int event, String email) {
     Evenement e = this.trouverEvenement(event);
     Utilisateur u = this.trouverUtilisateur(email);
     Groupe g = e.getGroupeE();
+    g.delUser(u);
+    return g.getUtilisateurs();
+  }
+
+  public Collection<Utilisateur> delUserOfGroup(int groupeId, String email) {
+    Groupe g = this.trouverGroupe(groupeId);
+    Utilisateur u = this.trouverUtilisateur(email);
     g.delUser(u);
     return g.getUtilisateurs();
   }
