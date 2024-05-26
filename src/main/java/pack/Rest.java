@@ -190,7 +190,7 @@ public class Rest {
   @POST
   @Path("addChoixUserCase/{user}/{case}")
   @Consumes("application/json")
-  public Response addChoixUserCase(@PathParam("user") String mail, @PathParam("case") int caseId, int note) {
+  public Response addChoixUserCase(@PathParam("user") String mail, @PathParam("case") int caseId, int note) throws PermissionRefuseeException {
     facade.addChoixToUser(mail, caseId, note);
     return Response.status(200).build();
   }
