@@ -25,8 +25,8 @@ volundr-scheduler .salles {
   min-width: 30rem;
 }
 
-volundr-scheduler .salles > li {
-  border : solid thin;
+volundr-scheduler .salles>li {
+  border: solid thin;
   flex-grow: 1;
 
   display: flex;
@@ -57,29 +57,29 @@ volundr-scheduler .cases {
   height: 100%;
 }
 
-volundr-scheduler .cases > li {
-  border-top : solid thin grey;
+volundr-scheduler .cases>li {
+  border-top: solid thin grey;
   flex-grow: 1;
-  
+
   /* position relative pour pouvoir position absolute dedans */
   position: relative;
 }
 
-volundr-scheduler .cases > li span {
+volundr-scheduler .cases>li span {
   position: absolute;
   right: calc(0.3rem + 100%);
   top: 0;
 }
 
-volundr-scheduler .cases > li:nth-child(8n+1),
-volundr-scheduler .cases > li:nth-child(8n+2),
-volundr-scheduler .cases > li:nth-child(8n+3),
-volundr-scheduler .cases > li:nth-child(8n+4) {
-  background-color : lightgrey;
+volundr-scheduler .cases>li:nth-child(8n+1),
+volundr-scheduler .cases>li:nth-child(8n+2),
+volundr-scheduler .cases>li:nth-child(8n+3),
+volundr-scheduler .cases>li:nth-child(8n+4) {
+  background-color: lightgrey;
 }
 
-volundr-scheduler .cases > li:hover {
-  background : yellow;
+volundr-scheduler .cases>li:hover {
+  background: yellow;
 }
 
 volundr-scheduler .creneaux {
@@ -87,7 +87,7 @@ volundr-scheduler .creneaux {
   grid-template-columns: 100%;
   grid-column-gap: 0;
   grid-row-gap: 0;
-  
+
   /* on superpose les creneaux sur les heures */
   position: absolute;
   top: 0;
@@ -97,7 +97,7 @@ volundr-scheduler .creneaux {
   pointer-events: none;
 }
 
-volundr-scheduler .creneaux > li {  
+volundr-scheduler .creneaux>li {
   /* position relative pour pouvoir position absolute dedans */
   position: relative;
 }
@@ -109,9 +109,9 @@ volundr-creneau {
   right: 0.2rem;
   bottom: 0.2rem;
   border-radius: 0.3rem;
-  
+
   background: cyan;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: center;

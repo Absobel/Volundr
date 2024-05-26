@@ -9,18 +9,18 @@ function toTime(time) {
 
 export default class Creneau extends HTMLElement {
 
-  constructor () {
+  constructor() {
     super();
     this.room = null;
   }
 
-  get time () { return toTime(this.getAttribute('data-time')) }
+  get time() { return toTime(this.getAttribute('data-time')) }
 
-  get duration () { return toTime(this.getAttribute('data-duration')) }
+  get duration() { return toTime(this.getAttribute('data-duration')) }
 
   static get observedAttributes() { return ['data-time', 'data-duration']; }
 
-  attributeChangedCallback (name, oldValue, newValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     if (newValue === null || this.room === null || this.parentElement === null) {
       return
     }
@@ -50,7 +50,7 @@ export default class Creneau extends HTMLElement {
     }
   }
 
-  disconnectedCallback () {
+  disconnectedCallback() {
     if (this.room !== null) {
       this.room.updateCreneauxList();
     }
