@@ -19,7 +19,7 @@ public class Etablissement {
 
     private String nom;
 
-    @OneToMany(mappedBy = "etablissement")
+    @OneToMany(mappedBy = "etablissement", fetch = FetchType.EAGER)
     private Collection<Utilisateur> utilisateurs;
 
     /**

@@ -52,6 +52,16 @@ public class Rest {
   }
 
   @GET
+  @Path("getEtablissements")
+  @Produces("application/json")
+  public Collection<EtablissementDTO> getEtablissements() {
+    List<EtablissementDTO> result = new ArrayList<>();
+    for (Etablissement etablissement : facade.listeEtablissements())
+      result.add(new EtablissementDTO(etablissement));
+    return result;
+  }
+
+  @GET
   @Path("getSalles")
   @Produces("application/json")
   public Collection<SalleDTO> getSalles() {
