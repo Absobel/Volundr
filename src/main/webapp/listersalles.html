@@ -10,6 +10,7 @@
 
 <body>
     <div id="listersalles"></div>
+    <div id="result"></div>
 </body>
 
 <script>
@@ -28,6 +29,9 @@
         const button = document.createElement("button");
         button.textContent = "Validate";
         button.addEventListener("click", () => {
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = ""; // Clear the result div before populating it with new data
+
             const selectedEtablissementId = etablissementSelect.value;
             // Make your request here using the selectedEtablissementId
             const salles = etablissements.find((etablissement) => etablissement.id == selectedEtablissementId).salles;
@@ -38,7 +42,7 @@
                     listersalles.textContent += ", ";
                 }
             });
-            document.getElementById("listersalles").appendChild(listersalles);
+            document.getElementById("result").appendChild(listersalles);
         });
 
         document.getElementById("listersalles").appendChild(etablissementSelect);
