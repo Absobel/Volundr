@@ -140,12 +140,6 @@ public class Facade {
     event.setGroupeE(g);
     em.persist(event);
 
-    MaCase c = new MaCase();
-    c.setDebutCreneau(0);
-    c.setFinCreneau(1);
-    c.setEvenementC(event);
-    em.persist(c);
-
     return event;
   }
 
