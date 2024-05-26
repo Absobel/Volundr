@@ -35,7 +35,7 @@ public class Groupe {
      */
     private String nom;
 
-    public boolean isNotEventGroup = false;
+    public boolean isNotEventGroup = true;
 
     public int getId() {
         return id;

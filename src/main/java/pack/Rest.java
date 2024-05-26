@@ -122,6 +122,15 @@ public class Rest {
   }
 
   @POST
+  @Path("creerGroupe")
+  @Produces("application/json")
+  public Response creerGroupe(Groupe groupe) {
+    facade.ajoutGroupe(groupe);
+    // https://developer.mozilla.org/fr/docs/Web/HTTP/Status/204
+    return Response.status(204).build();
+  }
+
+  @POST
   @Path("addCasesEvent/{event}")
   @Produces("application/json")
   public Response addCasesEvent(@PathParam("event") int event, Collection<MaCase> cases) {
