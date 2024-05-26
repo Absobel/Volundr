@@ -58,7 +58,7 @@
             <button type="submit" name="op" value="creersalle">
                 Creer Salle
             </button>
-            <button type="submit" name="op" value="listesalles">
+            <button type="submit" name="op" value="listersalles">
                 Liste Salles
             </button>
         </form>
