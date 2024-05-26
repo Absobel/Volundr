@@ -208,6 +208,11 @@ public class Facade {
         Evenement.class).getResultList();
   }
 
+  public List<Choix> listeChoixEventUser(int eventId, String mail) {
+    return em.createQuery("SELECT c FROM Choix c JOIN c.utilisateurCh user JOIN c.caseCh caseselect JOIN caseselect.evenementC ev WHERE user.mail=:usermail AND ev.id=:eventid",
+        Choix.class).setParameter("usermail", mail).setParameter("eventid", eventId).getResultList();
+  }
+
   public Evenement trouverEvenement(int eventid) {
     return em.find(Evenement.class, eventid);
   }
@@ -241,6 +246,14 @@ public class Facade {
       c.setEvenementC(event);
       em.merge(c);
     }
+  }
+
+  public void addChoixToUser(String mail, int caseId, int note) {
+    Choix newChoix = new Choix();
+    newChoix.setUtilisateurCh(trouverUtilisateur(mail));
+    newChoix.setCaseCh(trouverMaCase(caseId));
+    newChoix.setNote(note);
+    em.merge(newChoix);
   }
 
   public void delCaseToEvent(Evenement event, Collection<MaCase> cases) {

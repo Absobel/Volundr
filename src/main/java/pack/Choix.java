@@ -1,27 +1,25 @@
 package pack;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.ManyToOne;
 
 @Entity
+@IdClass(ChoixId.class)
 public class Choix {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
     /**
      * Utilisateur concerné par le choix.
      */
+    @Id
     @ManyToOne
     private Utilisateur utilisateurCh;
 
     /**
      * Case visée par le choix.
      */
+    @Id
     @ManyToOne
     private MaCase caseCh;
 
@@ -29,14 +27,6 @@ public class Choix {
      * Note attribuée à la case.
      */
     private int note;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Utilisateur getUtilisateurCh() {
         return utilisateurCh;

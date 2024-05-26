@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -97,6 +98,17 @@ public class Rest {
     return res;
   }
 
+  @GET
+  @Path("getChoixEvent/{event}/{user}")
+  @Produces("application/json")
+  public Collection<ChoixDTO> getChoixEventUser(@PathParam("event") int event, @PathParam("user") String mail) {
+    Collection<Choix> choix = facade.listeChoixEventUser(event, mail);
+    List<ChoixDTO> res = new ArrayList<>();
+    for (Choix c : choix)
+      res.add(new ChoixDTO(c));
+    return res;
+  }
+
   @POST
   @Path("addUser")
   public Response addUser(Utilisateur user) {
@@ -132,7 +144,6 @@ public class Rest {
 
   @POST
   @Path("addCasesEvent/{event}")
-  @Produces("application/json")
   public Response addCasesEvent(@PathParam("event") int event, Collection<MaCase> cases) {
     Evenement realEvent = facade.trouverEvenement(event);
     // /* on récupère les vraies cases */
@@ -141,6 +152,14 @@ public class Rest {
     // realCases.add(facade.toMaCase(c));
     // }
     facade.addCaseToEvent(realEvent, cases);
+    return Response.status(200).build();
+  }
+
+  @POST
+  @Path("addChoixUserCase/{user}/{case}")
+  @Consumes("application/json")
+  public Response addChoixUserCase(@PathParam("user") String mail, @PathParam("case") int caseId, int note) {
+    facade.addChoixToUser(mail, caseId, note);
     return Response.status(200).build();
   }
 
