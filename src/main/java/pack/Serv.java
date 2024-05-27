@@ -37,67 +37,20 @@ public class Serv extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-
+    session = req.getSession(false);
     if (session != null) {
       session.setAttribute("userSession", facade.updateUserSession());
-
-      switch (req.getParameter("op")) {
-        case "deconnexion":
-          session.invalidate();
-          req.getRequestDispatcher("index.html").forward(req, resp);
-          break;
-        case "creeretablissement":
-          req.getRequestDispatcher("ajoutEtablissement.html").forward(req, resp);
-          break;
-        case "ajoutetablissement":
-          String ename = req.getParameter("nomEtablissement");
-          facade.ajoutEtablissement(ename);
-          req.setAttribute("userSession", facade.getUserSession());
-          req.getRequestDispatcher("default.jsp").forward(req, resp);
-          break;
-        case "listeetablissements":
-          req.setAttribute("listeetablissements", facade.listeEtablissements());
-          req.getRequestDispatcher("listeretablissements.jsp").forward(req, resp);
-          break;
-        case "listeutilisateurs":
-          req.setAttribute("listeutilisateurs", facade.listeUsers());
-          req.getRequestDispatcher("listerutilisateurs.jsp").forward(req, resp);
-          break;
-        case "listeevenements":
-          req.setAttribute("listeevenements", facade.listeEvenements());
-          req.getRequestDispatcher("listeevenement.jsp").forward(req, resp);
-          break;
-        case "listegroupes":
-          req.setAttribute("listegroupes", facade.listeGroupes());
-          req.getRequestDispatcher("listegroupes.jsp").forward(req, resp);
-          break;
-        case "creerEvenement":
-          req.getRequestDispatcher("creer_event.html").forward(req, resp);
-          break;
-        case "creerGroupe":
-          req.getRequestDispatcher("creer_groupe.html").forward(req, resp);
-          break;
-        case "listeUserGroupe":
-          req.getRequestDispatcher("mesGroupes.jsp").forward(req, resp);
-          break;
-        case "listeUserEvent":
-          req.getRequestDispatcher("mesEvents.jsp").forward(req, resp);
-          break;
-        case "listersalles":
-          req.getRequestDispatcher("listersalles.html").forward(req, resp);
-          break;
-        case "creersalle":
-          req.getRequestDispatcher("creersalle.html").forward(req, resp);
-          break;
-      }
     } else {
+      // req.getRequestDispatcher("index.html").forward(req, resp);
       switch (req.getParameter("op")) {
         case "chargerutilisateur":
           String mail = req.getParameter("mail");
           String password = req.getParameter("password");
           if (facade.verifierUtilisateur(mail, password)) {
+
             session = req.getSession();
             session.setMaxInactiveInterval(30 * 60);
+
             session.setAttribute("userSession", facade.getUserSession());
             req.getRequestDispatcher("default.jsp").forward(req, resp);
           } else {
@@ -121,7 +74,6 @@ public class Serv extends HttpServlet {
           } else {
             req.getRequestDispatcher("testinscription.html").forward(req, resp);
           }
-
           break;
         case "creerutilisateur":
           req.getRequestDispatcher("inscription.html").forward(req, resp);
@@ -129,7 +81,63 @@ public class Serv extends HttpServlet {
         case "retournerarriere":
           req.getRequestDispatcher("index.html").forward(req, resp);
           break;
+        default:
+          req.getRequestDispatcher("index.html").forward(req, resp);
+          break;
       }
+    }
+    switch (req.getParameter("op")) {
+      case "deconnexion":
+        session.invalidate();
+        req.getRequestDispatcher("index.html").forward(req, resp);
+        break;
+      case "creeretablissement":
+        req.getRequestDispatcher("ajoutEtablissement.html").forward(req, resp);
+        break;
+      case "ajoutetablissement":
+        String ename = req.getParameter("nomEtablissement");
+        facade.ajoutEtablissement(ename);
+        req.setAttribute("userSession", facade.getUserSession());
+        req.getRequestDispatcher("default.jsp").forward(req, resp);
+        break;
+      case "listeetablissements":
+        req.setAttribute("listeetablissements", facade.listeEtablissements());
+        req.getRequestDispatcher("listeretablissements.jsp").forward(req, resp);
+        break;
+      case "listeutilisateurs":
+        req.setAttribute("listeutilisateurs", facade.listeUsers());
+        req.getRequestDispatcher("listerutilisateurs.jsp").forward(req, resp);
+        break;
+      case "listeevenements":
+        req.setAttribute("listeevenements", facade.listeEvenements());
+        req.getRequestDispatcher("listeevenement.jsp").forward(req, resp);
+        break;
+      case "listegroupes":
+        req.setAttribute("listegroupes", facade.listeGroupes());
+        req.getRequestDispatcher("listegroupes.jsp").forward(req, resp);
+        break;
+      case "creerEvenement":
+        req.getRequestDispatcher("creer_event.html").forward(req, resp);
+        break;
+      case "creerGroupe":
+        req.getRequestDispatcher("creer_groupe.html").forward(req, resp);
+        break;
+      case "listeUserGroupe":
+        req.getRequestDispatcher("mesGroupes.jsp").forward(req, resp);
+        break;
+      case "listeUserEvent":
+        req.getRequestDispatcher("mesEvents.jsp").forward(req, resp);
+        break;
+      case "listersalles":
+        req.getRequestDispatcher("listersalles.html").forward(req, resp);
+        break;
+      case "creersalle":
+        req.getRequestDispatcher("creersalle.html").forward(req, resp);
+        break;
+
+      default:
+        req.getRequestDispatcher("index.html").forward(req, resp);
+        break;
     }
 
     // req.forward(req, resp);

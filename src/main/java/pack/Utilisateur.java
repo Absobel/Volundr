@@ -23,6 +23,8 @@ public class Utilisateur implements Serializable {
 
     private String password; /* probablement à changer */
 
+    private boolean isAdmin;
+
     /**
      * Groupes auxquels l'usager appartient.
      */
@@ -47,7 +49,6 @@ public class Utilisateur implements Serializable {
      */
     @OneToMany(mappedBy = "usagerChoisi", fetch = FetchType.EAGER)
     private List<MaCase> casesAffectation;
-
 
     public List<Groupe> getGroupesU() {
         return groupesU;
@@ -117,10 +118,19 @@ public class Utilisateur implements Serializable {
     }
 
     public List<MaCase> getCasesAffectation() {
-      return casesAffectation;
+        return casesAffectation;
     }
 
     public void setCasesAffectation(List<MaCase> casesAffectation) {
-      this.casesAffectation = casesAffectation;
+        this.casesAffectation = casesAffectation;
     }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
 }

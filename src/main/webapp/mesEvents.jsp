@@ -23,7 +23,8 @@ Utilisateur userSession = (Utilisateur) session.getAttribute("userSession");
                     for( Evenement ev : g.getEvenements()){
                         String s = ev.getNom();
                         %>
-                        <%= s %><br><br>
+                        <%= s      %>
+                        <br><br>
                         <% } 
                     }
                 } %>

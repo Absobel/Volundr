@@ -9,8 +9,10 @@
 
     <body>
         
-        <% int sessionTime = session.getMaxInactiveInterval(); %>
+        <% int sessionTime = session.getMaxInactiveInterval(); 
+       %>
         <form action="Serv" method="post">
+               
                 <button type="submit" name="op" value="deconnexion">
                     Deconnexion
                 </button>
@@ -52,7 +54,7 @@
         Utilisateur user =(Utilisateur) session.getAttribute("userSession"); 
 
 
-        if (user.getMail().equals("olivierblot@gmail.com")){ %>
+        if (user.getIsAdmin()){ %>
         <form action="Serv" method="post">
             <button type="submit" name="op" value="creeretablissement">
                 Creer Etablissement

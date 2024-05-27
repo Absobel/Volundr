@@ -40,6 +40,17 @@ public class Facade {
     em.persist(user);
   }
 
+  public void ajoutUtilisateur(String nom, String prenom, String mail, String password, boolean isAdmin) {
+    Utilisateur user = new Utilisateur();
+    user.setNom(nom);
+    user.setPrenom(prenom);
+    user.setMail(mail);
+    user.setPassword(password);
+    user.setIsAdmin(isAdmin);
+    user = em.merge(user);
+    em.persist(user);
+  }
+
   public void ajoutGroupe(Groupe groupe) {
     em.merge(groupe);
   }
@@ -468,7 +479,11 @@ public class Facade {
         String nom = mots[1];
         String mail = mots[2];
         String password = mots[3];
-        ajoutUtilisateur(nom, prenom, mail, password);
+        boolean isAdmin = false;
+        if (mots.length > 4) {
+          isAdmin = Boolean.parseBoolean(mots[4]);
+        }
+        ajoutUtilisateur(nom, prenom, mail, password, isAdmin);
       }
 
     } catch (IOException e) {
