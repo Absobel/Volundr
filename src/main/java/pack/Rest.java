@@ -113,9 +113,24 @@ public class Rest {
   @GET
   @Path("getCasesEvent/{event}")
   @Produces("application/json")
-  public Collection<MaCaseDTO> getEvents(@PathParam("event") int event) {
+  public Collection<MaCaseDTO> getCasesEvent(@PathParam("event") int event) {
     Evenement e = facade.trouverEvenement(event);
     Collection<MaCaseDTO> res = new ArrayList<>();
+    for (MaCase c : e.getCases())
+      res.add(new MaCaseDTO(c));
+    return res;
+  }
+
+  @GET
+  @Path("runAffectationEvent/{event}")
+  @Produces("application/json")
+  public Collection<MaCaseDTO> runAffectationEvent(@PathParam("event") int event) {
+    Evenement e = facade.trouverEvenement(event);
+    Collection<MaCaseDTO> res = new ArrayList<>();
+    /* lancer l'affectation */
+    facade.AffecterCreneaux(e);
+    e = facade.trouverEvenement(event);
+    /* envoyer le résultat */
     for (MaCase c : e.getCases())
       res.add(new MaCaseDTO(c));
     return res;

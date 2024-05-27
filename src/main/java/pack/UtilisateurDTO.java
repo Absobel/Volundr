@@ -10,15 +10,12 @@ public class UtilisateurDTO implements Serializable {
 
     private String prenom;
 
-    private String password; /* probablement à changer */
-
     private Etablissement etablissement;
 
     public UtilisateurDTO(Utilisateur user) {
       this.mail = user.getMail();
       this.nom = user.getNom();
       this.prenom = user.getPrenom();
-      this.password = user.getPassword();
       this.etablissement = user.getEtablissement();
     }
 
@@ -46,14 +43,6 @@ public class UtilisateurDTO implements Serializable {
         this.prenom = prenom;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Etablissement getEtablissement() {
         return etablissement;
     }
@@ -61,5 +50,4 @@ public class UtilisateurDTO implements Serializable {
     public void setEtablissement(Etablissement etablissement) {
         this.etablissement = etablissement;
     }
-
 }

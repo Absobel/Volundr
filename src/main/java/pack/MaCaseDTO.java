@@ -19,6 +19,9 @@ public class MaCaseDTO implements Serializable {
   /** L'identifiant de la salle à laquelle appartient la case */
   private SalleDTO salleC;
 
+  /** L'Utilisateur à qui la case a été affectée */
+  private UtilisateurDTO usagerChoisi;
+
   public MaCaseDTO() {
     /* ne pas oublier le constructeur par defaut pour JBoss */
   }
@@ -28,6 +31,7 @@ public class MaCaseDTO implements Serializable {
     this.debutCreneau = c.getDebutCreneau();
     this.finCreneau = c.getFinCreneau();
     this.salleC = new SalleDTO(c.getSalleC());
+    this.usagerChoisi = c.getUsagerChoisi() == null ? null : new UtilisateurDTO(c.getUsagerChoisi());
   }
 
   public int getId() {
@@ -46,4 +50,7 @@ public class MaCaseDTO implements Serializable {
     return salleC;
   }
 
+  public UtilisateurDTO getUsagerChoisi() {
+    return usagerChoisi;
+  }
 }
