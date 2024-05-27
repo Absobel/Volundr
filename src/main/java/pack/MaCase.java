@@ -2,6 +2,7 @@ package pack;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class MaCase {
     private Salle salleC;
 
     // Liste de choix faits/à faire des utilisateurs ayant accès à cette case.
-    @OneToMany(mappedBy = "caseCh", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "caseCh", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Choix> choix;
 
     /**
@@ -52,6 +53,7 @@ public class MaCase {
     /**
      * Usager choisi par l'algorithme de décision.
      */
+    @ManyToOne
     private Utilisateur usagerChoisi;
 
     public MaCase() {
