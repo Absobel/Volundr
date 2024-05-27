@@ -23,8 +23,9 @@ Utilisateur userSession = (Utilisateur) session.getAttribute("userSession");
                     for( Evenement ev : g.getEvenements()){
                         String s = ev.getNom();
                         %>
-                        <%= s      %>
-                        <br><br>
+                        <%= s %><br><br>
+                        <a href="webscheduler/page_ajout_choix.html?user=<%= userSession.getMail()%>&id=<%= ev.getId()%>" id="pach"> Choix Créneau</a>                 
+                        
                         <% } 
                     }
                 } %>
