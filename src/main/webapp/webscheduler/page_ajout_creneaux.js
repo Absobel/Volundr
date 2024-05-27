@@ -14,6 +14,7 @@ const addCreneau = document.getElementById('add-creneau');
 const choixDuree = document.getElementById('duree-creneau');
 const choixSalle = document.getElementById('choix-salle');
 const addSalle = document.getElementById('add-salle');
+const runAfectation = document.getElementById('run-affectation');
 
 
 /** Fonction pour ajouter une salle dans le scheduler si elle n'y est pas déjà */
@@ -80,6 +81,10 @@ function updateAffichage() {
         /* important de récupérer l'id sinon quand on va rappeler le serveur
          * on va créer une copie au lieu de modifier l'original */
         new_creneau.setAttribute('data-id', creneau.id);
+
+        /* afficher la personne à qui on a affecté le créneau
+         * (si l'affectation a déjà eu lieu) */
+        new_creneau.innerText = (creneau.usagerChoisi === undefined) ? "" : `${creneau.usagerChoisi.prenom} ${creneau.usagerChoisi.nom}`;
 
         document.getElementById(`volundr-room-${creneau.salleC.id}`).appendChild(new_creneau);
 
@@ -196,6 +201,19 @@ addCreneau.addEventListener('click', () => {
     })
   ]
 
+});
+
+/* Quand on clique sur le lien, on lance l'algorithme d'affectation sur le
+ * serveur et on refresh l'affichage */
+runAfectation.addEventListener('click', () => {
+  fetch(`http://localhost:8080/Volundr/rest/tutorial/runAffectationEvent/${id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        updateAffichage();
+        console.log(response);
+      });
 });
 
 // actualiser l'affichage au chargement de la page
