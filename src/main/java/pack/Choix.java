@@ -9,6 +9,10 @@ import jakarta.persistence.ManyToOne;
 @IdClass(ChoixId.class)
 public class Choix {
 
+    /** La note par défaut appliquée pour les créneaux que l'utilisateur
+     * n'a pas rempli */
+    public static final int NOTE_DEFAUT = 0;
+
     /**
      * Utilisateur concerné par le choix.
      */

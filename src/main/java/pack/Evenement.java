@@ -2,6 +2,7 @@ package pack;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,13 +21,13 @@ public class Evenement {
     /**
      * Groupe invité à l'évènement.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Groupe groupeE;
 
     /**
      * Liste des cases composant l'évènement.
      */
-    @OneToMany(mappedBy = "evenementC", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "evenementC", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<MaCase> cases;
 
     /**

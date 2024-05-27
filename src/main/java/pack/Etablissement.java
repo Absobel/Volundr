@@ -1,5 +1,6 @@
 package pack;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -19,13 +20,13 @@ public class Etablissement {
 
     private String nom;
 
-    @OneToMany(mappedBy = "etablissement", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "etablissement", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<Utilisateur> utilisateurs;
 
     /**
      * Salles de l'étbalissement.
      */
-    @OneToMany(mappedBy = "etablissementS", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "etablissementS", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Salle> salles;
 
     public List<Salle> getSalles() {
