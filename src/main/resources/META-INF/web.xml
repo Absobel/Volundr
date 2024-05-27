@@ -9,6 +9,11 @@
         <session-timeout>1</session-timeout> <!-- Durée de vie de la session en minutes -->
     </session-config>
 
-    <!-- Autres configurations de servlets, filtres, écouteurs, etc. -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>
+
 
 </web-app>
