@@ -11,7 +11,6 @@
 <body>
 
   <main>
-
     <form>
       <label for="email">Choisir un email :</label>
       <select name="cars" id="email">
@@ -33,6 +32,8 @@
     <textarea id="affichage" rows="5" cols="33" readonly>
         petit texte de test
       </textarea>
+    
+    <a href="default.jsp" id="valider">valider</a>
   </main>
 
 </body>
@@ -162,7 +163,6 @@
       updateAffichage();
     });
   });
-
   // actualiser l'affichage au chargement de la page
   window.onload = updateAffichage;
 </script>

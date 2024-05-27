@@ -23,6 +23,8 @@ public class Utilisateur implements Serializable {
 
     private String password; /* probablement à changer */
 
+    private boolean isAdmin;
+
     /**
      * Groupes auxquels l'usager appartient.
      */
@@ -106,6 +108,14 @@ public class Utilisateur implements Serializable {
 
     public void setEtablissement(Etablissement etablissement) {
         this.etablissement = etablissement;
+    }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 }
