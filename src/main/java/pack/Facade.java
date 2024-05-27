@@ -3,12 +3,12 @@ package pack;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
@@ -412,7 +412,7 @@ public class Facade {
        * sur des ChoixDTO.
        * Explication: J'ai pas voulu override les méthodes de Choix: compareTo,
        * hashcode et equals pour pas créer de bug avec les JPA */
-      SortedSet<ChoixDTO> choixTotauxUser = new TreeSet<>();
+      Set<ChoixDTO> choixTotauxUser = new HashSet<>();
 
       /* ratacher l'user au PersistenceContext
        * sinon on peut pas faire getChoix */
@@ -437,17 +437,22 @@ public class Facade {
                                                  si n'existe pas déjà */
       }
 
-      boolean estAffecte = false;
+      /* On va maintenant trier par ordre décroissant de notes */
+      List<ChoixDTO> choixTries = new ArrayList<>();
+      choixTries.addAll(choixTotauxUser);
+      Collections.sort(choixTries, new ChoixDTO.ChoixDTONotesComparator());
+
       /* On parcourt maintenant les ChoixDTO (triés par ordre décroissant de
        * notes grace au SortedSet) */
-      for (ChoixDTO c : choixTotauxUser) {
-        if ((!estAffecte) && c.getCaseCh().getUsagerChoisi() == null) {
-          MaCase realCase = trouverMaCase(c.getCaseCh().getId());
+      for (ChoixDTO c : choixTries) {
+        MaCase realCase = trouverMaCase(c.getCaseCh().getId());
+        if (realCase.getUsagerChoisi() == null) {
           realCase.setUsagerChoisi(user);
           em.merge(realCase); /* pas sur que ce soit nécessaire */
-          estAffecte = true;
+          break; /* passer à l'user suivant */
         }
       }
+
     }
   }
 
