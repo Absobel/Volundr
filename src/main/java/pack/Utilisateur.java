@@ -41,6 +41,14 @@ public class Utilisateur implements Serializable {
     @ManyToMany(mappedBy = "utilisateursC")
     private List<MaCase> cases;
 
+    /**
+     * Les cases des différents événements auquels appartient l'utilisateur et
+     * qui lui ont été affecté
+     */
+    @OneToMany(mappedBy = "usagerChoisi", fetch = FetchType.EAGER)
+    private List<MaCase> casesAffectation;
+
+
     public List<Groupe> getGroupesU() {
         return groupesU;
     }
@@ -108,4 +116,11 @@ public class Utilisateur implements Serializable {
         this.etablissement = etablissement;
     }
 
+    public List<MaCase> getCasesAffectation() {
+      return casesAffectation;
+    }
+
+    public void setCasesAffectation(List<MaCase> casesAffectation) {
+      this.casesAffectation = casesAffectation;
+    }
 }

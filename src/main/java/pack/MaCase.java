@@ -52,6 +52,7 @@ public class MaCase {
     /**
      * Usager choisi par l'algorithme de décision.
      */
+    @ManyToOne
     private Utilisateur usagerChoisi;
 
     public MaCase() {
