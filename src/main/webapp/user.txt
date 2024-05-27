@@ -1,4 +1,4 @@
-Olivier Blot-Veillon olivierblot@gmail.com password
+Olivier Blot-Veillon olivierblot@gmail.com password true
 Obi-Wan Kenobi kenobi@gmail.com Ihavethehighground
 Anakin Skywalker skywalker@gmail.com Ihatesand
 Mace Windu windu@gmail.com Takeaseatyoungskywalker
