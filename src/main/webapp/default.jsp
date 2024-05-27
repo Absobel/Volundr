@@ -8,6 +8,14 @@
     </head>
 
     <body>
+        
+        <% int sessionTime = session.getMaxInactiveInterval(); %>
+        <form action="Serv" method="post">
+                <button type="submit" name="op" value="deconnexion">
+                    Deconnexion
+                </button>
+        </form>
+        <%= sessionTime %> <br>
         <a href="https://sd-160040.dedibox.fr/hagimont/" target="_blank">Chez le boss</a>
         <h1>Hello there.</h1>
         <h1> GENERAL KENOBI</h1>
@@ -19,6 +27,9 @@
     <form action="Serv" method="post">
         <div class="rectangle">
             <div class="header">Événement</div>
+            <button type="submit" name="op" value="listeUserEvent">
+                Mes Evenements
+            </button>
             <button type="submit" name="op" value="creerEvenement">
                 Créer Événement
             </button>
@@ -37,8 +48,11 @@
         </div>
     </form>
 
-    <% Utilisateur user=(Utilisateur) session.getAttribute("userSession"); if (!(user==null)){ if
-        (user.getMail().equals("olivierblot@gmail.com")){ %>
+    <%  
+        Utilisateur user =(Utilisateur) session.getAttribute("userSession"); 
+
+
+        if (user.getMail().equals("olivierblot@gmail.com")){ %>
         <form action="Serv" method="post">
             <button type="submit" name="op" value="creeretablissement">
                 Creer Etablissement
@@ -62,6 +76,6 @@
                 Liste Salles
             </button>
         </form>
-        <% } } %>
+        <% }  %>
 
     </html>
