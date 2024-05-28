@@ -3,22 +3,17 @@ package pack;
 import java.io.IOException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.ejb.EJB;
-// import jakarta.ejb.EJB;
-//import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import jakarta.ws.rs.core.Response;
 
 @WebServlet("/Serv")
 public class Serv extends HttpServlet {
 
   @EJB
   Facade facade;
-
-  HttpSession session;
 
   @Override
   public void init() {
@@ -28,18 +23,17 @@ public class Serv extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
+    throws ServletException, IOException {
 
     redirect(req, resp);
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
+    throws ServletException, IOException {
 
-    session = req.getSession(false);
-    if (session != null) {
-      session.setAttribute("userSession", facade.updateUserSession());
+    HttpSession session = req.getSession(false);
+    if ((session != null) && (session.getAttribute("userSession") != null)) {
       switch (req.getParameter("op")) {
         case "deconnexion":
           session.invalidate();
@@ -96,12 +90,13 @@ public class Serv extends HttpServlet {
         case "chargerutilisateur":
           String mail = req.getParameter("mail");
           String password = req.getParameter("password");
-          if (facade.verifierUtilisateur(mail, password)) {
+          Utilisateur user = facade.verifierUtilisateur(mail, password);
+          if (user != null) {
 
             session = req.getSession();
             session.setMaxInactiveInterval(30 * 60);
 
-            session.setAttribute("userSession", facade.getUserSession());
+            session.setAttribute("userSession", user);
             req.getRequestDispatcher("index.jsp").forward(req, resp);
           } else {
             req.getRequestDispatcher("testlogin.html").forward(req, resp);
