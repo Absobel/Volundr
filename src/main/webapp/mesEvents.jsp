@@ -38,12 +38,10 @@ Utilisateur userSession = (Utilisateur) session.getAttribute("userSession");
                          <div id="countdown"></div>
                          <script>
                             var countdownElement = document.getElementById("countdown");
+                            var eventTime = document.getElementById("eventTime");
                             function time() {
                                 var d = new Date();
-                                var s = d.getSeconds();
-                                var m = d.getMinutes();
-                                var h = d.getHours();
-                                var e = document.getElementById("eventTime").value;
+                                var e = eventTime.value;
                                 var date2 = new Date(e);
                                 var timeDifference = e - d;
 
