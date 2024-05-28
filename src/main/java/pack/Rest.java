@@ -205,7 +205,8 @@ public class Rest {
   @POST
   @Path("addChoixUserCase/{user}/{case}")
   @Consumes("application/json")
-  public Response addChoixUserCase(@PathParam("user") String mail, @PathParam("case") int caseId, int note) throws PermissionRefuseeException {
+  public Response addChoixUserCase(@PathParam("user") String mail, @PathParam("case") int caseId, int note)
+      throws PermissionRefuseeException {
     facade.addChoixToUser(mail, caseId, note);
     return Response.status(200).build();
   }
@@ -282,4 +283,21 @@ public class Rest {
     facade.addUsersFromGroupToGroup(groupe, groupeId);
     return Response.status(200).build();
   }
+
+  @POST
+  @Path("setDebutDate/{idGroupe}")
+  @Consumes("application/json")
+  public Response setDebutDate(@PathParam("idGroupe") int idGroupe, String help) {
+    facade.setDebutDate(idGroupe, help);
+    return Response.status(200).build();
+  }
+
+  @POST
+  @Path("setFinDate/{idGroupe}")
+  @Consumes("application/json")
+  public Response setFinDate(@PathParam("idGroupe") int idGroupe, String help) {
+    facade.setFinDate(idGroupe, help);
+    return Response.status(200).build();
+  }
+
 }

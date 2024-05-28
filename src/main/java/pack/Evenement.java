@@ -1,5 +1,6 @@
 package pack;
 
+import java.util.Date;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -34,6 +35,26 @@ public class Evenement {
      * Nom de l'évènement.
      */
     private String nom;
+
+    private Date debutInscr;
+
+    public Date getDebutInscr() {
+        return debutInscr;
+    }
+
+    public void setDebutInscr(java.util.Date date) {
+        this.debutInscr = date;
+    }
+
+    public Date getFinInscr() {
+        return finInscr;
+    }
+
+    public void setFinInscr(java.util.Date date) {
+        this.finInscr = date;
+    }
+
+    private Date finInscr;
 
     public int getId() {
         return id;

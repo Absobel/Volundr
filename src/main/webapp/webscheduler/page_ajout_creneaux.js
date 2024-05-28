@@ -15,6 +15,7 @@ const choixDuree = document.getElementById('duree-creneau');
 const choixSalle = document.getElementById('choix-salle');
 const addSalle = document.getElementById('add-salle');
 const runAfectation = document.getElementById('run-affectation');
+const valDates = document.getElementById('valDates');
 
 
 /** Fonction pour ajouter une salle dans le scheduler si elle n'y est pas déjà */
@@ -215,6 +216,65 @@ runAfectation.addEventListener('click', () => {
         console.log(response);
       });
 });
+
+const setDebutInscr = document.getElementById('start');
+const setFinInscr = document.getElementById('end');
+
+function formatDate(date) {
+  const d = new Date(date);
+  let month = '' + (d.getMonth() + 1);
+  let day = '' + d.getDate();
+  const year = d.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [year, month, day].join('-');
+}
+var inputStart;
+var inputEnd;
+
+document.getElementById("start").addEventListener('change', function () {
+inputStart = this.value;
+console.log(inputStart);
+});
+
+document.getElementById("start").addEventListener('change', () => {
+    fetch(`http://localhost:8080/Volundr/rest/tutorial/setDebutDate/${id}`,{
+      method: "post",
+      headers: {
+        'Content-Type' : 'application/json'
+      }, 
+      body: inputStart
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      updateAffichage();
+      console.log(response);
+    });
+  });
+
+  document.getElementById("end").addEventListener('change', function () {
+    inputEnd = this.value;
+    console.log(inputEnd);
+    });
+    
+    document.getElementById("end").addEventListener('change', () => {
+        fetch(`http://localhost:8080/Volundr/rest/tutorial/setFinDate/${id}`,{
+          method: "post",
+          headers: {
+            'Content-Type' : 'application/json'
+          }, 
+          body: inputEnd
+        }).then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          updateAffichage();
+          console.log(response);
+        });
+      });
 
 // actualiser l'affichage au chargement de la page
 window.onload = updateAffichage;

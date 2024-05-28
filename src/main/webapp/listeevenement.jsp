@@ -29,7 +29,7 @@ Utilisateur userSession = (Utilisateur) session.getAttribute("userSession");
                 <blockquote>
                     <p>
                         <% String gn=e.getGroupeE().getNom(); %>
-                            <%= s %> <br>
+                            <%= gn %> <br>
                     </p>
                 </blockquote>
                 <% } %>

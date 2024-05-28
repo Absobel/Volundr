@@ -88,6 +88,9 @@ public class Serv extends HttpServlet {
         case "creersalle":
           req.getRequestDispatcher("creersalle.html").forward(req, resp);
           break;
+        case "retourEventManager":
+          req.getRequestDispatcher("eventManager.jsp").forward(req, resp);
+          break;
         default:
           redirect(req, resp);
       }
