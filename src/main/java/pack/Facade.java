@@ -406,8 +406,11 @@ public class Facade {
     }
   }
 
-  /** Affecter un créneau à chaque membre de l'événement
-   * @param event l'événement sur lequel on lance l'algorithme */
+  /**
+   * Affecter un créneau à chaque membre de l'événement
+   *
+   * @param event l'événement sur lequel on lance l'algorithme
+   */
   public void AffecterCreneaux(Evenement event) {
 
     /* On efface les affectations existantes */
@@ -416,36 +419,48 @@ public class Facade {
       em.merge(creneau); /* pour valider la modif */
     }
 
-    /* On va affecter à chaque utilisateur le premier créneau libre
-     * dans l'ordre de ses choix */
+    /*
+     * On va affecter à chaque utilisateur le premier créneau libre
+     * dans l'ordre de ses choix
+     */
     for (Utilisateur u : event.getGroupeE().getUtilisateurs()) {
-      /* On ne peut pas créer de SortedSet sur des Choix mais uniquement
+      /*
+       * On ne peut pas créer de SortedSet sur des Choix mais uniquement
        * sur des ChoixDTO.
        * Explication: J'ai pas voulu override les méthodes de Choix: compareTo,
-       * hashcode et equals pour pas créer de bug avec les JPA */
+       * hashcode et equals pour pas créer de bug avec les JPA
+       */
       Set<ChoixDTO> choixTotauxUser = new HashSet<>();
 
-      /* ratacher l'user au PersistenceContext
-       * sinon on peut pas faire getChoix */
+      /*
+       * ratacher l'user au PersistenceContext
+       * sinon on peut pas faire getChoix
+       */
       Utilisateur user = em.merge(u);
 
       /* On ajoute les cases que l'utilisateur a noté */
       for (Choix c : user.getChoix())
         choixTotauxUser.add(new ChoixDTO(c));
 
-      /* On ré-ajoute toutes les cases en créant des choix fictifs au cas
+      /*
+       * On ré-ajoute toutes les cases en créant des choix fictifs au cas
        * où l'utilisateur a oublié de noter certaines.
        * Le SortedSet assure que si on a déjà mis le choix, il ne sera pas
-       * re-ajouté */
+       * re-ajouté
+       */
       for (MaCase creneau : event.getCases()) {
-        /* On crée virtuellement un choix qu'on convertit ensuite en ChoixDTO.
-         * Cette entitée ne sera pas ajoutée à la base de données */
+        /*
+         * On crée virtuellement un choix qu'on convertit ensuite en ChoixDTO.
+         * Cette entitée ne sera pas ajoutée à la base de données
+         */
         Choix c = new Choix();
         c.setUtilisateurCh(user);
         c.setCaseCh(creneau);
         c.setNote(Choix.NOTE_DEFAUT); /* note par défaut */
-        choixTotauxUser.add(new ChoixDTO(c)); /* le set ajoute uniquement
-                                                 si n'existe pas déjà */
+        choixTotauxUser.add(new ChoixDTO(c)); /*
+                                               * le set ajoute uniquement
+                                               * si n'existe pas déjà
+                                               */
       }
 
       /* On va maintenant trier par ordre décroissant de notes */
@@ -453,8 +468,10 @@ public class Facade {
       choixTries.addAll(choixTotauxUser);
       Collections.sort(choixTries, new ChoixDTO.ChoixDTONotesComparator());
 
-      /* On parcourt maintenant les ChoixDTO (triés par ordre décroissant de
-       * notes grace au SortedSet) */
+      /*
+       * On parcourt maintenant les ChoixDTO (triés par ordre décroissant de
+       * notes grace au SortedSet)
+       */
       for (ChoixDTO c : choixTries) {
         MaCase realCase = trouverMaCase(c.getCaseCh().getId());
         if (realCase.getUsagerChoisi() == null) {
@@ -467,10 +484,9 @@ public class Facade {
     }
   }
 
-
-
   public void userLoader() {
-    try (BufferedReader userReader = new BufferedReader(new FileReader("Volundr/src/main/webapp/user.txt"))) {
+    try (BufferedReader userReader = new BufferedReader(
+        new FileReader("Volundr/src/main/webapp/loaderFiles/user.txt"))) {
       String ligne;
 
       while ((ligne = userReader.readLine()) != null) {
@@ -494,7 +510,7 @@ public class Facade {
 
   public void etablissementLoader() {
     try (BufferedReader etablissementReader = new BufferedReader(
-        new FileReader("Volundr/src/main/webapp/etablissement.txt"))) {
+        new FileReader("Volundr/src/main/webapp/loaderFiles/etablissement.txt"))) {
       String ligne;
 
       while ((ligne = etablissementReader.readLine()) != null) {
@@ -509,7 +525,7 @@ public class Facade {
 
   public void salleLoader() {
     try (BufferedReader etablissementReader = new BufferedReader(
-        new FileReader("Volundr/src/main/webapp/salle.txt"))) {
+        new FileReader("Volundr/src/main/webapp/loaderFiles/salle.txt"))) {
       String ligne;
 
       while ((ligne = etablissementReader.readLine()) != null) {
@@ -528,7 +544,7 @@ public class Facade {
 
   public void groupLoader() {
     try (BufferedReader etablissementReader = new BufferedReader(
-        new FileReader("Volundr/src/main/webapp/groupe.txt"))) {
+        new FileReader("Volundr/src/main/webapp/loaderFiles/groupe.txt"))) {
       String ligne;
 
       while ((ligne = etablissementReader.readLine()) != null) {
