@@ -3,22 +3,17 @@ package pack;
 import java.io.IOException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.ejb.EJB;
-// import jakarta.ejb.EJB;
-//import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import jakarta.ws.rs.core.Response;
 
 @WebServlet("/Serv")
 public class Serv extends HttpServlet {
 
   @EJB
   Facade facade;
-
-  HttpSession session;
 
   @Override
   public void init() {
@@ -28,31 +23,26 @@ public class Serv extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
+    throws ServletException, IOException {
 
     redirect(req, resp);
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
+    throws ServletException, IOException {
 
-    session = req.getSession(false);
-    if (session != null) {
-      session.setAttribute("userSession", facade.updateUserSession());
+    HttpSession session = req.getSession(false);
+    if ((session != null) && (session.getAttribute("userSession") != null)) {
       switch (req.getParameter("op")) {
         case "deconnexion":
           session.invalidate();
-          req.getRequestDispatcher("index.html").forward(req, resp);
-          break;
-        case "creeretablissement":
-          req.getRequestDispatcher("ajoutEtablissement.html").forward(req, resp);
+          req.getRequestDispatcher("login.jsp").forward(req, resp);
           break;
         case "ajoutetablissement":
           String ename = req.getParameter("nomEtablissement");
           facade.ajoutEtablissement(ename);
-          req.setAttribute("userSession", facade.getUserSession());
-          req.getRequestDispatcher("ind.jsp").forward(req, resp);
+          redirect(req, resp);
           break;
         case "listeetablissements":
           req.setAttribute("listeetablissements", facade.listeEtablissements());
@@ -72,9 +62,6 @@ public class Serv extends HttpServlet {
           break;
         case "creerEvenement":
           req.getRequestDispatcher("creer_event.html").forward(req, resp);
-          break;
-        case "creerGroupe":
-          req.getRequestDispatcher("creer_groupe.html").forward(req, resp);
           break;
         case "listeUserGroupe":
           req.getRequestDispatcher("mesGroupes.jsp").forward(req, resp);
@@ -99,15 +86,17 @@ public class Serv extends HttpServlet {
         case "chargerutilisateur":
           String mail = req.getParameter("mail");
           String password = req.getParameter("password");
-          if (facade.verifierUtilisateur(mail, password)) {
+          Utilisateur user = facade.verifierUtilisateur(mail, password);
+          if (user != null) {
 
             session = req.getSession();
             session.setMaxInactiveInterval(30 * 60);
 
-            session.setAttribute("userSession", facade.getUserSession());
+            session.setAttribute("userSession", user);
             req.getRequestDispatcher("index.jsp").forward(req, resp);
           } else {
-            req.getRequestDispatcher("testlogin.html").forward(req, resp);
+            req.setAttribute("fail", 1);
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
           }
           break;
         case "inscrireutilisateur":
@@ -119,38 +108,37 @@ public class Serv extends HttpServlet {
           String cword = req.getParameter("cword");
           if (newmail.equals(cmail) && newpassword.equals(cword)) {
             if (facade.verifierMail(cmail)) {
-              req.getRequestDispatcher("inscription3.html").forward(req, resp);
+              req.setAttribute("fail", 2);
+              req.getRequestDispatcher("inscription.jsp").forward(req, resp);
             } else {
               facade.ajoutUtilisateur(nom, prenom, newmail, newpassword);
-              req.getRequestDispatcher("index.html").forward(req, resp);
+              req.getRequestDispatcher("login.jsp").forward(req, resp);
             }
           } else {
-            req.getRequestDispatcher("testinscription.html").forward(req, resp);
+            req.setAttribute("fail", 1);
+            req.getRequestDispatcher("inscription.jsp").forward(req, resp);
           }
           break;
         case "creerutilisateur":
-          req.getRequestDispatcher("inscription.html").forward(req, resp);
+          req.getRequestDispatcher("inscription.jsp").forward(req, resp);
           break;
         case "retournerarriere":
-          req.getRequestDispatcher("index.html").forward(req, resp);
+          req.getRequestDispatcher("login.jsp").forward(req, resp);
           break;
         default:
-          resp.sendRedirect("index.html");
+          resp.sendRedirect("login.jsp");
 
       }
     }
-
-    // req.forward(req, resp);
   }
 
   protected void redirect(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    if (!(facade.getUserSession() == null)) {
-      if (!(session == null)) {
+      HttpSession session = req.getSession(false);
+      if ((session != null) && (session.getAttribute("userSession") != null)) {
         resp.sendRedirect("index.jsp");
+      } else {
+        resp.sendRedirect("login.jsp");
       }
-    } else {
-      resp.sendRedirect("index.html");
-    }
   }
 }

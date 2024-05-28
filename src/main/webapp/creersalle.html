@@ -1,62 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>creer event</title>
     <!-- link href="css/style.css" rel="stylesheet"> -->
-</head>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-<body>
-    Bâtiment : <input type="text" id="batiment" name="batiment" required><br>
-    Numéro : <input type="text" id="num" name="num" required><br>
-    Capacité : <input type="text" id="capacite" name="capacite" required><br>
-    Etablissement : <select id="selectetab"></select><br>
-    <button id="creerSalle">créer Salle</button>
-</body>
+* {
+  font-family: "Jost", sans-serif;
+  letter-spacing: 0.05em;
+}
 
-<script>
-    fetch("http://localhost:8080/Volundr/rest/tutorial/getEtablissements", {
-        method: "get"
-    }).then(async (response) => {
-        const etablissements = await response.json();
-        const etablissementSelect = document.getElementById("selectetab");
-        etablissements.forEach((etablissement) => {
-            const option = document.createElement("option");
-            option.value = etablissement.id;
-            option.text = etablissement.nom;
-            etablissementSelect.appendChild(option);
-        });
+body {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
 
-        document.getElementById('creerSalle').addEventListener('click', () => {
-            if (document.getElementById("batiment").value === "" || document.getElementById("num").value === "" || document.getElementById("capacite").value === "" || document.getElementById("selectetab").value === "") {
-                alert("Veuillez remplir tous les champs");
-                return;
+.spacer {
+  flex-grow: 1;
+}
+
+button, p, div, strong {
+  margin: 0.5rem auto;
+}
+
+strong {
+  color: red;
+}
+
+div {
+  display: grid;
+  grid-auto-columns: 1fr 1fr; 
+  grid-auto-rows: 1fr; 
+  grid-template-columns: 1fr 2fr; 
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+}
+
+button {
+  border: none;
+  padding: 0.3rem 1rem;
+  border-radius: 2rem;
+}
+
+form {
+  display: inline-block;
+  margin: 0.5rem auto;
+}
+</style>
+  </head>
+
+  <body>
+    <form onsubmit="return false;">
+      <div>
+        <label for="batiment">Bâtiment :</label> <input type="text" id="batiment" name="batiment" required>
+        <label for="num">Numéro :</label> <input type="text" id="num" name="num" required>
+        <label for="capacite">Capacité :</label> <input type="text" id="capacite" name="capacite" required>
+        <label for="selectetab">Etablissement :</label> <select id="selectetab" name="selectetab"></select>
+      </div>
+      <button id="creerSalle">créer Salle</button>
+    </form>
+  </body>
+
+  <script>
+  fetch("http://localhost:8080/Volundr/rest/tutorial/getEtablissements", {
+    method: "get"
+  }).then(async (response) => {
+      const etablissements = await response.json();
+      const etablissementSelect = document.getElementById("selectetab");
+      etablissements.forEach((etablissement) => {
+        const option = document.createElement("option");
+        option.value = etablissement.id;
+        option.text = etablissement.nom;
+        etablissementSelect.appendChild(option);
+      });
+
+      document.getElementById('creerSalle').addEventListener('click', () => {
+        if (document.getElementById("batiment").value === "" || document.getElementById("num").value === "" || document.getElementById("capacite").value === "" || document.getElementById("selectetab").value === "") {
+          alert("Veuillez remplir tous les champs");
+          return;
+        }
+
+        const body = {
+          "batiment": document.getElementById("batiment").value,
+          "numero": document.getElementById("num").value,
+          "capacite": document.getElementById("capacite").value,
+          "etablissementS": etablissementSelect.value
+        };
+
+        // DEBUG
+        console.log(JSON.stringify(body));
+
+        fetch("http://localhost:8080/Volundr/rest/tutorial/creerSalle", {
+          method: "post",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        }).then(async (response) => {
+            if (response.ok) {
+              window.location = `http://localhost:8080/Volundr/listersalles.html`;
+            } else {
+              console.log(await response.text());
             }
-
-            const body = {
-                "batiment": document.getElementById("batiment").value,
-                "numero": document.getElementById("num").value,
-                "capacite": document.getElementById("capacite").value,
-                "etablissementS": etablissementSelect.value
-            };
-
-            // DEBUG
-            console.log(JSON.stringify(body));
-
-            fetch("http://localhost:8080/Volundr/rest/tutorial/creerSalle", {
-                method: "post",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body)
-            }).then((response) => {
-                window.location = `http://localhost:8080/Volundr/listersalles.html`;
-            });
-        });
+          });
+      });
     });
-</script>
+  </script>
 
 </html>
