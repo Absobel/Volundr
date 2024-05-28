@@ -1,13 +1,13 @@
 Olivier Blot-Veillon olivierblot@gmail.com password true
-Téo Pisenti teopisenti@gmailcom password true
+Téo Pisenti teopisenti@gmail.com password true
 Absobel imkonnu@gmail.com password true
 Louis Bru louisbru@gmail.com password true
 Obi-Wan Kenobi kenobi@gmail.com Ihavethehighground
 Anakin Skywalker skywalker@gmail.com Ihatesand
 Mace Windu windu@gmail.com Takeaseatyoungskywalker
-Yoda Jspsonnom yoda@gmail.com Greatestteacherfailureis
+Maitre Yoda yoda@gmail.com Greatestteacherfailureis
 Chancelier Palpatine palpatine@gmail.com Unlimitedpowers
-Compte Dooku dooku@gmail.com Superiorairofsuperiority
+Comte Dooku dooku@gmail.com Superiorairofsuperiority
 Padmé Amidala amidala@gmail.com Agressivenegaciation
 JarJar Binks jarjar@gmail.com missajarjar
 QuiGon Jinn quigon@gmail.com Abilitytospeakdoesnotmakeyouintelligent

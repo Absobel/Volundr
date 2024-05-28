@@ -3,13 +3,14 @@ package pack;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -571,6 +572,31 @@ public class Facade {
       etablissementLoader();
       salleLoader();
       groupLoader();
+    }
+  }
+
+  public void setDebutDate(int id, String help) {
+    Evenement event = trouverEvenement(id);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    try {
+      event.setDebutInscr(dateFormat.parse(help));
+    } catch (ParseException e) {
+      // TODO Auto-generated catch block
+      event.setNom(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+  public void setFinDate(int id, String help) {
+    Evenement event = trouverEvenement(id);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    try {
+      event.setFinInscr(dateFormat.parse(help));
+
+    } catch (ParseException e) {
+      // TODO Auto-generated catch block
+      event.setNom(e.getMessage());
+      e.printStackTrace();
     }
   }
 }
