@@ -20,16 +20,6 @@ public class Facade {
   @PersistenceContext
   private EntityManager em;
 
-  private Utilisateur userSession;
-
-  public Utilisateur getUserSession() {
-    return userSession;
-  }
-
-  public void setUserSession(Utilisateur userSession) {
-    this.userSession = userSession;
-  }
-
   public void ajoutUtilisateur(String nom, String prenom, String mail, String password) {
     Utilisateur user = new Utilisateur();
     user.setNom(nom);
@@ -75,13 +65,6 @@ public class Facade {
   public void ajoutUtilisateur(Utilisateur user) {
     // user = em.merge(user);
     em.persist(user);
-  }
-
-  public Utilisateur updateUserSession() {
-    String mail = this.getUserSession().getMail();
-    Utilisateur updatedUser = trouverUtilisateur(mail);
-    setUserSession(updatedUser);
-    return updatedUser;
   }
 
   public MaCase creerMaCase(MaCaseDTO maCaseDTO) {
@@ -163,15 +146,14 @@ public class Facade {
     return event;
   }
 
-  public boolean verifierUtilisateur(String mail, String password) {
+  public Utilisateur verifierUtilisateur(String mail, String password) {
     Utilisateur user = em.find(Utilisateur.class, mail);
     if (user != null) {
       if (user.getPassword().equals(password)) {
-        setUserSession(user);
-        return true;
+        return user;
       }
     }
-    return false;
+    return null;
   }
 
   public boolean verifierMail(String mail) {
