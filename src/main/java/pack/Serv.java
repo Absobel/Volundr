@@ -39,14 +39,10 @@ public class Serv extends HttpServlet {
           session.invalidate();
           req.getRequestDispatcher("login.jsp").forward(req, resp);
           break;
-        case "creeretablissement":
-          req.getRequestDispatcher("ajoutEtablissement.html").forward(req, resp);
-          break;
         case "ajoutetablissement":
           String ename = req.getParameter("nomEtablissement");
           facade.ajoutEtablissement(ename);
-          req.setAttribute("userSession", facade.getUserSession());
-          req.getRequestDispatcher("ind.jsp").forward(req, resp);
+          redirect(req, resp);
           break;
         case "listeetablissements":
           req.setAttribute("listeetablissements", facade.listeEtablissements());
@@ -66,9 +62,6 @@ public class Serv extends HttpServlet {
           break;
         case "creerEvenement":
           req.getRequestDispatcher("creer_event.html").forward(req, resp);
-          break;
-        case "creerGroupe":
-          req.getRequestDispatcher("creer_groupe.html").forward(req, resp);
           break;
         case "listeUserGroupe":
           req.getRequestDispatcher("mesGroupes.jsp").forward(req, resp);
@@ -99,7 +92,8 @@ public class Serv extends HttpServlet {
             session.setAttribute("userSession", user);
             req.getRequestDispatcher("index.jsp").forward(req, resp);
           } else {
-            req.getRequestDispatcher("testlogin.html").forward(req, resp);
+            req.setAttribute("fail", 1);
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
           }
           break;
         case "inscrireutilisateur":
