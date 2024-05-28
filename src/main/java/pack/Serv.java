@@ -111,17 +111,19 @@ public class Serv extends HttpServlet {
           String cword = req.getParameter("cword");
           if (newmail.equals(cmail) && newpassword.equals(cword)) {
             if (facade.verifierMail(cmail)) {
-              req.getRequestDispatcher("inscription3.html").forward(req, resp);
+              req.setAttribute("fail", 2);
+              req.getRequestDispatcher("inscription.jsp").forward(req, resp);
             } else {
               facade.ajoutUtilisateur(nom, prenom, newmail, newpassword);
               req.getRequestDispatcher("login.jsp").forward(req, resp);
             }
           } else {
-            req.getRequestDispatcher("testinscription.html").forward(req, resp);
+            req.setAttribute("fail", 1);
+            req.getRequestDispatcher("inscription.jsp").forward(req, resp);
           }
           break;
         case "creerutilisateur":
-          req.getRequestDispatcher("inscription.html").forward(req, resp);
+          req.getRequestDispatcher("inscription.jsp").forward(req, resp);
           break;
         case "retournerarriere":
           req.getRequestDispatcher("login.jsp").forward(req, resp);
