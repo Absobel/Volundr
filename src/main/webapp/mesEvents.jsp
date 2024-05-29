@@ -65,7 +65,7 @@ Utilisateur userSession = (Utilisateur) session.getAttribute("userSession");
                             <% 
                             } else {
                             %>
-                                L'inscription est terminée. Vous ne pouvez plus soumettre vos préférences. <br> <%= ev.getAffectationDone() %>
+                                L'inscription est terminée. Vous ne pouvez plus soumettre vos préférences. <br>
                                 <% 
                                 if (ev.getAffectationDone()) {
                                 %>
