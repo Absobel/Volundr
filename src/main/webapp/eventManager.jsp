@@ -9,12 +9,12 @@
 </head>
 
 <body>
-    <main>
-      
-      <% String id = request.getParameter("id"); %>
-        <a href="update_group_event.html?id=<%= id %>" id="uge">Modifier Groupe Evenement</a>
-        <a href="webscheduler/page_ajout_creneaux.html?id=<%= id %>" id="pac">Ajouter Creneaux</a>
-    </main>
+  <main>
+
+    <% String id=request.getParameter("id"); %>
+      <a href="update_group_event.html?id=<%= id %>" id="uge">Modifier Groupe Evenement</a>
+      <a href="webscheduler/page_ajout_creneaux.html?id=<%= id %>" id="pac">Ajouter Creneaux</a>
+  </main>
 </body>
 <a href="index.jsp" id="retourAcceuil"/> Retour Menu</a> <a href="listeevenement.jsp" id="retourManager"/> Retour Liste Evenement</a><br>
 </html>
