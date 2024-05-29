@@ -577,7 +577,7 @@ public class Facade {
    * @param event l'événement sur lequel on lance l'algorithme
    */
   public void AffecterCreneaux(Evenement event) {
-
+    event.setAffectationDone(true);
     /* On efface les affectations existantes */
     for (MaCase creneau : event.getCases()) {
       creneau.setUsagerChoisi(null);
@@ -645,7 +645,7 @@ public class Facade {
           break; /* passer à l'user suivant */
         }
       }
-
+      em.merge(event);
     }
   }
 
@@ -762,5 +762,21 @@ public class Facade {
       event.setNom(e.getMessage());
       e.printStackTrace();
     }
+  }
+
+  public Utilisateur updateUser(Utilisateur user) {
+    return trouverUtilisateur(user.getMail());
+  }
+
+  public MaCase getCaseUser(int eventId, String userMail) {
+    Evenement event = trouverEvenement(eventId);
+    Utilisateur user = trouverUtilisateur(userMail);
+    MaCase res = new MaCase();
+    for (MaCase c : event.getCases()) {
+      if (c.getUsagerChoisi() == user) {
+        res = c;
+      }
+    }
+    return res;
   }
 }

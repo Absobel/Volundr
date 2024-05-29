@@ -166,7 +166,6 @@ Array.from(document.getElementsByClassName('submenu')).forEach(x => {
     // Appel à l'api pour ajouter une personne à la BDD
     fetch("http://localhost:8080/Volundr/rest/tutorial/creerEvent", {
       method: "post",
-
       // Make sure to serialize your JSON body
       body: document.getElementById("eventname").value
 

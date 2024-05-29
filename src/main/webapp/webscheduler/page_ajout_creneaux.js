@@ -15,7 +15,7 @@ const choixDuree = document.getElementById('duree-creneau');
 const choixSalle = document.getElementById('choix-salle');
 const addSalle = document.getElementById('add-salle');
 const runAfectation = document.getElementById('run-affectation');
-const valDates = document.getElementById('valDates');
+const retourManager = document.getElementById('retourManager');
 
 
 /** Fonction pour ajouter une salle dans le scheduler si elle n'y est pas déjà */
@@ -275,6 +275,13 @@ document.getElementById("start").addEventListener('change', () => {
           console.log(response);
         });
       });
+
+      // actualiser l'affichage au chargement de la page
+  retourManager.addEventListener("click", () => {
+       // Do something awesome that makes the world a better place
+      window.location = `http://localhost:8080/Volundr/eventManager.jsp?id=${id}`;
+
+    });
 
 // actualiser l'affichage au chargement de la page
 window.onload = updateAffichage;

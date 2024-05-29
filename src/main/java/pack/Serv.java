@@ -23,17 +23,18 @@ public class Serv extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-    throws ServletException, IOException {
+      throws ServletException, IOException {
 
     redirect(req, resp);
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-    throws ServletException, IOException {
+      throws ServletException, IOException {
 
     HttpSession session = req.getSession(false);
     if ((session != null) && (session.getAttribute("userSession") != null)) {
+      session.setAttribute("userSession", facade.updateUser((Utilisateur) session.getAttribute("userSession")));
       switch (req.getParameter("op")) {
         case "deconnexion":
           session.invalidate();
@@ -134,11 +135,11 @@ public class Serv extends HttpServlet {
 
   protected void redirect(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-      HttpSession session = req.getSession(false);
-      if ((session != null) && (session.getAttribute("userSession") != null)) {
-        resp.sendRedirect("index.jsp");
-      } else {
-        resp.sendRedirect("login.jsp");
-      }
+    HttpSession session = req.getSession(false);
+    if ((session != null) && (session.getAttribute("userSession") != null)) {
+      resp.sendRedirect("index.jsp");
+    } else {
+      resp.sendRedirect("login.jsp");
+    }
   }
 }

@@ -19,8 +19,10 @@ Utilisateur userSession = (Utilisateur) session.getAttribute("userSession");
     <br>
     <% Collection<Groupe> gs = (Collection<Groupe>) userSession.getGroupesU();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            for(Groupe g : gs) {
+            int incr =0;
+            for (Groupe g : gs){
                 if (!(g.getIsNotEventGroup())){
+                    incr = incr + 1;
                     for( Evenement ev : g.getEvenements()){
                         
                         String s = ev.getNom();
@@ -40,7 +42,8 @@ Utilisateur userSession = (Utilisateur) session.getAttribute("userSession");
                             <input type="hidden" id="eventTime" value=<%= dateFormat.format(ev.getFinInscr()) %> >
                             <a href="webscheduler/page_ajout_choix.html?user=<%= userSession.getMail()%>&id=<%= ev.getId()%>" id="pach"> Choix Créneau</a> 
                             <div id="countdown"></div>
-                            <script>
+                            <script id="<%= incr %>" >
+                                
                                 var countdownElement = document.getElementById("countdown");
                                 var e = new Date(eventTime.value);
                                 function time() {
@@ -59,11 +62,19 @@ Utilisateur userSession = (Utilisateur) session.getAttribute("userSession");
                                 setInterval(time, 1000);
                             </script>                
                             
-                            <% }
-                            
-                            else {%>
-                                L'inscription est terminée. Vous ne pouvez plus soumettre vos préférences. <br>
-                                <%
+                            <% 
+                            } else {
+                            %>
+                                L'inscription est terminée. Vous ne pouvez plus soumettre vos préférences. <br> <%= ev.getAffectationDone() %>
+                                <% 
+                                if (ev.getAffectationDone()) {
+                                %>
+                                <a href="webscheduler/page_affichage_choix.html?user=<%= userSession.getMail()%>&id=<%= ev.getId()%>" > Affichage du Choix</a> <br>
+                                <% 
+                                } else {
+                                %>
+                                    L'affectation n'a pas encore été faite. Veuillez revenir plus tard. <br>
+                               <% }
                             }
                         } else {
                             %> Il n'y a pas encore de date associée à cet évènement. Veuillez revenir plus tard. <br>

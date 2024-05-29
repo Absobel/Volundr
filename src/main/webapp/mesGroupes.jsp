@@ -35,7 +35,7 @@ Utilisateur userSession = (Utilisateur) session.getAttribute("userSession");
                     </p>
                 </blockquote>
                 <% } } %>
-
+                <a href="index.jsp" id="retourAcceuil"/> Retour</a><br>
 </body>
 
 </html>
