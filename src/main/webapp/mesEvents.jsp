@@ -1,5 +1,5 @@
 <%@ include file="header.jsp" %>
-    <%@ page language="java" import="pack.*, java.util.*, java.text.SimpleDateFormat, java.time.*"
+    <%@ page language="java" import="model.*, java.util.*, java.text.SimpleDateFormat, java.time.*"
         contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         <% Utilisateur userSession=(Utilisateur) session.getAttribute("userSession"); %>
 

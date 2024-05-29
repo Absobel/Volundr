@@ -1,4 +1,4 @@
-<%@ page language="java" import="pack.*, java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" import="model.*, java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <%@ include file="header.jsp" %>
     <!DOCTYPE html>
     <html lang="en">
