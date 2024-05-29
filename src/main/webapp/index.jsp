@@ -160,7 +160,7 @@
 
                   }).then(async (response) => {
                     // Do something awesome that makes the world a better place
-                    window.location = `http://localhost:8080/Volundr/update_groupe.html?id=\${(await response.json()).id}`;
+                    window.location = `http://localhost:8080/Volundr/update_groupe.jsp?id=\${(await response.json()).id}`;
                   });
                 });
 
@@ -174,7 +174,7 @@
 
                   }).then(async (response) => {
                     // Do something awesome that makes the world a better place
-                    window.location = `http://localhost:8080/Volundr/update_group_event.html?id=\${(await response.json()).id}`;
+                    window.location = `http://localhost:8080/Volundr/update_group_event.jsp?id=\${(await response.json()).id}`;
                   });
                 });
 
