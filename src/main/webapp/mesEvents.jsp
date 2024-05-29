@@ -24,7 +24,7 @@
 
                         String s = ev.getNom();
                         %>
-                        <%= s %><br><br>
+                        <p><%= s %></p><br><br>
                             <% if (ev.getDebutInscr() !=null && ev.getFinInscr() !=null){ LocalDateTime
                                 debut=ev.getDebutInscr().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                                 LocalDateTime
