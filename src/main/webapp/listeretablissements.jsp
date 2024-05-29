@@ -21,7 +21,7 @@
                             request.getAttribute("listeetablissements");
                             for(Etablissement e : es) {
 
-                            String s = e.getNom() + " " + e.getId() ;
+                            String s = e.getNom() ;
 
                             %>
                             <%= s %> <br>
