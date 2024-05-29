@@ -23,9 +23,10 @@ public class Facade {
 
   /**
    * Ajout d'un utilisateur dans la base de données
-   * @param nom nom de l'utilisateur
-   * @param prenom prenom de l'utilisateur
-   * @param mail mail de l'utilisateur
+   *
+   * @param nom      nom de l'utilisateur
+   * @param prenom   prenom de l'utilisateur
+   * @param mail     mail de l'utilisateur
    * @param password mot de passe de l'utilisateur
    */
   public void ajoutUtilisateur(String nom, String prenom, String mail, String password) {
@@ -39,12 +40,14 @@ public class Facade {
   }
 
   /**
-   * Ajout d'un utilisateur dans la base de données avec la possibilité de préciser s'il est admin
-   * @param nom nom de l'utilisateur
-   * @param prenom prenom de l'utilisateur
-   * @param mail mail de l'utilisateur
+   * Ajout d'un utilisateur dans la base de données avec la possibilité de
+   * préciser s'il est admin
+   *
+   * @param nom      nom de l'utilisateur
+   * @param prenom   prenom de l'utilisateur
+   * @param mail     mail de l'utilisateur
    * @param password mot de passe de l'utilisateur
-   * @param isAdmin true si l'utilisateur créé est admin, false sinon
+   * @param isAdmin  true si l'utilisateur créé est admin, false sinon
    */
   public void ajoutUtilisateur(String nom, String prenom, String mail, String password, boolean isAdmin) {
     Utilisateur user = new Utilisateur();
@@ -59,6 +62,7 @@ public class Facade {
 
   /**
    * Ajout d'un groupe dans la base de données
+   *
    * @param groupe groupe à ajouter à la base de données
    */
   public void ajoutGroupe(Groupe groupe) {
@@ -67,6 +71,7 @@ public class Facade {
 
   /**
    * Ajout d'un groupe vide dans la base de données
+   *
    * @param groupName nom du nouveau groupe à ajouter à la base de données
    */
   public Groupe ajoutGroupe(String groupeName) {
@@ -79,8 +84,9 @@ public class Facade {
 
   /**
    * Ajout d'un groupe contenant des utilisateurs précis dans la base de données
+   *
    * @param groupName nom du nouveau groupe à ajouter à la base de données
-   * @param users liste d'utilisateurs composant le groupe
+   * @param users     liste d'utilisateurs composant le groupe
    */
   public void ajoutGroupe(String groupeName, Set<Utilisateur> users) {
     Groupe groupe = new Groupe();
@@ -93,6 +99,7 @@ public class Facade {
 
   /**
    * Ajout d'un utilisateur dans la base de données
+   *
    * @param user utilisateur à ajouter à la base de données
    */
   public void ajoutUtilisateur(Utilisateur user) {
@@ -102,7 +109,9 @@ public class Facade {
 
   /**
    * Ajout à la base de données et renvoi d'une case
-   * @param maCaseDTO variable contenant les informations que l'on veut transmettre à la nouvelle case
+   *
+   * @param maCaseDTO variable contenant les informations que l'on veut
+   *                  transmettre à la nouvelle case
    * @return la case avec les informations transmises
    */
   public MaCase creerMaCase(MaCaseDTO maCaseDTO) {
@@ -136,6 +145,7 @@ public class Facade {
 
   /**
    * Ajout d'une salle dans la base de données
+   *
    * @param s salle à ajouter à la base de données
    */
   public void creerSalle(Salle s) {
@@ -144,7 +154,9 @@ public class Facade {
 
   /**
    * Ajout à la base de données et renvoi d'une salle
-   * @param salleDTO variable contenant les informations que l'on veut transmettre à la nouvelle salle
+   *
+   * @param salleDTO variable contenant les informations que l'on veut transmettre
+   *                 à la nouvelle salle
    * @return la salle avec les informations transmises
    */
   public Salle creerSalle(SalleDTO salleDTO) {
@@ -181,6 +193,7 @@ public class Facade {
 
   /**
    * Ajout à la base de données et renvoi d'un événement
+   *
    * @param name nom de l'événement à créer
    * @return l'événement nouvellement créé
    */
@@ -198,10 +211,11 @@ public class Facade {
     return event;
   }
 
-
   /**
-   * Fonction vérifiant si l'utilisateur a bien rentré le mdp correspondant à l'adresse mail
-   * @param mail adresse mail entrée
+   * Fonction vérifiant si l'utilisateur a bien rentré le mdp correspondant à
+   * l'adresse mail
+   *
+   * @param mail     adresse mail entrée
    * @param password mot de passe entré
    * @return l'utilisateur si le mdp et l'adresse correspondent, null sinon
    */
@@ -216,7 +230,9 @@ public class Facade {
   }
 
   /**
-   * Fonction vérifiant si le mail entré correspond à celui d'un utilisateur inscrit dans la base de données
+   * Fonction vérifiant si le mail entré correspond à celui d'un utilisateur
+   * inscrit dans la base de données
+   *
    * @param mail adresse mail entrée
    * @return true si le mail existe, false sinon
    */
@@ -231,6 +247,7 @@ public class Facade {
 
   /**
    * Ajout à la base de données un nouvel événement
+   *
    * @param name nom du nouvel événement
    */
   public void ajoutEtablissement(String name) {
@@ -242,9 +259,10 @@ public class Facade {
 
   /**
    * Ajout d'une nouvelle salle dans la base de données
-   * @param bat bâtiment de la salle
-   * @param num numéro de la salle
-   * @param cap capacité de la salle
+   *
+   * @param bat    bâtiment de la salle
+   * @param num    numéro de la salle
+   * @param cap    capacité de la salle
    * @param idEtab identifiant de l'établissement contenant la salle
    */
   public void ajoutSalle(String bat, int num, int cap, int idEtab) {
@@ -260,6 +278,7 @@ public class Facade {
 
   /**
    * Fonction de récupération de la liste des utilisateurs
+   *
    * @return liste des utilisateurs
    */
   public List<Utilisateur> listeUsers() {
@@ -269,6 +288,7 @@ public class Facade {
 
   /**
    * Fonction de récupération de la liste des groupes
+   *
    * @return liste des groupes
    */
   public List<Groupe> listeGroupes() {
@@ -278,6 +298,7 @@ public class Facade {
 
   /**
    * Fonction de récupération de la liste des salles
+   *
    * @return liste des salles
    */
   public List<Salle> listeSalles() {
@@ -287,6 +308,7 @@ public class Facade {
 
   /**
    * Fonction de récupération de la liste des établissements
+   *
    * @return liste des établissements
    */
   public List<Etablissement> listeEtablissements() {
@@ -296,6 +318,7 @@ public class Facade {
 
   /**
    * Fonction de récupération de la liste des événements
+   *
    * @return liste des événements
    */
   public List<Evenement> listeEvenements() {
@@ -304,9 +327,11 @@ public class Facade {
   }
 
   /**
-   * Fonction de récupération de la liste des choix d'un utilisateur donné pour un événement
+   * Fonction de récupération de la liste des choix d'un utilisateur donné pour un
+   * événement
+   *
    * @param eventId événement pour lequel ont veut récupérer les choix
-   * @param mail utilisateur ayant réalisé les choix
+   * @param mail    utilisateur ayant réalisé les choix
    * @return liste des choix
    */
   public List<Choix> listeChoixEventUser(int eventId, String mail) {
@@ -317,6 +342,7 @@ public class Facade {
 
   /**
    * Fonction de récupération d'un événement à partir de son identifiant
+   *
    * @param eventid identifiant de l'événement
    * @return l'événement correspondant à l'id passé en paramètre
    */
@@ -326,6 +352,7 @@ public class Facade {
 
   /**
    * Fonction de récupération d'un établissement à partir de son identifiant
+   *
    * @param id identifiant de l'établissement
    * @return l'établissement correspondant à l'id passé en paramètre
    */
@@ -335,6 +362,7 @@ public class Facade {
 
   /**
    * Fonction de récupération d'un utilisateur à partir de son adresse mail
+   *
    * @param mail adresse mail de l'utilisateur
    * @return l'utilisateur correspondant à l'adresse mail passée en paramètres
    */
@@ -344,6 +372,7 @@ public class Facade {
 
   /**
    * Fonction de récupération d'une salle à partir de son identifiant
+   *
    * @param salleId identifiant de la salle
    * @return la salle correspondant à l'id passé en paramètres
    */
@@ -353,6 +382,7 @@ public class Facade {
 
   /**
    * Fonction de récupération d'une case à partir de son identifiant
+   *
    * @param caseId identifiant de la case
    * @return la case correspondant à l'id passé en paramètres
    */
@@ -362,6 +392,7 @@ public class Facade {
 
   /**
    * Fonction de récupération d'un groupe à partir de son identifiant
+   *
    * @param groupeId identifiant du groupe
    * @return le groupe correspondant à l'id passé en paramètres
    */
@@ -371,6 +402,7 @@ public class Facade {
 
   /**
    * Fonction récupérant la liste des utilisateurs d'un groupe donné
+   *
    * @param groupe groupe dont on veut récupérer la liste des utilisateurs
    * @return la liste des utilisateurs du groupe passé en paramètre
    */
@@ -380,6 +412,7 @@ public class Facade {
 
   /**
    * Fonction ajoutant une liste de cases à un événement (tous deux existants)
+   *
    * @param event événement cible de l'ajout de cases
    * @param cases cases à ajouter
    */
@@ -395,11 +428,13 @@ public class Facade {
   }
 
   /**
-   * Fonction permettant à un utilisateur de faire un nouveau choix 
-   * @param mail adresse mail de l'utilisateur
+   * Fonction permettant à un utilisateur de faire un nouveau choix
+   *
+   * @param mail   adresse mail de l'utilisateur
    * @param caseId case pour laquelle l'utilisateur pourra exprimer un choix
-   * @param note note attribuée
-   * @throws PermissionRefuseeException si l'utilisateur n'est pas dans le groupe invité à l'événement
+   * @param note   note attribuée
+   * @throws PermissionRefuseeException si l'utilisateur n'est pas dans le groupe
+   *                                    invité à l'événement
    */
   public void addChoixToUser(String mail, int caseId, int note) throws PermissionRefuseeException {
     MaCase c = trouverMaCase(caseId);
