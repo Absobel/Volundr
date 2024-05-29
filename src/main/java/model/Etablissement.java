@@ -1,4 +1,4 @@
-package pack;
+package model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

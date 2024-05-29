@@ -1,4 +1,4 @@
-package pack;
+package controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,6 +14,16 @@ import java.util.Set;
 import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import model.Choix;
+import model.Etablissement;
+import model.Evenement;
+import model.Groupe;
+import model.MaCase;
+import model.Salle;
+import model.Utilisateur;
+import dataTransfert.ChoixDTO;
+import dataTransfert.MaCaseDTO;
+import dataTransfert.SalleDTO;
 
 @Singleton
 public class Facade {

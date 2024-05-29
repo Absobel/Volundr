@@ -1,4 +1,4 @@
-package pack;
+package controller;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,6 +12,19 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
+import model.Choix;
+import model.Etablissement;
+import model.Evenement;
+import model.Groupe;
+import model.MaCase;
+import model.Salle;
+import model.Utilisateur;
+import dataTransfert.ChoixDTO;
+import dataTransfert.EtablissementDTO;
+import dataTransfert.GroupeDTO;
+import dataTransfert.MaCaseDTO;
+import dataTransfert.SalleDTO;
+import dataTransfert.UtilisateurDTO;
 
 /**
  * Rest

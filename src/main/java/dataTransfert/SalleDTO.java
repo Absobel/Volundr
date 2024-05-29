@@ -1,6 +1,7 @@
-package pack;
+package dataTransfert;
 
 import java.io.Serializable;
+import model.Salle;
 
 public class SalleDTO implements Serializable {
 

@@ -1,8 +1,11 @@
-package pack;
+package dataTransfert;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import model.Etablissement;
+import model.Salle;
+import model.Utilisateur;
 
 public class EtablissementDTO {
 

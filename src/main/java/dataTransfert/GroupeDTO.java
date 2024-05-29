@@ -1,7 +1,9 @@
-package pack;
+package dataTransfert;
 
 import java.util.HashSet;
 import java.util.Set;
+import model.Groupe;
+import model.Utilisateur;
 
 public class GroupeDTO {
 
