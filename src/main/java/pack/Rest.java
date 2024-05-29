@@ -97,7 +97,8 @@ public class Rest {
   }
 
   /**
-   * Fonction retournant la liste des adresses mail des utilisateurs d'un événement donné
+   * Fonction retournant la liste des adresses mail des utilisateurs d'un
+   * événement donné
    *
    * @param event identifiant de l'événement
    * @return la liste des adresses mail
@@ -116,7 +117,8 @@ public class Rest {
   }
 
   /**
-   * Fonction retournant la liste des adresses mail des utilisateurs d'un groupe donné
+   * Fonction retournant la liste des adresses mail des utilisateurs d'un groupe
+   * donné
    *
    * @param groupe identifiant du groupe
    * @return la liste des adresses mail
@@ -136,7 +138,8 @@ public class Rest {
 
   /**
    * Fonction retournant une chaîne de caractères décrivant tous les événements
-   * Exemple : "noms:Event1(debutCreneau1|finCreneau1)(debutCreneau2|finCreneau2):Event2(debutCreneau3|finCreneau3)
+   * Exemple :
+   * "noms:Event1(debutCreneau1|finCreneau1)(debutCreneau2|finCreneau2):Event2(debutCreneau3|finCreneau3)
    *
    * @return la chaîne de caractères
    */
@@ -171,7 +174,8 @@ public class Rest {
   }
 
   /**
-   * Fonction lançant l'affectation des utilisateurs aux créneaux d'un événement et renvoyant la solution proposée
+   * Fonction lançant l'affectation des utilisateurs aux créneaux d'un événement
+   * et renvoyant la solution proposée
    *
    * @param event identifiant de l'événement
    * @return liste des cases avec l'utilisateur qui leur a été attribué
@@ -180,7 +184,6 @@ public class Rest {
   @Path("getChoixAffect/{event}/{user}")
   @Produces("application/json")
   public MaCaseDTO getChoixAffect(@PathParam("event") int eventId, @PathParam("user") String userMail) {
-    Evenement e = facade.trouverEvenement(eventId);
     MaCase caseUser = facade.getCaseUser(eventId, userMail);
     MaCaseDTO res = new MaCaseDTO(caseUser);
     return res;
@@ -203,10 +206,11 @@ public class Rest {
   }
 
   /**
-   * Fonction retournant les choix d'un utilisateurs pour les cases d'un événement donné
+   * Fonction retournant les choix d'un utilisateurs pour les cases d'un événement
+   * donné
    *
    * @param event identifiant de l'événement
-   * @param mail adresse mail de l'utilisateur
+   * @param mail  adresse mail de l'utilisateur
    * @return la liste des choix
    */
   @GET
@@ -279,7 +283,8 @@ public class Rest {
   }
 
   /**
-   * Fonction créant et ajoutant à la base de données un nouveau groupe vide (0 utilisateurs)
+   * Fonction créant et ajoutant à la base de données un nouveau groupe vide (0
+   * utilisateurs)
    *
    * @param groupeName nom du nouveau groupe
    * @return le groupe nouvellement créé
@@ -315,11 +320,12 @@ public class Rest {
   /**
    * Fonction assignant une note à une case, pour un utilisateur donné
    *
-   * @param mail adresse mail de l'utilisateur
+   * @param mail   adresse mail de l'utilisateur
    * @param caseId identifiant de la case
-   * @param note note attribuée
+   * @param note   note attribuée
    * @return réponse permettant de verifier si le message a bien été envoyé
-   * @throws PermissionRefuseeException si l'utilisateur n'est pas dans le groupe invité à l'événement contenant la case
+   * @throws PermissionRefuseeException si l'utilisateur n'est pas dans le groupe
+   *                                    invité à l'événement contenant la case
    */
   @POST
   @Path("addChoixUserCase/{user}/{case}")
@@ -365,7 +371,7 @@ public class Rest {
    * Fonction ajoutant un utilisateur à un groupe
    *
    * @param groupe identifiant du groupe
-   * @param email adresse mail de l'utilisateur
+   * @param email  adresse mail de l'utilisateur
    * @return réponse permettant de verifier si le message a bien été envoyé
    */
   @POST
@@ -395,7 +401,7 @@ public class Rest {
    * Fonction supprimant un utilisateur d'un groupe
    *
    * @param groupe identifiant du groupe
-   * @param email adresse mail de l'utilisateur
+   * @param email  adresse mail de l'utilisateur
    * @return réponse permettant de verifier si le message a bien été envoyé
    */
   @POST
@@ -409,7 +415,7 @@ public class Rest {
   /**
    * Fonction supprimant tous les utilisateurs d'un groupe donné d'un événement
    *
-   * @param event identifiant de l'événement
+   * @param event   identifiant de l'événement
    * @param groupId identifiant du groupe
    * @return réponse permettant de verifier si le message a bien été envoyé
    */
@@ -422,10 +428,12 @@ public class Rest {
   }
 
   /**
-   * Fonction supprimant les utilisateurs d'un groupe s'ils font partie d'un autre groupe
+   * Fonction supprimant les utilisateurs d'un groupe s'ils font partie d'un autre
+   * groupe
    *
-   * @param groupe groupe cible de la suppression
-   * @param groupId groupe dont les utilisateurs seront supprimés de l'autre groupe
+   * @param groupe  groupe cible de la suppression
+   * @param groupId groupe dont les utilisateurs seront supprimés de l'autre
+   *                groupe
    * @return réponse permettant de verifier si le message a bien été envoyé
    */
   @POST
@@ -439,7 +447,7 @@ public class Rest {
   /**
    * Fonction ajoutant tous les utilisateurs d'un groupe à un événement
    *
-   * @param event identifiant de l'événement
+   * @param event    identifiant de l'événement
    * @param groupeId identifiant du groupe
    * @return réponse permettant de verifier si le message a bien été envoyé
    */
@@ -454,7 +462,7 @@ public class Rest {
   /**
    * Fonction ajoutant tous les utilisateurs d'un groupe dans un autre groupe
    *
-   * @param groupe identifiant du groupe cible de l'ajout
+   * @param groupe   identifiant du groupe cible de l'ajout
    * @param groupeId identifiant du groupe dont les utilisateurs sont copiés
    * @return réponse permettant de verifier si le message a bien été envoyé
    */
@@ -470,7 +478,7 @@ public class Rest {
    * Fonction enregistrant la date de début d'un événement
    *
    * @param idEvent identifiant de l'événement
-   * @param help date de début de l'événement
+   * @param help    date de début de l'événement
    * @return réponse permettant de verifier si le message a bien été envoyé
    */
   @POST
@@ -485,7 +493,7 @@ public class Rest {
    * Fonction enregistrant la date de fin d'un événement
    *
    * @param idEvent identifiant de l'événement
-   * @param help date de fin de l'événement
+   * @param help    date de fin de l'événement
    * @return réponse permettant de verifier si le message a bien été envoyé
    */
   @POST
