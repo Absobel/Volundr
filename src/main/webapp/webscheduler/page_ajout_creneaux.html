@@ -1,40 +1,113 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-  <meta http-equiv="content-type" content="text/html" ; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>scheduler html/css</title>
-  <link href="./style.css" rel="stylesheet">
-  <script type="module" src="./page_ajout_creneaux.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html" ; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>scheduler html/css</title>
+    <link href="./style.css" rel="stylesheet">
+    <script type="module" src="./page_ajout_creneaux.js"></script>
 
-<body>
+    <style>
 
-  <main>
+    @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-    <volundr-scheduler id="scheduler" class="click-creneau" style="display:none;">
-    </volundr-scheduler>
+    * {
+      font-family: "Jost", sans-serif;
+      letter-spacing: 0.05em;
+    }
 
-    <input type="text" id="duree-creneau" name="duree-creneau" required minlength="4" maxlength="8" size="10">
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
 
-    <a href="#add-creneau" id="add-creneau">ajouter un creneau</a>
+    .spacer {
+      flex-grow: 1;
+    }
 
+    button,
+    p,
+    div,
+    strong {
+      margin: 0.5rem auto;
+    }
 
-    <form>
-      <label for="choix-salle">Choisir une salle :</label>
-      <select name="choix-salle" id="choix-salle">
-      </select>
+    strong {
+      color: red;
+    }
+
+    div {
+      display: grid;
+      grid-auto-columns: 1fr 1fr;
+      grid-auto-rows: 1fr;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+    }
+
+    button {
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+    }
+
+    form {
+      display: inline-block;
+      margin: 0.5rem auto;
+    }
+
+    main {
+      height: 50vh;
+      display: flex;
+      margin-bottom: 2rem;
+    }
+
+    main > form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    </style>
+
+  </head>
+
+  <body>
+
+    <main>
+
+      <volundr-scheduler id="scheduler" class="click-creneau" style="display:none;">
+      </volundr-scheduler>
+
+      <form onsubmit="return false;">
+        <label for="choix-salle">Choisir une salle :</label>
+        <select name="choix-salle" id="choix-salle">
+        </select>
+        <button id="add-salle">ajouter une salle</button>
+      </form>
+
+    </main>
+
+    <form onsubmit="return false;">
+      <div>
+        <input type="text" id="duree-creneau" name="duree-creneau" minlength="4" maxlength="8" size="10">
+        <button id="add-creneau">ajouter un creneau</button>
+
+        <label for="start">Début Inscription</label>
+        <input type="date" id="start"/>
+
+        <label for="end">Fin Inscription</label>
+        <input type="date" id="end"/>
+      </div>
+
+      <button id="run-affectation">exécuter l'algorithme d'affectation</button>
     </form>
 
-    <a href="#add-salle" id="add-salle">ajouter une salle</a>
+    <a href="../index.jsp" id="retourAcceuil">home</a>
+    <a href="#back" id="retourManager" />back</a>
 
-
-    <a href="#run-affectation" id="run-affectation">exécuter l'algorithme d'affectation</a><br>
-
-    <label for="start">Début Inscription</label><input type="date" id="start" required /><br>
-    <label for="end">Fin Inscription</label><input type="date" id="end" required /><br>
-
-    <a href="../index.jsp" id="retourAcceuil">home</a><br>
-    <a href="#back" id="retourManager" /> back</a><br>
-  </main>
+  </body>
+</html>
