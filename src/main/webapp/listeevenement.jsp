@@ -28,12 +28,6 @@
                                             <a href="eventManager.jsp?id=<%= e.getId()%>" id=<%=e.getId()%> >Setting
                                                 Event</a>
                                             <%}%> <br>
-                                                <blockquote>
-                                                    <p>
-                                                        <% String gn=e.getGroupeE().getNom(); %>
-                                                            <%= gn %> <br>
-                                                    </p>
-                                                </blockquote>
                                                 <% } %>
                         </div>
                     </body>
