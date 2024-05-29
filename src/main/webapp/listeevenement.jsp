@@ -31,6 +31,7 @@
                                                 <% } %>
                         </div>
                     </body>
+                    <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
                     <script>
 
                     </script>
