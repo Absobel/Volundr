@@ -9,31 +9,87 @@
     <script type="module" src="./page_ajout_choix.js"></script>
 
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+    * {
+      font-family: "Jost", sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .spacer {
+      flex-grow: 1;
+    }
+
+    button,
+    p,
+    div,
+    strong {
+      margin: 0.5rem auto;
+    }
+
+    strong {
+      color: red;
+    }
+
+    div {
+      display: grid;
+      grid-auto-columns: 1fr 1fr;
+      grid-auto-rows: 1fr;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+    }
+
+    button {
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+    }
+
+    form {
+      display: inline-block;
+      margin: 0.5rem auto;
+    }
+
     main {
       height: 50vh;
-      width: 70vw;
+      display: flex;
+      margin-bottom: 2rem;
     }
+
+    main > form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     </style>
   </head>
 
   <body>
 
     <main>
-
       <volundr-scheduler id="scheduler" class="click-creneau" style="display:none;">
       </volundr-scheduler>
-
-      <ul>
-        <li><a href="#choix-oui" id="choix-oui">dire oui à des créneaux</a></li> <!-- note = 2 -->
-        <li><a href="#choix-maybe" id="choix-maybe">dire peut-être à des créneaux</a></li> <!-- note = 1 -->
-        <li><a href="#choix-non" id="choix-non">dire non à des créneaux</a></li> <!-- note = 0 -->
-      </ul><br>
-
-
-      <a href="../index.jsp" id="retourAcceuil">Acceuil</a><br>
-      <a href="../mesEvents.jsp" id="retourEvent">Mes Events</a><br>
     </main>
 
+    <p>Cliquer sur un bouton ci-dessous puis cliquer sur un créneau pour modifier votre choix de disponibilité</p>
+
+    <form onsubmit="return false;">
+      <button id="choix-oui" style="background-color: green;">Je suis disponible</button>
+      <button id="choix-maybe" style="background-color: orange;">Je suis occupé mais je peux me libérer</button>
+      <button id="choix-non" style="background-color: red;">Je suis indisponible</button>
+    </form>
+
+    <a href="../index.jsp" id="retourAcceuil">Acceuil</a>
+    <a href="../mesEvents.jsp" id="retourEvent">Mes Events</a>
 
   </body>
 
