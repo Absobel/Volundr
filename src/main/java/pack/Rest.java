@@ -189,12 +189,17 @@ public class Rest {
     return res;
   }
 
+  /**
+   * Fonction lançant l'affectation des créneaux d'un événement et retournant les cases remplies avec un utilisateur
+   *
+   * @param event identifiant de l'événement
+   * @return la liste des cases remplies
+   */
   @GET
   @Path("runAffectationEvent/{event}")
   @Produces("application/json")
   public Collection<MaCaseDTO> runAffectationEvent(@PathParam("event") int event) {
     Evenement e = facade.trouverEvenement(event);
-    e.setAffectationDone(true);
     Collection<MaCaseDTO> res = new ArrayList<>();
     /* lancer l'affectation */
     facade.AffecterCreneaux(e);
