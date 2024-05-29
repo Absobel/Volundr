@@ -22,12 +22,22 @@ public class Rest {
   @EJB
   Facade facade;
 
+  /**
+   * Fonction essentielle au bon fonctionnement de l'application
+   *
+   * @return la solution à la faim dans le monde
+   */
   @GET
   @Path("hello")
   public String hello() {
     return "bonjour le monde !";
   }
 
+  /**
+   * Fonction récupérant la liste des utilisateurs depuis la facade
+   *
+   * @return la liste des utilisateurs
+   */
   @GET
   @Path("getUsers")
   @Produces("application/json")
@@ -38,6 +48,11 @@ public class Rest {
     return result;
   }
 
+  /**
+   * Fonction récupérant la liste des groupes depuis la facade
+   *
+   * @return la liste des groupes
+   */
   @GET
   @Path("getGroups")
   @Produces("application/json")
@@ -51,6 +66,11 @@ public class Rest {
     return result;
   }
 
+  /**
+   * Fonction récupérant la liste des établlissements depuis la facade
+   *
+   * @return la liste des établissements
+   */
   @GET
   @Path("getEtablissements")
   @Produces("application/json")
@@ -61,6 +81,11 @@ public class Rest {
     return result;
   }
 
+  /**
+   * Fonction récupérant la liste des salles depuis la facade
+   *
+   * @return la liste des salles
+   */
   @GET
   @Path("getSalles")
   @Produces("application/json")
@@ -71,6 +96,12 @@ public class Rest {
     return result;
   }
 
+  /**
+   * Fonction retournant la liste des adresses mail des utilisateurs d'un événement donné
+   *
+   * @param event identifiant de l'événement
+   * @return la liste des adresses mail
+   */
   @GET
   @Path("getUsersEvent/{event}")
   @Produces("application/json")
@@ -84,6 +115,12 @@ public class Rest {
     return test;
   }
 
+  /**
+   * Fonction retournant la liste des adresses mail des utilisateurs d'un groupe donné
+   *
+   * @param groupe identifiant du groupe
+   * @return la liste des adresses mail
+   */
   @GET
   @Path("getUsersGroup/{groupe}")
   @Produces("application/json")
@@ -97,6 +134,12 @@ public class Rest {
     return users;
   }
 
+  /**
+   * Fonction retournant une chaîne de caractères décrivant tous les événements
+   * Exemple : "noms:Event1(debutCreneau1|finCreneau1)(debutCreneau2|finCreneau2):Event2(debutCreneau3|finCreneau3)
+   *
+   * @return la chaîne de caractères
+   */
   @GET
   @Path("getEvent")
   @Produces("application/json")
@@ -110,6 +153,12 @@ public class Rest {
     return s;
   }
 
+  /**
+   * Fonction retournant les cases d'un événement donné
+   *
+   * @param event identifiant de l'événement
+   * @return la liste des cases
+   */
   @GET
   @Path("getCasesEvent/{event}")
   @Produces("application/json")
@@ -121,6 +170,12 @@ public class Rest {
     return res;
   }
 
+  /**
+   * Fonction lançant l'affectation des utilisateurs aux créneaux d'un événement et renvoyant la solution proposée
+   *
+   * @param event identifiant de l'événement
+   * @return liste des cases avec l'utilisateur qui leur a été attribué
+   */
   @GET
   @Path("getChoixAffect/{event}/{user}")
   @Produces("application/json")
@@ -147,6 +202,13 @@ public class Rest {
     return res;
   }
 
+  /**
+   * Fonction retournant les choix d'un utilisateurs pour les cases d'un événement donné
+   *
+   * @param event identifiant de l'événement
+   * @param mail adresse mail de l'utilisateur
+   * @return la liste des choix
+   */
   @GET
   @Path("getChoixEvent/{event}/{user}")
   @Produces("application/json")
@@ -158,6 +220,12 @@ public class Rest {
     return res;
   }
 
+  /**
+   * Fonction ajoutant un utilisateur dans la base de données
+   *
+   * @param user utilisateur à ajouter
+   * @return réponse permettant de vérifier si le message a bien été envoyé
+   */
   @POST
   @Path("addUser")
   public Response addUser(Utilisateur user) {
@@ -166,6 +234,12 @@ public class Rest {
     return Response.status(204).build();
   }
 
+  /**
+   * Fonction créant et ajoutant un nouvel événement
+   *
+   * @param name nom du nouvel événement
+   * @return l'événement nouvellement créé
+   */
   @POST
   @Path("creerEvent")
   @Produces("application/json")
@@ -173,6 +247,12 @@ public class Rest {
     return facade.ajoutEvenement(name);
   }
 
+  /**
+   * Fonction ajoutant une salle dans la base de données
+   *
+   * @param salle salle à ajouter
+   * @return réponse permettant de vérifier si le message a bien été envoyé
+   */
   @POST
   @Path("creerSalle")
   @Produces("application/json")
@@ -182,6 +262,12 @@ public class Rest {
     return Response.status(204).build();
   }
 
+  /**
+   * Fonction transmettant un groupe à la facade
+   *
+   * @param groupeId identifiant du groupe à transmettre
+   * @return réponse permettant de vérifier si le message a bien été envoyé
+   */
   @POST
   @Path("creerGroupe/{groupe}")
   @Produces("application/json")
@@ -192,6 +278,12 @@ public class Rest {
     return Response.status(204).build();
   }
 
+  /**
+   * Fonction créant et ajoutant à la base de données un nouveau groupe vide (0 utilisateurs)
+   *
+   * @param groupeName nom du nouveau groupe
+   * @return le groupe nouvellement créé
+   */
   @POST
   @Path("creerGroupeVide")
   @Produces("application/json")
@@ -200,6 +292,13 @@ public class Rest {
     // https://developer.mozilla.org/fr/docs/Web/HTTP/Status/204
   }
 
+  /**
+   * Fonction ajoutant des cases données à un événement
+   *
+   * @param event identifiant de l'établissement
+   * @param cases liste des cases à ajouter
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
   @Path("addCasesEvent/{event}")
   public Response addCasesEvent(@PathParam("event") int event, Collection<MaCase> cases) {
@@ -213,6 +312,15 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction assignant une note à une case, pour un utilisateur donné
+   *
+   * @param mail adresse mail de l'utilisateur
+   * @param caseId identifiant de la case
+   * @param note note attribuée
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   * @throws PermissionRefuseeException si l'utilisateur n'est pas dans le groupe invité à l'événement contenant la case
+   */
   @POST
   @Path("addChoixUserCase/{user}/{case}")
   @Consumes("application/json")
@@ -222,6 +330,13 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction supprimant des cases données d'un événement
+   *
+   * @param event identifiant de l'événement
+   * @param cases liste des cases à supprimer
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
   @Path("delCasesEvent/{event}")
   @Produces("application/json")
@@ -231,6 +346,13 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction ajoutant un utilisateur à un événement
+   *
+   * @param event identifiant de l'événement
+   * @param email adresse mail de l'utilisateur
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
   @Path("addUserEvent/{event}")
   @Produces("application/json")
@@ -239,6 +361,13 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction ajoutant un utilisateur à un groupe
+   *
+   * @param groupe identifiant du groupe
+   * @param email adresse mail de l'utilisateur
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
   @Path("addUserGroup/{groupe}")
   @Produces("application/json")
@@ -247,6 +376,13 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction supprimant un utilisateur d'un événement
+   *
+   * @param event identifiant de l'événement
+   * @param email adresse mail de l'utilisateur
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
   @Path("delUserEvent/{event}")
   @Produces("application/json")
@@ -255,6 +391,13 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction supprimant un utilisateur d'un groupe
+   *
+   * @param groupe identifiant du groupe
+   * @param email adresse mail de l'utilisateur
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
   @Path("delUserGroup/{groupe}")
   @Produces("application/json")
@@ -263,6 +406,13 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction supprimant tous les utilisateurs d'un groupe donné d'un événement
+   *
+   * @param event identifiant de l'événement
+   * @param groupId identifiant du groupe
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
   @Path("delUsersFromGroupEvent/{event}")
   @Produces("application/json")
@@ -271,6 +421,13 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction supprimant les utilisateurs d'un groupe s'ils font partie d'un autre groupe
+   *
+   * @param groupe groupe cible de la suppression
+   * @param groupId groupe dont les utilisateurs seront supprimés de l'autre groupe
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
   @Path("delUsersFromGroupOfGroup/{groupe}")
   @Produces("application/json")
@@ -279,6 +436,13 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction ajoutant tous les utilisateurs d'un groupe à un événement
+   *
+   * @param event identifiant de l'événement
+   * @param groupeId identifiant du groupe
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
   @Path("addUserFromGroupEvent/{event}")
   @Produces("application/json")
@@ -287,6 +451,13 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction ajoutant tous les utilisateurs d'un groupe dans un autre groupe
+   *
+   * @param groupe identifiant du groupe cible de l'ajout
+   * @param groupeId identifiant du groupe dont les utilisateurs sont copiés
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
   @Path("addUsersFromGroupToGroup/{groupe}")
   @Produces("application/json")
@@ -295,19 +466,33 @@ public class Rest {
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction enregistrant la date de début d'un événement
+   *
+   * @param idEvent identifiant de l'événement
+   * @param help date de début de l'événement
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
-  @Path("setDebutDate/{idGroupe}")
+  @Path("setDebutDate/{idEvent}")
   @Consumes("application/json")
-  public Response setDebutDate(@PathParam("idGroupe") int idGroupe, String help) {
-    facade.setDebutDate(idGroupe, help);
+  public Response setDebutDate(@PathParam("idEvent") int idEvent, String help) {
+    facade.setDebutDate(idEvent, help);
     return Response.status(200).build();
   }
 
+  /**
+   * Fonction enregistrant la date de fin d'un événement
+   *
+   * @param idEvent identifiant de l'événement
+   * @param help date de fin de l'événement
+   * @return réponse permettant de verifier si le message a bien été envoyé
+   */
   @POST
-  @Path("setFinDate/{idGroupe}")
+  @Path("setFinDate/{idEvent}")
   @Consumes("application/json")
-  public Response setFinDate(@PathParam("idGroupe") int idGroupe, String help) {
-    facade.setFinDate(idGroupe, help);
+  public Response setFinDate(@PathParam("idEvent") int idEvent, String help) {
+    facade.setFinDate(idEvent, help);
     return Response.status(200).build();
   }
 
