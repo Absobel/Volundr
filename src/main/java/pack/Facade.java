@@ -456,6 +456,12 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction supprimant des cases d'un événement
+   *
+   * @param event événement cible de la suppression
+   * @param cases liste de cases à supprimer
+   */
   public void delCaseToEvent(Evenement event, Collection<MaCase> cases) {
     /*
      * attention : le sens de la relation impose de modifier
@@ -467,11 +473,24 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction assignant une salle à une case
+   *
+   * @param creneau case recevant la salle
+   * @param salle nouvelle salle à laquelle la case appartient
+   */
   public void addSalleToCase(MaCase creneau, Salle salle) {
     creneau.setSalleC(salle);
     // em.merge(creneau);
   }
 
+  /**
+   * Fonction ajoutant un utilisateur à un événement et ensuite retournant la liste des utilisateurs de cet événement
+   *
+   * @param event identifiant de l'événement
+   * @param email adresse mail de l'utilisateur à ajouter
+   * @return la liste mise à jour des utilisateurs de l'événement
+   */
   public Collection<Utilisateur> addUserEvent(int event, String email) {
     Evenement e = this.trouverEvenement(event);
     Utilisateur u = this.trouverUtilisateur(email);
@@ -480,6 +499,12 @@ public class Facade {
     return g.getUtilisateurs();
   }
 
+  /**
+   * Fonction ajoutant tous les utilisateurs d'un groupe à un événement
+   *
+   * @param eventId identifiant de l'événement
+   * @param groupeId identifiant du groupe
+   */
   public void addUserFromGroup(int eventId, int groupeId) {
     Evenement event = em.find(Evenement.class, eventId);
     Groupe groupe = em.find(Groupe.class, groupeId);
@@ -492,6 +517,12 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction ajoutant tous les utilisateurs d'un groupe à un autre groupe
+   *
+   * @param newGroupeId identifiant du groupe cible de l'ajout
+   * @param groupeId identifiant du groupe dont les utilisateurs sont copiés
+   */
   public void addUsersFromGroupToGroup(int newGroupeId, int groupeId) {
     Groupe newGroupe = trouverGroupe(newGroupeId);
     Groupe groupe = trouverGroupe(groupeId);
@@ -504,6 +535,12 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction ajoutant un utilisateur à un groupe
+   *
+   * @param groupeId identifiant du groupe
+   * @param mail adresse mail de l'utilisateur
+   */
   public void addUserToGroup(int groupeId, String mail) {
     Groupe groupe = em.find(Groupe.class, groupeId);
     Utilisateur user = em.find(Utilisateur.class, mail);
@@ -514,6 +551,12 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction supprimant les utilisateurs d'un événement s'ils font partie d'un certain groupe
+   *
+   * @param eventId identifiant de l'événement
+   * @param groupeId identifiant du groupe
+   */
   public void delUsersFromGroupEvent(int eventId, int groupeId) {
     Evenement event = em.find(Evenement.class, eventId);
     Groupe groupe = em.find(Groupe.class, groupeId);
@@ -528,6 +571,12 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction suppprimant les utilisateurs d'un groupe s'ils font partie d'un certain autre groupe
+   *
+   * @param newGroupeId groupe cible de la suppression
+   * @param groupeId groupe dont les utilisateurs seront supprimés dans l'autre groupe
+   */
   public void delUsersFromGroupOfGroup(int newGroupeId, int groupeId) {
     Groupe newGroupe = trouverGroupe(newGroupeId);
     Groupe groupe = trouverGroupe(groupeId);
@@ -542,6 +591,14 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction supprimant un utilisateur d'un événement et du groupe associé à cet événement et
+   * renvoyant la liste mise à jour des utilisateurs de ce groupe.
+   *
+   * @param event identifiant de l'événement
+   * @param email adresse mail de l'utilisateur
+   * @return liste des utilisateurs du groupe associé à l'événement
+   */
   public Collection<Utilisateur> delUserEvent(int event, String email) {
     Evenement e = this.trouverEvenement(event);
     Utilisateur u = this.trouverUtilisateur(email);
@@ -550,6 +607,13 @@ public class Facade {
     return g.getUtilisateurs();
   }
 
+  /**
+   * Fonction supprimant un utilisateur d'un groupe et renvoyant la liste mise à jour des utilisateurs de ce groupe
+   *
+   * @param groupeId identifiant du groupe
+   * @param email adresse mail de l'utilisateur
+   * @return la liste mise à jour des utilisateurs du groupe
+   */
   public Collection<Utilisateur> delUserOfGroup(int groupeId, String email) {
     Groupe g = this.trouverGroupe(groupeId);
     Utilisateur u = this.trouverUtilisateur(email);
@@ -557,6 +621,12 @@ public class Facade {
     return g.getUtilisateurs();
   }
 
+  /**
+   * Fonction supprimant un utilisateur d'un groupe
+   *
+   * @param groupe groupe cible de la suppression
+   * @param user utilisateur à supprimer
+   */
   public void delUserFromGroup(Groupe groupe, Utilisateur user) {
     if (groupe.getUtilisateurs().contains(user)) {
       groupe.getUtilisateurs().remove(user);
@@ -564,6 +634,12 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction supprimant une case d'un événement
+   *
+   * @param event événement cible de la suppression
+   * @param creneau case à supprimer
+   */
   public void delCaseFromEvent(Evenement event, MaCase creneau) {
     if (event.getCases().contains(creneau)) {
       event.getCases().remove(creneau);
@@ -649,6 +725,10 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction chargeant les utilisateurs rentrés dans un fichier dans la base de données
+   *
+   */
   public void userLoader() {
     try (BufferedReader userReader = new BufferedReader(
         new FileReader("Volundr/src/main/webapp/loaderFiles/user.txt"))) {
@@ -673,6 +753,10 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction chargeant les établissements rentrés dans un fichier dans la base de données
+   *
+   */
   public void etablissementLoader() {
     try (BufferedReader etablissementReader = new BufferedReader(
         new FileReader("Volundr/src/main/webapp/loaderFiles/etablissement.txt"))) {
@@ -688,6 +772,10 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction chargeant les salles rentrées dans un fichier dans la base de données
+   *
+   */
   public void salleLoader() {
     try (BufferedReader etablissementReader = new BufferedReader(
         new FileReader("Volundr/src/main/webapp/loaderFiles/salle.txt"))) {
@@ -707,6 +795,10 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction chargeant les groupes rentrés dans un fichier dans la base de données
+   *
+   */
   public void groupLoader() {
     try (BufferedReader etablissementReader = new BufferedReader(
         new FileReader("Volundr/src/main/webapp/loaderFiles/groupe.txt"))) {
@@ -730,6 +822,10 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction appelant toutes les fonctions de chargement afin d'initialiser la base de données
+   *
+   */
   public void loader() {
     if (em.find(Etablissement.class, 1) == null) {
       userLoader();
@@ -739,6 +835,12 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction enregistrant la date de début d'un événement
+   *
+   * @param id identifiant de l'événement
+   * @param help chaîne de caractères contenant la date de début
+   */
   public void setDebutDate(int id, String help) {
     Evenement event = trouverEvenement(id);
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -751,6 +853,12 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction enregistrant la date de fin d'un événement
+   *
+   * @param id identifiant de l'événement
+   * @param help chaîne de caractères contenant la date de fin
+   */
   public void setFinDate(int id, String help) {
     Evenement event = trouverEvenement(id);
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
