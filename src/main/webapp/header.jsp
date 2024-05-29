@@ -1,5 +1,4 @@
 <style>
-    /* CSS Reset */
     *,
     *::before,
     *::after {
@@ -10,8 +9,14 @@
         vertical-align: baseline;
     }
 
-    /* Custom Styles */
     @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+    .myheader .mybutton .myimg .header-content .myp {
+        font-family: "Jost", sans-serif;
+        letter-spacing: 0.05em;
+        margin: 0 auto;
+    }
+
 
     .myheader {
         display: flex;
