@@ -16,5 +16,5 @@
       <a href="webscheduler/page_ajout_creneaux.html?id=<%= id %>" id="pac">Ajouter Creneaux</a>
   </main>
 </body>
-<a href="index.jsp" id="retourAcceuil"/> Retour Menu</a> <a href="listeevenement.jsp" id="retourManager"/> Retour Liste Evenement</a><br>
+<a href="index.jsp" id="retourAcceuil"/> Retour Menu</a> <br>
 </html>
