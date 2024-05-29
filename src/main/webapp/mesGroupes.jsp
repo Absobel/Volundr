@@ -24,18 +24,20 @@
                         String s = g.getNom();
 
                         %>
-                        <p><%= s %></p> <br>
-                            <blockquote>
-                                <p>
-                                    <% for (Utilisateur u : g.getUtilisateurs()){ String userName=u.getPrenom() + " " +
-                                        u.getNom(); %>
-                                        <%= userName %> <br>
-                                            <% } %>
-                                </p>
-                            </blockquote>
-                            <% } } %>
-                            
-            <a href="index.jsp" id="retourAcceuil"/> Retour</a><br>
+                        <p>
+                            <%= s %>
+                        </p> <br>
+                        <blockquote>
+                            <p>
+                                <% for (Utilisateur u : g.getUtilisateurs()){ String userName=u.getPrenom() + " " +
+                                    u.getNom(); %>
+                                    <%= userName %> <br>
+                                        <% } %>
+                            </p>
+                        </blockquote>
+                        <% } } %>
+
+                            <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
             </body>
 
             </html>

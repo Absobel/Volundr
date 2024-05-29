@@ -190,7 +190,8 @@ public class Rest {
   }
 
   /**
-   * Fonction lançant l'affectation des créneaux d'un événement et retournant les cases remplies avec un utilisateur
+   * Fonction lançant l'affectation des créneaux d'un événement et retournant les
+   * cases remplies avec un utilisateur
    *
    * @param event identifiant de l'événement
    * @return la liste des cases remplies

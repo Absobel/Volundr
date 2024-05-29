@@ -208,13 +208,13 @@ addCreneau.addEventListener('click', () => {
  * serveur et on refresh l'affichage */
 runAfectation.addEventListener('click', () => {
   fetch(`http://localhost:8080/Volundr/rest/tutorial/runAffectationEvent/${id}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        updateAffichage();
-        console.log(response);
-      });
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      updateAffichage();
+      console.log(response);
+    });
 });
 
 const setDebutInscr = document.getElementById('start');
@@ -235,53 +235,53 @@ var inputStart;
 var inputEnd;
 
 document.getElementById("start").addEventListener('change', function () {
-inputStart = this.value;
-console.log(inputStart);
+  inputStart = this.value;
+  console.log(inputStart);
 });
 
 document.getElementById("start").addEventListener('change', () => {
-    fetch(`http://localhost:8080/Volundr/rest/tutorial/setDebutDate/${id}`,{
-      method: "post",
-      headers: {
-        'Content-Type' : 'application/json'
-      }, 
-      body: inputStart
-    }).then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      updateAffichage();
-      console.log(response);
-    });
+  fetch(`http://localhost:8080/Volundr/rest/tutorial/setDebutDate/${id}`, {
+    method: "post",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: inputStart
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    updateAffichage();
+    console.log(response);
   });
+});
 
-  document.getElementById("end").addEventListener('change', function () {
-    inputEnd = this.value;
-    console.log(inputEnd);
-    });
-    
-    document.getElementById("end").addEventListener('change', () => {
-        fetch(`http://localhost:8080/Volundr/rest/tutorial/setFinDate/${id}`,{
-          method: "post",
-          headers: {
-            'Content-Type' : 'application/json'
-          }, 
-          body: inputEnd
-        }).then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          updateAffichage();
-          console.log(response);
-        });
-      });
+document.getElementById("end").addEventListener('change', function () {
+  inputEnd = this.value;
+  console.log(inputEnd);
+});
 
-      // actualiser l'affichage au chargement de la page
-  retourManager.addEventListener("click", () => {
-       // Do something awesome that makes the world a better place
-      window.location = `http://localhost:8080/Volundr/eventManager.jsp?id=${id}`;
+document.getElementById("end").addEventListener('change', () => {
+  fetch(`http://localhost:8080/Volundr/rest/tutorial/setFinDate/${id}`, {
+    method: "post",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: inputEnd
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    updateAffichage();
+    console.log(response);
+  });
+});
 
-    });
+// actualiser l'affichage au chargement de la page
+retourManager.addEventListener("click", () => {
+  // Do something awesome that makes the world a better place
+  window.location = `http://localhost:8080/Volundr/eventManager.jsp?id=${id}`;
+
+});
 
 // actualiser l'affichage au chargement de la page
 window.onload = updateAffichage;

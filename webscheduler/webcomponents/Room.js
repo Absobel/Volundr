@@ -11,7 +11,7 @@ function toTime(time) {
 /** pgcd de deux entiers */
 function gcd(num1, num2) {
   if (num2 == 0)
-  return num1;
+    return num1;
   return gcd(num2, num1 % num2);
 }
 
@@ -31,7 +31,7 @@ function lcm_of_array(arr) {
 
 export default class Room extends HTMLElement {
 
-  constructor () {
+  constructor() {
     super();
 
     this.cases = document.createElement('ul');
@@ -53,7 +53,7 @@ export default class Room extends HTMLElement {
     this.appendChild(this.creneaux);
   }
 
-  disconnectedCallback () {
+  disconnectedCallback() {
     if (this.scheduler !== null) {
       this.scheduler.updateSallesList();
     }
@@ -61,7 +61,7 @@ export default class Room extends HTMLElement {
 
   /** Nettoyer et actualiser la liste des créneaux quand un nouveau fils
    * est ajouté ou supprimé */
-  updateCreneauxList () {
+  updateCreneauxList() {
 
     /* supprimer les li vides ou elements qui ont rien à faire là */
     for (let element of this.creneaux.children) {
@@ -117,7 +117,7 @@ export default class Room extends HTMLElement {
   /** L'heure de la fin du temps affiché pour placer des créneaux */
   get timeEnd() { return toTime(this.getAttribute('data-time-end')) }
 
-  attributeChangedCallback (name, oldValue, newValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     let timeEnd = this.getAttribute('data-time-end');
     let timeStart = this.getAttribute('data-time-start');
 
@@ -156,7 +156,7 @@ export default class Room extends HTMLElement {
       });
 
       newLi.addEventListener("click", () => {
-          this.scheduler.caseClickCallback.map(x => x(this, time));
+        this.scheduler.caseClickCallback.map(x => x(this, time));
       });
 
       /* Ajouter le texte de l'heure */
@@ -172,7 +172,7 @@ export default class Room extends HTMLElement {
 
   /** mettre le bon nombre de colonnes à la grille css des créneaux
    * et mettre à jour les créneaux pour qu'ils aient la bonne largeur */
-  updateGridColumns () {
+  updateGridColumns() {
     let timeStart = toTime(this.getAttribute('data-time-start'));
     let liLen = Array(this.cases.childElementCount).fill(0);
     let creneaux = Array.from(this.getElementsByTagName('volundr-creneau'));

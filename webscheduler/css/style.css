@@ -25,10 +25,10 @@ main {
   grid-template-columns: repeat(autof, 1fr);
 }
 
-.scheduler .salles > li {
-  border : solid thin;
+.scheduler .salles>li {
+  border: solid thin;
   flex-grow: 1;
-  
+
   /* on change la position pour pouvoir
      placer les creneaux par rapport à la salle */
   position: relative;
@@ -45,13 +45,13 @@ main {
   height: 100%;
 }
 
-.scheduler .cases > li {
-  border-top : solid thin grey;
+.scheduler .cases>li {
+  border-top: solid thin grey;
   flex-grow: 1;
 }
 
-.scheduler .cases > li:hover {
-  background : yellow;
+.scheduler .cases>li:hover {
+  background: yellow;
 }
 
 .scheduler .creneaux {
@@ -60,7 +60,7 @@ main {
   grid-template-rows: repeat(8, 1fr);
   grid-column-gap: 0;
   grid-row-gap: 0;
-  
+
   /* on superpose les creneaux sur les heures */
   position: absolute;
   top: 0;
@@ -70,34 +70,34 @@ main {
   pointer-events: none;
 }
 
-.scheduler .creneaux > li {  
+.scheduler .creneaux>li {
   /* position relative pour pouvoir position absolute dedans */
   position: relative;
 }
 
-.scheduler .creneaux > li > div {
+.scheduler .creneaux>li>div {
   position: absolute;
   top: 0.2rem;
   left: 0.2rem;
   right: 0.2rem;
   bottom: 0.2rem;
   border-radius: 0.3rem;
-  
+
   background: red;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 0.2rem;
-  
+
   pointer-events: auto;
 }
 
-.scheduler .creneaux > li > div:hover {
+.scheduler .creneaux>li>div:hover {
   background: yellow;
 }
 
-.scheduler .creneaux > li > div * {
+.scheduler .creneaux>li>div * {
   min-width: 0;
   overflow: hidden;
   display: block;

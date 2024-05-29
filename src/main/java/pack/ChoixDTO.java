@@ -4,9 +4,11 @@ import java.util.Comparator;
 
 public class ChoixDTO {
 
-  /** Un Comparator pour trier par notes décroissantes: On peut pas définir
+  /**
+   * Un Comparator pour trier par notes décroissantes: On peut pas définir
    * une fonction de comparaison directement sur la classe ChoixDTO
-   * car on romprait la condition d'égalité */
+   * car on romprait la condition d'égalité
+   */
   public static class ChoixDTONotesComparator implements Comparator<ChoixDTO> {
 
     @Override
@@ -36,10 +38,12 @@ public class ChoixDTO {
     this.note = choix.getNote();
   }
 
-  /* On considère deux choix égaux si leurs clés primaires sont égales
+  /*
+   * On considère deux choix égaux si leurs clés primaires sont égales
    * ATTENTION: On doit comparer les clés primaires det ObjetDTO et non les
    * ObjetDTO eux-même car on peut en créer pleins qui représentent
-   * la même entitée */
+   * la même entitée
+   */
   @Override
   public boolean equals(Object obj) {
     if (obj == null) {
@@ -62,10 +66,12 @@ public class ChoixDTO {
     return true;
   }
 
-  /* On considère deux choix égaux si leurs clés primaires sont égales
+  /*
+   * On considère deux choix égaux si leurs clés primaires sont égales
    * ATTENTION: On doit comparer les clés primaires det ObjetDTO et non les
    * ObjetDTO eux-même car on peut en créer pleins qui représentent
-   * la même entitée */
+   * la même entitée
+   */
   @Override
   public int hashCode() {
     int hash = 3;

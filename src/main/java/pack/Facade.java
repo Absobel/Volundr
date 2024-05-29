@@ -477,7 +477,7 @@ public class Facade {
    * Fonction assignant une salle à une case
    *
    * @param creneau case recevant la salle
-   * @param salle nouvelle salle à laquelle la case appartient
+   * @param salle   nouvelle salle à laquelle la case appartient
    */
   public void addSalleToCase(MaCase creneau, Salle salle) {
     creneau.setSalleC(salle);
@@ -485,7 +485,8 @@ public class Facade {
   }
 
   /**
-   * Fonction ajoutant un utilisateur à un événement et ensuite retournant la liste des utilisateurs de cet événement
+   * Fonction ajoutant un utilisateur à un événement et ensuite retournant la
+   * liste des utilisateurs de cet événement
    *
    * @param event identifiant de l'événement
    * @param email adresse mail de l'utilisateur à ajouter
@@ -502,7 +503,7 @@ public class Facade {
   /**
    * Fonction ajoutant tous les utilisateurs d'un groupe à un événement
    *
-   * @param eventId identifiant de l'événement
+   * @param eventId  identifiant de l'événement
    * @param groupeId identifiant du groupe
    */
   public void addUserFromGroup(int eventId, int groupeId) {
@@ -521,7 +522,7 @@ public class Facade {
    * Fonction ajoutant tous les utilisateurs d'un groupe à un autre groupe
    *
    * @param newGroupeId identifiant du groupe cible de l'ajout
-   * @param groupeId identifiant du groupe dont les utilisateurs sont copiés
+   * @param groupeId    identifiant du groupe dont les utilisateurs sont copiés
    */
   public void addUsersFromGroupToGroup(int newGroupeId, int groupeId) {
     Groupe newGroupe = trouverGroupe(newGroupeId);
@@ -539,7 +540,7 @@ public class Facade {
    * Fonction ajoutant un utilisateur à un groupe
    *
    * @param groupeId identifiant du groupe
-   * @param mail adresse mail de l'utilisateur
+   * @param mail     adresse mail de l'utilisateur
    */
   public void addUserToGroup(int groupeId, String mail) {
     Groupe groupe = em.find(Groupe.class, groupeId);
@@ -552,9 +553,10 @@ public class Facade {
   }
 
   /**
-   * Fonction supprimant les utilisateurs d'un événement s'ils font partie d'un certain groupe
+   * Fonction supprimant les utilisateurs d'un événement s'ils font partie d'un
+   * certain groupe
    *
-   * @param eventId identifiant de l'événement
+   * @param eventId  identifiant de l'événement
    * @param groupeId identifiant du groupe
    */
   public void delUsersFromGroupEvent(int eventId, int groupeId) {
@@ -572,10 +574,12 @@ public class Facade {
   }
 
   /**
-   * Fonction suppprimant les utilisateurs d'un groupe s'ils font partie d'un certain autre groupe
+   * Fonction suppprimant les utilisateurs d'un groupe s'ils font partie d'un
+   * certain autre groupe
    *
    * @param newGroupeId groupe cible de la suppression
-   * @param groupeId groupe dont les utilisateurs seront supprimés de l'autre groupe
+   * @param groupeId    groupe dont les utilisateurs seront supprimés de l'autre
+   *                    groupe
    */
   public void delUsersFromGroupOfGroup(int newGroupeId, int groupeId) {
     Groupe newGroupe = trouverGroupe(newGroupeId);
@@ -592,7 +596,8 @@ public class Facade {
   }
 
   /**
-   * Fonction supprimant un utilisateur d'un événement et du groupe associé à cet événement et
+   * Fonction supprimant un utilisateur d'un événement et du groupe associé à cet
+   * événement et
    * renvoyant la liste mise à jour des utilisateurs de ce groupe.
    *
    * @param event identifiant de l'événement
@@ -608,10 +613,11 @@ public class Facade {
   }
 
   /**
-   * Fonction supprimant un utilisateur d'un groupe et renvoyant la liste mise à jour des utilisateurs de ce groupe
+   * Fonction supprimant un utilisateur d'un groupe et renvoyant la liste mise à
+   * jour des utilisateurs de ce groupe
    *
    * @param groupeId identifiant du groupe
-   * @param email adresse mail de l'utilisateur
+   * @param email    adresse mail de l'utilisateur
    * @return la liste mise à jour des utilisateurs du groupe
    */
   public Collection<Utilisateur> delUserOfGroup(int groupeId, String email) {
@@ -625,7 +631,7 @@ public class Facade {
    * Fonction supprimant un utilisateur d'un groupe
    *
    * @param groupe groupe cible de la suppression
-   * @param user utilisateur à supprimer
+   * @param user   utilisateur à supprimer
    */
   public void delUserFromGroup(Groupe groupe, Utilisateur user) {
     if (groupe.getUtilisateurs().contains(user)) {
@@ -637,7 +643,7 @@ public class Facade {
   /**
    * Fonction supprimant une case d'un événement
    *
-   * @param event événement cible de la suppression
+   * @param event   événement cible de la suppression
    * @param creneau case à supprimer
    */
   public void delCaseFromEvent(Evenement event, MaCase creneau) {
@@ -726,7 +732,8 @@ public class Facade {
   }
 
   /**
-   * Fonction chargeant les utilisateurs rentrés dans un fichier dans la base de données
+   * Fonction chargeant les utilisateurs rentrés dans un fichier dans la base de
+   * données
    *
    */
   public void userLoader() {
@@ -754,7 +761,8 @@ public class Facade {
   }
 
   /**
-   * Fonction chargeant les établissements rentrés dans un fichier dans la base de données
+   * Fonction chargeant les établissements rentrés dans un fichier dans la base de
+   * données
    *
    */
   public void etablissementLoader() {
@@ -773,7 +781,8 @@ public class Facade {
   }
 
   /**
-   * Fonction chargeant les salles rentrées dans un fichier dans la base de données
+   * Fonction chargeant les salles rentrées dans un fichier dans la base de
+   * données
    *
    */
   public void salleLoader() {
@@ -796,7 +805,8 @@ public class Facade {
   }
 
   /**
-   * Fonction chargeant les groupes rentrés dans un fichier dans la base de données
+   * Fonction chargeant les groupes rentrés dans un fichier dans la base de
+   * données
    *
    */
   public void groupLoader() {
@@ -823,7 +833,8 @@ public class Facade {
   }
 
   /**
-   * Fonction appelant toutes les fonctions de chargement afin d'initialiser la base de données
+   * Fonction appelant toutes les fonctions de chargement afin d'initialiser la
+   * base de données
    *
    */
   public void loader() {
@@ -838,7 +849,7 @@ public class Facade {
   /**
    * Fonction enregistrant la date de début d'un événement
    *
-   * @param id identifiant de l'événement
+   * @param id   identifiant de l'événement
    * @param help chaîne de caractères contenant la date de début
    */
   public void setDebutDate(int id, String help) {
@@ -856,7 +867,7 @@ public class Facade {
   /**
    * Fonction enregistrant la date de fin d'un événement
    *
-   * @param id identifiant de l'événement
+   * @param id   identifiant de l'événement
    * @param help chaîne de caractères contenant la date de fin
    */
   public void setFinDate(int id, String help) {
