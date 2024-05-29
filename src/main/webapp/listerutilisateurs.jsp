@@ -14,17 +14,20 @@
 
                 <body>
 
-                    Liste des Utilisateurs : <br>
+                    <p>Liste des Utilisateurs :</p> <br>
                     <br>
-                    <% Collection<Utilisateur> us = (Collection<Utilisateur>) request.getAttribute("listeutilisateurs");
-                            for(Utilisateur u : us) {
+                    <p>
+                        <% Collection<Utilisateur> us = (Collection<Utilisateur>)
+                                request.getAttribute("listeutilisateurs");
+                                for(Utilisateur u : us) {
 
-                            String s = u.getPrenom() + " " + u.getNom() ;
+                                String s = u.getPrenom() + " " + u.getNom() ;
 
-                            %>
-                            <%= s %> <br>
-                                <% } %>
-                                    <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
+                                %>
+                                <%= s %> <br>
+                                    <% } %>
+                                        <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
+                    </p>
                 </body>
 
                 </html>
