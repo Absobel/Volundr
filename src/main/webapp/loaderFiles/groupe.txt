@@ -1,6 +1,9 @@
 Admin | olivierblot@gmail.com teopisenti@gmail.com ayoubcanon@gmail.com louisbru@gmail.com
-Jedi | skywalker@gmail.com kenobi@gmail.com windu@gmail.com lukeskywalker@gmail.com yoda@gmail.com
-Sith | skywalker@gmail.com palpatine@gmail.com maul@gmail.com dooku@gmail.com
+Jedi | skywalker@gmail.com kenobi@gmail.com windu@gmail.com lukeskywalker@gmail.com yoda@gmail.com rey@gmail.com
+Sith | skywalker@gmail.com palpatine@gmail.com maul@gmail.com dooku@gmail.com kyloren@gmail.com
 Naboo | amidala@gmail.com jarjar@gmail.com palpatine@gmail.com
-Prequels | skywalker@gmail.com kenobi@gmail.com palpatine@gmail.com windu@gmail.com yoda@gmail.com maul@gmail.com dooku@gmail.com amidala@gmail.com jarjar@gmail.com
-Originals | lukeskywalker@gmail.com solo@gmail.com organa@gmil.com palpatine@gmail.com kenobi@gmail.com yoda@gmail.com
+Prequels | skywalker@gmail.com kenobi@gmail.com palpatine@gmail.com windu@gmail.com yoda@gmail.com maul@gmail.com dooku@gmail.com amidala@gmail.com jarjar@gmail.com r2@gmail.com c3po@gmail.com
+Originals | lukeskywalker@gmail.com solo@gmail.com organa@gmil.com palpatine@gmail.com kenobi@gmail.com yoda@gmail.com r2@gmail.com c3po@gmail.com
+Droids | c3po@gmail.com r2@gmail.com bb8@gmail.com
+Sequels | rey@gmail.com dameron@gmail.com kyloren@gmail.com bb8@gmail.com finn@gmail.com lukeskywalker@gmail.com palpatine@gmail.com solo@gmail.com organa@gmail.com c3po@gmail.com r2@gmail.com
+Enseignant | marc.pantel@toulouse-inp.fr alexandra.hull@toulouse-inp.fr daniel.hagimont@irit.fr
