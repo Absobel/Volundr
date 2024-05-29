@@ -14,27 +14,29 @@
                 </head>
 
                 <body>
+                    <div class="notheader">
 
-                    Liste des etablissements : <br>
-                    <br>
-                    <% Collection<Etablissement> es = (Collection<Etablissement>)
-                            request.getAttribute("listeetablissements");
-                            for(Etablissement e : es) {
+                        Liste des etablissements : <br>
+                        <br>
+                        <% Collection<Etablissement> es = (Collection<Etablissement>)
+                                request.getAttribute("listeetablissements");
+                                for(Etablissement e : es) {
 
-                            String s = e.getNom() ;
+                                String s = e.getNom() + " " + e.getId() ;
 
-                            %>
-                            <%= s %> <br>
-                                <blockquote>
-                                    <p>
-                                        <% for (Salle sa : e.getSalles()){ String numSalle=sa.getBatiment() +
-                                            sa.getNumero() + " : " + sa.getCapacite() + " places" ; %>
-                                            <%= numSalle %> <br>
-                                                <% } %>
-                                    </p>
-                                </blockquote>
-                                <% } %>
-                                    <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
+                                %>
+                                <%= s %> <br>
+                                    <blockquote>
+                                        <p>
+                                            <% for (Salle sa : e.getSalles()){ String numSalle=sa.getBatiment() +
+                                                sa.getNumero() + " : " + sa.getCapacite() + " places" ; %>
+                                                <%= numSalle %> <br>
+                                                    <% } %>
+                                        </p>
+                                    </blockquote>
+                                    <% } %>
+                                        <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
+                    </div>
                 </body>
 
                 </html>
