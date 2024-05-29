@@ -575,7 +575,7 @@ public class Facade {
    * Fonction suppprimant les utilisateurs d'un groupe s'ils font partie d'un certain autre groupe
    *
    * @param newGroupeId groupe cible de la suppression
-   * @param groupeId groupe dont les utilisateurs seront supprimés dans l'autre groupe
+   * @param groupeId groupe dont les utilisateurs seront supprimés de l'autre groupe
    */
   public void delUsersFromGroupOfGroup(int newGroupeId, int groupeId) {
     Groupe newGroupe = trouverGroupe(newGroupeId);
