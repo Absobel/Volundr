@@ -13,28 +13,29 @@
                     </head>
 
                     <body>
+                        <div class="notheader">
+                            Liste des evenements : <br>
+                            <br>
+                            <% Collection<Evenement> es = (Collection<Evenement>)
+                                    request.getAttribute("listeevenements");
+                                    for(Evenement e : es) {
 
-                        Liste des evenements : <br>
-                        <br>
-                        <% Collection<Evenement> es = (Collection<Evenement>) request.getAttribute("listeevenements");
-                                for(Evenement e : es) {
+                                    String s = e.getNom() + " " ;
 
-                                String s = e.getNom() + " " ;
-
-                                %>
-                                <%= s %>
-                                    <% if(userSession.getIsAdmin()){ %>
-                                        <a href="eventManager.jsp?id=<%= e.getId()%>" id=<%=e.getId()%> >Setting
-                                            Event</a>
-                                        <%}%> <br>
-                                            <blockquote>
-                                                <p>
-                                                    <% String gn=e.getGroupeE().getNom(); %>
-                                                        <%= gn %> <br>
-                                                </p>
-                                            </blockquote>
-                                            <% } %>
-
+                                    %>
+                                    <%= s %>
+                                        <% if(userSession.getIsAdmin()){ %>
+                                            <a href="eventManager.jsp?id=<%= e.getId()%>" id=<%=e.getId()%> >Setting
+                                                Event</a>
+                                            <%}%> <br>
+                                                <blockquote>
+                                                    <p>
+                                                        <% String gn=e.getGroupeE().getNom(); %>
+                                                            <%= gn %> <br>
+                                                    </p>
+                                                </blockquote>
+                                                <% } %>
+                        </div>
                     </body>
                     <script>
 

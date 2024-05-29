@@ -13,7 +13,7 @@
                 </head>
 
                 <body>
-
+                    <div class="notheader">
                     <p>Liste des Utilisateurs :</p> <br>
                     <br>
                     <p>
@@ -28,6 +28,7 @@
                                     <% } %>
                                         <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
                     </p>
+                    </div>
                 </body>
 
                 </html>

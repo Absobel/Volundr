@@ -13,28 +13,30 @@
                 </head>
 
                 <body>
+                    <div class="notheader">
 
-                    Liste des groupes : <br>
-                    <br>
-                    <% Collection<Groupe> gs = (Collection<Groupe>) request.getAttribute("listegroupes");
-                            for(Groupe g : gs) {
-                            if ( g.getIsNotEventGroup()){
+                        Liste des groupes : <br>
+                        <br>
+                        <% Collection<Groupe> gs = (Collection<Groupe>) request.getAttribute("listegroupes");
+                                for(Groupe g : gs) {
+                                if ( g.getIsNotEventGroup()){
 
 
-                            String s = g.getNom();
+                                String s = g.getNom();
 
-                            %>
-                            <%= s %> <br>
-                                <blockquote>
-                                    <p>
-                                        <% for (Utilisateur u : g.getUtilisateurs()){ String userName=u.getPrenom()
-                                            + " " + u.getNom(); %>
-                                            <%= userName %> <br>
-                                                <% } %>
-                                    </p>
-                                </blockquote>
-                                <% } } %>
-                                    <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
+                                %>
+                                <%= s %> <br>
+                                    <blockquote>
+                                        <p>
+                                            <% for (Utilisateur u : g.getUtilisateurs()){ String userName=u.getPrenom()
+                                                + " " + u.getNom(); %>
+                                                <%= userName %> <br>
+                                                    <% } %>
+                                        </p>
+                                    </blockquote>
+                                    <% } } %>
+                                        <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
+                    </div>
                 </body>
 
                 </html>
