@@ -24,7 +24,7 @@
                         String s = g.getNom();
 
                         %>
-                        <p>
+                        <p class="nomevent">
                             <%= s %>
                         </p> <br>
                         <blockquote>
