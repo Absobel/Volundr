@@ -14,7 +14,7 @@
 
             <body>
 
-                Mes groupes : <br>
+                <p>Mes groupes : </p><br>
                 <br>
                 <% Collection<Groupe> gs = (Collection<Groupe>) userSession.getGroupesU();
                         for(Groupe g : gs) {
@@ -24,7 +24,7 @@
                         String s = g.getNom();
 
                         %>
-                        <%= s %> <br>
+                        <p><%= s %></p> <br>
                             <blockquote>
                                 <p>
                                     <% for (Utilisateur u : g.getUtilisateurs()){ String userName=u.getPrenom() + " " +
