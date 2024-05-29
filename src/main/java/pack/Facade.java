@@ -21,6 +21,13 @@ public class Facade {
   @PersistenceContext
   private EntityManager em;
 
+  /**
+   * Ajout d'un utilisateur dans la base de données
+   * @param nom nom de l'utilisateur
+   * @param prenom prenom de l'utilisateur
+   * @param mail mail de l'utilisateur
+   * @param password mot de passe de l'utilisateur
+   */
   public void ajoutUtilisateur(String nom, String prenom, String mail, String password) {
     Utilisateur user = new Utilisateur();
     user.setNom(nom);
@@ -31,6 +38,14 @@ public class Facade {
     em.persist(user);
   }
 
+  /**
+   * Ajout d'un utilisateur dans la base de données avec la possibilité de préciser s'il est admin
+   * @param nom nom de l'utilisateur
+   * @param prenom prenom de l'utilisateur
+   * @param mail mail de l'utilisateur
+   * @param password mot de passe de l'utilisateur
+   * @param isAdmin true si l'utilisateur créé est admin, false sinon
+   */
   public void ajoutUtilisateur(String nom, String prenom, String mail, String password, boolean isAdmin) {
     Utilisateur user = new Utilisateur();
     user.setNom(nom);
@@ -42,10 +57,18 @@ public class Facade {
     em.persist(user);
   }
 
+  /**
+   * Ajout d'un groupe dans la base de données
+   * @param groupe groupe à ajouter à la base de données
+   */
   public void ajoutGroupe(Groupe groupe) {
     em.merge(groupe);
   }
 
+  /**
+   * Ajout d'un groupe vide dans la base de données
+   * @param groupName nom du nouveau groupe à ajouter à la base de données
+   */
   public Groupe ajoutGroupe(String groupeName) {
     Groupe groupe = new Groupe();
     groupe.setNom(groupeName);
@@ -54,6 +77,11 @@ public class Facade {
     return groupe;
   }
 
+  /**
+   * Ajout d'un groupe contenant des utilisateurs précis dans la base de données
+   * @param groupName nom du nouveau groupe à ajouter à la base de données
+   * @param users liste d'utilisateurs composant le groupe
+   */
   public void ajoutGroupe(String groupeName, Set<Utilisateur> users) {
     Groupe groupe = new Groupe();
     groupe.setNom(groupeName);
@@ -63,11 +91,20 @@ public class Facade {
     em.persist(groupe);
   }
 
+  /**
+   * Ajout d'un utilisateur dans la base de données
+   * @param user utilisateur à ajouter à la base de données
+   */
   public void ajoutUtilisateur(Utilisateur user) {
     // user = em.merge(user);
     em.persist(user);
   }
 
+  /**
+   * Ajout à la base de données et renvoi d'une case
+   * @param maCaseDTO variable contenant les informations que l'on veut transmettre à la nouvelle case
+   * @return la case avec les informations transmises
+   */
   public MaCase creerMaCase(MaCaseDTO maCaseDTO) {
     MaCase c = new MaCase();
     c.setId(maCaseDTO.getId());
@@ -97,10 +134,19 @@ public class Facade {
     }
   }
 
+  /**
+   * Ajout d'une salle dans la base de données
+   * @param s salle à ajouter à la base de données
+   */
   public void creerSalle(Salle s) {
     em.merge(s);
   }
 
+  /**
+   * Ajout à la base de données et renvoi d'une salle
+   * @param salleDTO variable contenant les informations que l'on veut transmettre à la nouvelle salle
+   * @return la salle avec les informations transmises
+   */
   public Salle creerSalle(SalleDTO salleDTO) {
     Salle s = new Salle();
     s.setId(salleDTO.getId());
@@ -133,6 +179,11 @@ public class Facade {
     }
   }
 
+  /**
+   * Ajout à la base de données et renvoi d'un événement
+   * @param name nom de l'événement à créer
+   * @return l'événement nouvellement créé
+   */
   public Evenement ajoutEvenement(String name) {
     Groupe g = new Groupe();
     g.setNom(name);
@@ -147,6 +198,13 @@ public class Facade {
     return event;
   }
 
+
+  /**
+   * Fonction vérifiant si l'utilisateur a bien rentré le mdp correspondant à l'adresse mail
+   * @param mail adresse mail entrée
+   * @param password mot de passe entré
+   * @return l'utilisateur si le mdp et l'adresse correspondent, null sinon
+   */
   public Utilisateur verifierUtilisateur(String mail, String password) {
     Utilisateur user = em.find(Utilisateur.class, mail);
     if (user != null) {
@@ -157,6 +215,11 @@ public class Facade {
     return null;
   }
 
+  /**
+   * Fonction vérifiant si le mail entré correspond à celui d'un utilisateur inscrit dans la base de données
+   * @param mail adresse mail entrée
+   * @return true si le mail existe, false sinon
+   */
   public boolean verifierMail(String mail) {
     Utilisateur user = em.find(Utilisateur.class, mail);
     if (user != null) {
@@ -166,6 +229,10 @@ public class Facade {
     }
   }
 
+  /**
+   * Ajout à la base de données un nouvel événement
+   * @param name nom du nouvel événement
+   */
   public void ajoutEtablissement(String name) {
     Etablissement etab = new Etablissement();
     etab.setNom(name);
@@ -173,6 +240,13 @@ public class Facade {
     em.persist(etab);
   }
 
+  /**
+   * Ajout d'une nouvelle salle dans la base de données
+   * @param bat bâtiment de la salle
+   * @param num numéro de la salle
+   * @param cap capacité de la salle
+   * @param idEtab identifiant de l'établissement contenant la salle
+   */
   public void ajoutSalle(String bat, int num, int cap, int idEtab) {
     Salle salle = new Salle();
     salle.setBatiment(bat);
@@ -184,65 +258,131 @@ public class Facade {
     em.persist(salle);
   }
 
+  /**
+   * Fonction de récupération de la liste des utilisateurs
+   * @return liste des utilisateurs
+   */
   public List<Utilisateur> listeUsers() {
     return em.createQuery("SELECT u FROM Utilisateur u",
         Utilisateur.class).getResultList();
   }
 
+  /**
+   * Fonction de récupération de la liste des groupes
+   * @return liste des groupes
+   */
   public List<Groupe> listeGroupes() {
     return em.createQuery("SELECT g FROM Groupe g",
         Groupe.class).getResultList();
   }
 
+  /**
+   * Fonction de récupération de la liste des salles
+   * @return liste des salles
+   */
   public List<Salle> listeSalles() {
     return em.createQuery("SELECT s FROM Salle s",
         Salle.class).getResultList();
   }
 
+  /**
+   * Fonction de récupération de la liste des établissements
+   * @return liste des établissements
+   */
   public List<Etablissement> listeEtablissements() {
     return em.createQuery("SELECT e FROM Etablissement e",
         Etablissement.class).getResultList();
   }
 
+  /**
+   * Fonction de récupération de la liste des événements
+   * @return liste des événements
+   */
   public List<Evenement> listeEvenements() {
     return em.createQuery("SELECT e FROM Evenement e",
         Evenement.class).getResultList();
   }
 
+  /**
+   * Fonction de récupération de la liste des choix d'un utilisateur donné pour un événement
+   * @param eventId événement pour lequel ont veut récupérer les choix
+   * @param mail utilisateur ayant réalisé les choix
+   * @return liste des choix
+   */
   public List<Choix> listeChoixEventUser(int eventId, String mail) {
     return em.createQuery(
         "SELECT c FROM Choix c JOIN c.utilisateurCh user JOIN c.caseCh caseselect JOIN caseselect.evenementC ev WHERE user.mail=:usermail AND ev.id=:eventid",
         Choix.class).setParameter("usermail", mail).setParameter("eventid", eventId).getResultList();
   }
 
+  /**
+   * Fonction de récupération d'un événement à partir de son identifiant
+   * @param eventid identifiant de l'événement
+   * @return l'événement correspondant à l'id passé en paramètre
+   */
   public Evenement trouverEvenement(int eventid) {
     return em.find(Evenement.class, eventid);
   }
 
+  /**
+   * Fonction de récupération d'un établissement à partir de son identifiant
+   * @param id identifiant de l'établissement
+   * @return l'établissement correspondant à l'id passé en paramètre
+   */
   public Etablissement trouverEtablissement(int id) {
     return em.find(Etablissement.class, id);
   }
 
+  /**
+   * Fonction de récupération d'un utilisateur à partir de son adresse mail
+   * @param mail adresse mail de l'utilisateur
+   * @return l'utilisateur correspondant à l'adresse mail passée en paramètres
+   */
   public Utilisateur trouverUtilisateur(String email) {
     return em.find(Utilisateur.class, email);
   }
 
+  /**
+   * Fonction de récupération d'une salle à partir de son identifiant
+   * @param salleId identifiant de la salle
+   * @return la salle correspondant à l'id passé en paramètres
+   */
   public Salle trouverSalle(int salleId) {
     return em.find(Salle.class, salleId);
   }
 
+  /**
+   * Fonction de récupération d'une case à partir de son identifiant
+   * @param caseId identifiant de la case
+   * @return la case correspondant à l'id passé en paramètres
+   */
   public MaCase trouverMaCase(int caseId) {
     return em.find(MaCase.class, caseId);
   }
 
+  /**
+   * Fonction de récupération d'un groupe à partir de son identifiant
+   * @param groupeId identifiant du groupe
+   * @return le groupe correspondant à l'id passé en paramètres
+   */
   public Groupe trouverGroupe(int groupeId) {
     return em.find(Groupe.class, groupeId);
   }
 
+  /**
+   * Fonction récupérant la liste des utilisateurs d'un groupe donné
+   * @param groupe groupe dont on veut récupérer la liste des utilisateurs
+   * @return la liste des utilisateurs du groupe passé en paramètre
+   */
   public Set<Utilisateur> getUsersGroup(Groupe groupe) {
     return groupe.getUtilisateurs();
   }
 
+  /**
+   * Fonction ajoutant une liste de cases à un événement (tous deux existants)
+   * @param event événement cible de l'ajout de cases
+   * @param cases cases à ajouter
+   */
   public void addCaseToEvent(Evenement event, Collection<MaCase> cases) {
     /*
      * attention : le sens de la relation impose de modifier
@@ -254,6 +394,13 @@ public class Facade {
     }
   }
 
+  /**
+   * Fonction permettant à un utilisateur de faire un nouveau choix 
+   * @param mail adresse mail de l'utilisateur
+   * @param caseId case pour laquelle l'utilisateur pourra exprimer un choix
+   * @param note note attribuée
+   * @throws PermissionRefuseeException si l'utilisateur n'est pas dans le groupe invité à l'événement
+   */
   public void addChoixToUser(String mail, int caseId, int note) throws PermissionRefuseeException {
     MaCase c = trouverMaCase(caseId);
     Utilisateur u = trouverUtilisateur(mail);
