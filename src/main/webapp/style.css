@@ -22,8 +22,11 @@ body {
 button,
 p,
 div,
-strong {
+strong,
+a,
+textarea {
     margin: 0.5rem auto;
+    display: block;
 }
 
 strong {
