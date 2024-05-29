@@ -11,24 +11,24 @@ import java.io.Serializable;
  */
 public class ChoixId implements Serializable {
 
-    private Utilisateur utilisateurCh;
+  private Utilisateur utilisateurCh;
 
-    private MaCase caseCh;
+  private MaCase caseCh;
 
-    public ChoixId() {
-      /* Ne pas oublier le constructeur vide pour JBoss */
-    }
+  public ChoixId() {
+    /* Ne pas oublier le constructeur vide pour JBoss */
+  }
 
-    public ChoixId(Utilisateur utilisateurCh, MaCase caseCh) {
-      this.utilisateurCh = utilisateurCh;
-      this.caseCh = caseCh;
-    }
+  public ChoixId(Utilisateur utilisateurCh, MaCase caseCh) {
+    this.utilisateurCh = utilisateurCh;
+    this.caseCh = caseCh;
+  }
 
-    public Utilisateur getUtilisateurCh() {
-      return utilisateurCh;
-    }
+  public Utilisateur getUtilisateurCh() {
+    return utilisateurCh;
+  }
 
-    public MaCase getCaseCh() {
-      return caseCh;
-    }
+  public MaCase getCaseCh() {
+    return caseCh;
+  }
 }

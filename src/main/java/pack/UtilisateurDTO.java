@@ -13,10 +13,10 @@ public class UtilisateurDTO implements Serializable {
     private Etablissement etablissement;
 
     public UtilisateurDTO(Utilisateur user) {
-      this.mail = user.getMail();
-      this.nom = user.getNom();
-      this.prenom = user.getPrenom();
-      this.etablissement = user.getEtablissement();
+        this.mail = user.getMail();
+        this.nom = user.getNom();
+        this.prenom = user.getPrenom();
+        this.etablissement = user.getEtablissement();
     }
 
     public String getMail() {

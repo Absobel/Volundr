@@ -44,11 +44,9 @@ public class Salle {
    */
   private int capacite;
 
-
   public Salle() {
     /* ne pas oublier de recréer le constructeur vide pour JBoss */
   }
-
 
   public int getId() {
     return id;
