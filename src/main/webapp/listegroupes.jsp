@@ -25,7 +25,9 @@
                                 String s = g.getNom();
 
                                 %>
-                                <%= s %> <br>
+                                <p class="nomevent">
+                                <%= s %> 
+                                </p><br>
                                     <blockquote>
                                         <p>
                                             <% for (Utilisateur u : g.getUtilisateurs()){ String userName=u.getPrenom()
