@@ -22,7 +22,7 @@
                         %>
                         <%= s %> <br>
                             <% } %>
-
+                            <a href="index.jsp" id="retourAcceuil"/> Retour</a><br>
             </body>
 
             </html>

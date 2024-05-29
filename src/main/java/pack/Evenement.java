@@ -36,7 +36,11 @@ public class Evenement {
      */
     private String nom;
 
+    public boolean affectationDone;
+
     private Date debutInscr;
+
+    private Date finInscr;
 
     public Date getDebutInscr() {
         return debutInscr;
@@ -53,8 +57,6 @@ public class Evenement {
     public void setFinInscr(java.util.Date date) {
         this.finInscr = date;
     }
-
-    private Date finInscr;
 
     public int getId() {
         return id;
@@ -86,6 +88,14 @@ public class Evenement {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public boolean getAffectationDone() {
+        return affectationDone;
+    }
+
+    public void setAffectationDone(boolean affectionDone) {
+        this.affectationDone = affectionDone;
     }
 
 }

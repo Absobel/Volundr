@@ -16,6 +16,7 @@ const scheduler = document.getElementById('scheduler');
 const choixOui = document.getElementById('choix-oui');
 const choixNon = document.getElementById('choix-non');
 const choixMaybe = document.getElementById('choix-maybe');
+const retourEvent = document.getElementById('retourEvent');
 
 
 /* la note qu'on doit mettre quand on clique sur les créneaux */
