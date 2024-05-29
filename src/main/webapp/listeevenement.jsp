@@ -23,15 +23,19 @@
                                     String s = e.getNom() + " " ;
 
                                     %>
+                                    <p class="nomevent">
                                     <%= s %>
+                                    </p>
                                         <% if(userSession.getIsAdmin()){ %>
                                             <a href="eventManager.jsp?id=<%= e.getId()%>" id=<%=e.getId()%> >Setting
                                                 Event</a>
                                             <%}%> <br>
                                                 <% } %>
+                                <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
                         </div>
+
                     </body>
-                    <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
+        
                     <script>
 
                     </script>

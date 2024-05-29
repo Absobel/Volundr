@@ -49,3 +49,9 @@ form {
     display: inline-block;
     margin: 0.5rem auto;
 }
+
+.nomevent {
+    color: rgb(35, 35, 150);
+    font-weight:bold;
+
+}
