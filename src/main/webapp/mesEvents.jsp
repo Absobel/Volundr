@@ -24,7 +24,7 @@
 
                         String s = ev.getNom();
                         %>
-                        <p>
+                        <p class="nomevent">
                             <%= s %>
                         </p><br><br>
                         <p>
@@ -81,4 +81,4 @@
                         <a href="index.jsp" id="retourAcceuil" /> Retour</a><br>
             </body>
 
-            </html>
+</html>
