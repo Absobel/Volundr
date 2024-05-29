@@ -9,10 +9,67 @@
     <script type="module" src="./page_affichage_choix.js"></script>
 
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+    * {
+      font-family: "Jost", sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .spacer {
+      flex-grow: 1;
+    }
+
+    button,
+    p,
+    div,
+    strong {
+      margin: 0.5rem auto;
+    }
+
+    strong {
+      color: red;
+    }
+
+    div {
+      display: grid;
+      grid-auto-columns: 1fr 1fr;
+      grid-auto-rows: 1fr;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+    }
+
+    button {
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+    }
+
+    form {
+      display: inline-block;
+      margin: 0.5rem auto;
+    }
+
     main {
       height: 50vh;
-      width: 70vw;
+      display: flex;
+      margin-bottom: 2rem;
     }
+
+    main > form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     </style>
 
   </head>
