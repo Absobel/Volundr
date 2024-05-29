@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>scheduler html/css</title>
-  <link href="./style.css" rel="stylesheet">
-  <script type="module" src="./page_ajout_choix.js"></script>
-</head>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>scheduler html/css</title>
+    <link href="./style.css" rel="stylesheet">
+    <script type="module" src="./page_ajout_choix.js"></script>
 
-<body>
+    <style>
+    main {
+      height: 50vh;
+      width: 70vw;
+    }
+    </style>
+  </head>
 
-  <main>
+  <body>
 
-    <volundr-scheduler id="scheduler" class="click-creneau" style="display:none;">
-    </volundr-scheduler>
+    <main>
 
-    <ul>
-      <li><a href="#choix-oui" id="choix-oui">dire oui à des créneaux</a></li> <!-- note = 2 -->
-      <li><a href="#choix-maybe" id="choix-maybe">dire peut-être à des créneaux</a></li> <!-- note = 1 -->
-      <li><a href="#choix-non" id="choix-non">dire non à des créneaux</a></li> <!-- note = 0 -->
+      <volundr-scheduler id="scheduler" class="click-creneau" style="display:none;">
+      </volundr-scheduler>
 
-
-    </ul><br>
-
-
-    <a href="../index.jsp" id="retourAcceuil">Acceuil</a><br>
-    <a href="../mesEvents.jsp" id="retourEvent">Mes Events</a><br>
-  </main>
+      <ul>
+        <li><a href="#choix-oui" id="choix-oui">dire oui à des créneaux</a></li> <!-- note = 2 -->
+        <li><a href="#choix-maybe" id="choix-maybe">dire peut-être à des créneaux</a></li> <!-- note = 1 -->
+        <li><a href="#choix-non" id="choix-non">dire non à des créneaux</a></li> <!-- note = 0 -->
+      </ul><br>
 
 
-</body>
+      <a href="../index.jsp" id="retourAcceuil">Acceuil</a><br>
+      <a href="../mesEvents.jsp" id="retourEvent">Mes Events</a><br>
+    </main>
+
+
+  </body>
 
 </html>
