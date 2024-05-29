@@ -1,4 +1,4 @@
-package pack;
+package model;
 
 import java.util.Date;
 import java.util.Set;

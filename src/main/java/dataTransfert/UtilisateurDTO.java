@@ -1,6 +1,8 @@
-package pack;
+package dataTransfert;
 
 import java.io.Serializable;
+import model.Etablissement;
+import model.Utilisateur;
 
 public class UtilisateurDTO implements Serializable {
 

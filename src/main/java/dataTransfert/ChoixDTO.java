@@ -1,6 +1,7 @@
-package pack;
+package dataTransfert;
 
 import java.util.Comparator;
+import model.Choix;
 
 public class ChoixDTO {
 

@@ -1,6 +1,7 @@
-package pack;
+package dataTransfert;
 
 import java.io.Serializable;
+import model.MaCase;
 
 public class MaCaseDTO implements Serializable {
 
