@@ -37,7 +37,7 @@ function addSalleScheduler(idSalle, nomSalle) {
 
 function updateAffichage() {
   // Récupérer la liste de toutes les salles de la base de donnée pour pouvoir les selectionner
-  fetch(`http://localhost:8080/Volundr/rest/tutorial/getSalles`)
+  fetch(`/rest/tutorial/getSalles`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -56,7 +56,7 @@ function updateAffichage() {
 
 
   // Récupérer la liste des créneaux de l'event et les ajouter dans le scheduler
-  fetch(`http://localhost:8080/Volundr/rest/tutorial/getCasesEvent/${id}`)
+  fetch(`/rest/tutorial/getCasesEvent/${id}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -101,7 +101,7 @@ function updateAffichage() {
  * puis update l'affichage */
 function supprimerCreneau(creneauElement) {
   // Appel à l'api pour ajouter une personne à la BDD
-  fetch(`http://localhost:8080/Volundr/rest/tutorial/delCasesEvent/${id}`, {
+  fetch(`/rest/tutorial/delCasesEvent/${id}`, {
     method: "post",
     headers: {
       'Accept': 'application/json',
@@ -184,7 +184,7 @@ addCreneau.addEventListener('click', () => {
       console.log(addCreneauxReqJSON());
 
       // Appel à l'api pour ajouter une personne à la BDD
-      fetch(`http://localhost:8080/Volundr/rest/tutorial/addCasesEvent/${id}`, {
+      fetch(`/rest/tutorial/addCasesEvent/${id}`, {
         method: "post",
         headers: {
           'Accept': 'application/json',
@@ -207,7 +207,7 @@ addCreneau.addEventListener('click', () => {
 /* Quand on clique sur le lien, on lance l'algorithme d'affectation sur le
  * serveur et on refresh l'affichage */
 runAfectation.addEventListener('click', () => {
-  fetch(`http://localhost:8080/Volundr/rest/tutorial/runAffectationEvent/${id}`)
+  fetch(`/rest/tutorial/runAffectationEvent/${id}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -240,7 +240,7 @@ document.getElementById("start").addEventListener('change', function () {
 });
 
 document.getElementById("start").addEventListener('change', () => {
-  fetch(`http://localhost:8080/Volundr/rest/tutorial/setDebutDate/${id}`, {
+  fetch(`/rest/tutorial/setDebutDate/${id}`, {
     method: "post",
     headers: {
       'Content-Type': 'application/json'
@@ -261,7 +261,7 @@ document.getElementById("end").addEventListener('change', function () {
 });
 
 document.getElementById("end").addEventListener('change', () => {
-  fetch(`http://localhost:8080/Volundr/rest/tutorial/setFinDate/${id}`, {
+  fetch(`/rest/tutorial/setFinDate/${id}`, {
     method: "post",
     headers: {
       'Content-Type': 'application/json'
@@ -279,7 +279,7 @@ document.getElementById("end").addEventListener('change', () => {
 // actualiser l'affichage au chargement de la page
 retourManager.addEventListener("click", () => {
   // Do something awesome that makes the world a better place
-  window.location = `http://localhost:8080/Volundr/eventManager.jsp?id=${id}`;
+  window.location = `/eventManager.jsp?id=${id}`;
 
 });
 

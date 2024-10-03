@@ -54,7 +54,7 @@
 
 <header class="myheader">
     <img class="myimg" src="images/file-21N81kHTDyTlO2p7v7pJN4am-removebg-preview.png" alt="Icon"
-        onclick="window.location.href='/Volundr/Serv'">
+        onclick="window.location.href='/Serv'">
     <form action="Serv" method="post" class="header-content">
         <button class="mybutton" type="submit" name="op" value="listeUserEvent">
             Mes Evenements

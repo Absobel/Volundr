@@ -152,7 +152,7 @@
 
                 document.getElementById('creerGroupe').addEventListener('click', () => {
 
-                  fetch("http://localhost:8080/Volundr/rest/tutorial/creerGroupeVide", {
+                  fetch("/rest/tutorial/creerGroupeVide", {
                     method: "post",
 
                     // Make sure to serialize your JSON body
@@ -160,13 +160,13 @@
 
                   }).then(async (response) => {
                     // Do something awesome that makes the world a better place
-                    window.location = `http://localhost:8080/Volundr/update_groupe.jsp?id=\${(await response.json()).id}`;
+                    window.location = `/update_groupe.jsp?id=\${(await response.json()).id}`;
                   });
                 });
 
                 document.getElementById('creerEvent').addEventListener('click', () => {
                   // Appel à l'api pour ajouter une personne à la BDD
-                  fetch("http://localhost:8080/Volundr/rest/tutorial/creerEvent", {
+                  fetch("/rest/tutorial/creerEvent", {
                     method: "post",
 
                     // Make sure to serialize your JSON body
@@ -174,7 +174,7 @@
 
                   }).then(async (response) => {
                     // Do something awesome that makes the world a better place
-                    window.location = `http://localhost:8080/Volundr/update_group_event.jsp?id=\${(await response.json()).id}`;
+                    window.location = `/update_group_event.jsp?id=\${(await response.json()).id}`;
                   });
                 });
 

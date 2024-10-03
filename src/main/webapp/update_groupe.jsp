@@ -54,7 +54,7 @@
 
       function updateAffichage() {
         // Récupérer la liste des utilisateurs du groupe associé à l'event
-        fetch(`http://localhost:8080/Volundr/rest/tutorial/getUsersGroup/\${id}`)
+        fetch(`/rest/tutorial/getUsersGroup/\${id}`)
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -66,7 +66,7 @@
           })
 
         // Récupérer la liste de tous les utilisateurs de la base de donnée pour pouvoir les selectionner
-        fetch(`http://localhost:8080/Volundr/rest/tutorial/getUsers`)
+        fetch(`/rest/tutorial/getUsers`)
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -83,7 +83,7 @@
             })
           })
 
-        fetch(`http://localhost:8080/Volundr/rest/tutorial/getGroups`)
+        fetch(`/rest/tutorial/getGroups`)
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -105,7 +105,7 @@
       document.getElementById("add").addEventListener("click", () => {
 
         // Appel à l'api pour ajouter une personne à la BDD
-        fetch(`http://localhost:8080/Volundr/rest/tutorial/addUserGroup/\${id}`, {
+        fetch(`/rest/tutorial/addUserGroup/\${id}`, {
           method: "post",
           body: emailSelector.value
 
@@ -121,7 +121,7 @@
       document.getElementById("del").addEventListener("click", () => {
 
         // Appel à l'api pour ajouter une personne à la BDD
-        fetch(`http://localhost:8080/Volundr/rest/tutorial/delUserGroup/\${id}`, {
+        fetch(`/rest/tutorial/delUserGroup/\${id}`, {
           method: "post",
           body: emailSelector.value
 
@@ -137,7 +137,7 @@
       document.getElementById("addG").addEventListener("click", () => {
 
         // Appel à l'api pour ajouter une personne à la BDD
-        fetch(`http://localhost:8080/Volundr/rest/tutorial/addUsersFromGroupToGroup/\${id}`, {
+        fetch(`/rest/tutorial/addUsersFromGroupToGroup/\${id}`, {
           method: "post",
           body: groupSelector.value
 
@@ -153,7 +153,7 @@
       document.getElementById("delG").addEventListener("click", () => {
 
         // Appel à l'api pour ajouter une personne à la BDD
-        fetch(`http://localhost:8080/Volundr/rest/tutorial/delUsersFromGroupOfGroup/\${id}`, {
+        fetch(`/rest/tutorial/delUsersFromGroupOfGroup/\${id}`, {
           method: "post",
           body: groupSelector.value
 
@@ -168,14 +168,14 @@
 
       // actualiser l'affichage au chargement de la page
       document.getElementById("valider").addEventListener("click", () => {
-        fetch(`http://localhost:8080/Volundr/rest/tutorial/creerGroupe/\${id}`, {
+        fetch(`/rest/tutorial/creerGroupe/\${id}`, {
           method: "post",
 
           // Make sure to serialize your JSON body
 
         }).then(async (response) => {
           // Do something awesome that makes the world a better place
-          window.location = `http://localhost:8080/Volundr/index.jsp`;
+          window.location = `/index.jsp`;
 
         });
 
