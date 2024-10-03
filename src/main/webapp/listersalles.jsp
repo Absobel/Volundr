@@ -18,7 +18,7 @@
         </body>
 
         <script>
-            fetch("http://localhost:8080/Volundr/rest/tutorial/getEtablissements", {
+            fetch("/rest/tutorial/getEtablissements", {
                 method: "get"
             }).then(async (response) => {
                 const etablissements = await response.json();

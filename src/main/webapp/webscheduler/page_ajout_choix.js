@@ -46,7 +46,7 @@ function scoreToColor(score) {
  * et sur le serveur) */
 function updateScore(creneau) {
 
-  fetch(`http://localhost:8080/Volundr/rest/tutorial/addChoixUserCase/${user}/${creneau.getAttribute('data-id')}`, {
+  fetch(`/rest/tutorial/addChoixUserCase/${user}/${creneau.getAttribute('data-id')}`, {
     method: "post",
     headers: {
       'Accept': 'application/json',
@@ -87,7 +87,7 @@ function addSalleScheduler(idSalle, nomSalle) {
  * et mettre à jour l'affichage */
 function getUserChoices(params) {
   // Récupérer tous les choix fait par l'utilisateur pour cet événement
-  fetch(`http://localhost:8080/Volundr/rest/tutorial/getChoixEvent/${id}/${user}`)
+  fetch(`/rest/tutorial/getChoixEvent/${id}/${user}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -104,7 +104,7 @@ function getUserChoices(params) {
 
 function updateAffichage() {
   // Récupérer la liste des créneaux de l'event et les ajouter dans le scheduler
-  fetch(`http://localhost:8080/Volundr/rest/tutorial/getCasesEvent/${id}`)
+  fetch(`/rest/tutorial/getCasesEvent/${id}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
