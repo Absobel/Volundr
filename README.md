@@ -1,5 +1,15 @@
 ![image](rapport/inp_n7.png){width="5cm"}
 
+# TLDR: Je veux juste run le projet !!
+
+1. Installez maven et la dernière version d'openjdk
+2. Executez `mvn clean package` pour build le projet
+3. Executez `./target/server/bin/standalone.sh` pour lancer le projet
+4. Allez à l'adresse `http://127.0.0.1:8080/` dans votre navigateur web
+5. Pour vous connecter en admin, utilisez le login "teopisenti@gmail.com" et le mot de passe "password"
+
+*Les valeurs par défaut de la base de donnée sont définies dans les fichiers situés dans ./src/main/resources/META-INF/loaderFiles/*
+
 # Introduction
 
 L'objectif de notre application $Volundr$ est de proposer une solution
