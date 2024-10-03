@@ -1,8 +1,9 @@
 package controller;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -233,7 +234,7 @@ public class Facade {
     Utilisateur user = em.find(Utilisateur.class, mail);
     if (user != null) {
       if (user.getPassword().equals(password)) {
-        return user;
+	return user;
       }
     }
     return null;
@@ -293,7 +294,7 @@ public class Facade {
    */
   public List<Utilisateur> listeUsers() {
     return em.createQuery("SELECT u FROM Utilisateur u",
-        Utilisateur.class).getResultList();
+	Utilisateur.class).getResultList();
   }
 
   /**
@@ -303,7 +304,7 @@ public class Facade {
    */
   public List<Groupe> listeGroupes() {
     return em.createQuery("SELECT g FROM Groupe g",
-        Groupe.class).getResultList();
+	Groupe.class).getResultList();
   }
 
   /**
@@ -313,7 +314,7 @@ public class Facade {
    */
   public List<Salle> listeSalles() {
     return em.createQuery("SELECT s FROM Salle s",
-        Salle.class).getResultList();
+	Salle.class).getResultList();
   }
 
   /**
@@ -323,7 +324,7 @@ public class Facade {
    */
   public List<Etablissement> listeEtablissements() {
     return em.createQuery("SELECT e FROM Etablissement e",
-        Etablissement.class).getResultList();
+	Etablissement.class).getResultList();
   }
 
   /**
@@ -333,7 +334,7 @@ public class Facade {
    */
   public List<Evenement> listeEvenements() {
     return em.createQuery("SELECT e FROM Evenement e",
-        Evenement.class).getResultList();
+	Evenement.class).getResultList();
   }
 
   /**
@@ -346,8 +347,8 @@ public class Facade {
    */
   public List<Choix> listeChoixEventUser(int eventId, String mail) {
     return em.createQuery(
-        "SELECT c FROM Choix c JOIN c.utilisateurCh user JOIN c.caseCh caseselect JOIN caseselect.evenementC ev WHERE user.mail=:usermail AND ev.id=:eventid",
-        Choix.class).setParameter("usermail", mail).setParameter("eventid", eventId).getResultList();
+	"SELECT c FROM Choix c JOIN c.utilisateurCh user JOIN c.caseCh caseselect JOIN caseselect.evenementC ev WHERE user.mail=:usermail AND ev.id=:eventid",
+	Choix.class).setParameter("usermail", mail).setParameter("eventid", eventId).getResultList();
   }
 
   /**
@@ -521,9 +522,9 @@ public class Facade {
     Groupe groupe = em.find(Groupe.class, groupeId);
     if (!(groupe == null)) {
       if (!(event == null)) {
-        for (Utilisateur u : groupe.getUtilisateurs()) {
-          event.getGroupeE().addUser(u);
-        }
+	for (Utilisateur u : groupe.getUtilisateurs()) {
+	  event.getGroupeE().addUser(u);
+	}
       }
     }
   }
@@ -539,9 +540,9 @@ public class Facade {
     Groupe groupe = trouverGroupe(groupeId);
     if (!(newGroupe == null)) {
       if (!(groupe == null)) {
-        for (Utilisateur u : groupe.getUtilisateurs()) {
-          newGroupe.addUser(u);
-        }
+	for (Utilisateur u : groupe.getUtilisateurs()) {
+	  newGroupe.addUser(u);
+	}
       }
     }
   }
@@ -557,7 +558,7 @@ public class Facade {
     Utilisateur user = em.find(Utilisateur.class, mail);
     if (!(groupe == null)) {
       if (!(user == null)) {
-        groupe.getUtilisateurs().add(user);
+	groupe.getUtilisateurs().add(user);
       }
     }
   }
@@ -574,11 +575,11 @@ public class Facade {
     Groupe groupe = em.find(Groupe.class, groupeId);
     if (!(groupe == null)) {
       if (!(event == null)) {
-        for (Utilisateur u : groupe.getUtilisateurs()) {
-          if (event.getGroupeE().getUtilisateurs().contains(u)) {
-            event.getGroupeE().delUser(u);
-          }
-        }
+	for (Utilisateur u : groupe.getUtilisateurs()) {
+	  if (event.getGroupeE().getUtilisateurs().contains(u)) {
+	    event.getGroupeE().delUser(u);
+	  }
+	}
       }
     }
   }
@@ -596,11 +597,11 @@ public class Facade {
     Groupe groupe = trouverGroupe(groupeId);
     if (!(groupe == null)) {
       if (!(newGroupe == null)) {
-        for (Utilisateur u : groupe.getUtilisateurs()) {
-          if (newGroupe.getUtilisateurs().contains(u)) {
-            newGroupe.delUser(u);
-          }
-        }
+	for (Utilisateur u : groupe.getUtilisateurs()) {
+	  if (newGroupe.getUtilisateurs().contains(u)) {
+	    newGroupe.delUser(u);
+	  }
+	}
       }
     }
   }
@@ -697,7 +698,7 @@ public class Facade {
 
       /* On ajoute les cases que l'utilisateur a noté */
       for (Choix c : user.getChoix())
-        choixTotauxUser.add(new ChoixDTO(c));
+	choixTotauxUser.add(new ChoixDTO(c));
 
       /*
        * On ré-ajoute toutes les cases en créant des choix fictifs au cas
@@ -706,18 +707,18 @@ public class Facade {
        * re-ajouté
        */
       for (MaCase creneau : event.getCases()) {
-        /*
-         * On crée virtuellement un choix qu'on convertit ensuite en ChoixDTO.
-         * Cette entitée ne sera pas ajoutée à la base de données
-         */
-        Choix c = new Choix();
-        c.setUtilisateurCh(user);
-        c.setCaseCh(creneau);
-        c.setNote(Choix.NOTE_DEFAUT); /* note par défaut */
-        choixTotauxUser.add(new ChoixDTO(c)); /*
-                                               * le set ajoute uniquement
-                                               * si n'existe pas déjà
-                                               */
+	/*
+	 * On crée virtuellement un choix qu'on convertit ensuite en ChoixDTO.
+	 * Cette entitée ne sera pas ajoutée à la base de données
+	 */
+	Choix c = new Choix();
+	c.setUtilisateurCh(user);
+	c.setCaseCh(creneau);
+	c.setNote(Choix.NOTE_DEFAUT); /* note par défaut */
+	choixTotauxUser.add(new ChoixDTO(c)); /*
+					       * le set ajoute uniquement
+					       * si n'existe pas déjà
+					       */
       }
 
       /* On va maintenant trier par ordre décroissant de notes */
@@ -730,12 +731,12 @@ public class Facade {
        * notes grace au SortedSet)
        */
       for (ChoixDTO c : choixTries) {
-        MaCase realCase = trouverMaCase(c.getCaseCh().getId());
-        if (realCase.getUsagerChoisi() == null) {
-          realCase.setUsagerChoisi(user);
-          em.merge(realCase); /* pas sur que ce soit nécessaire */
-          break; /* passer à l'user suivant */
-        }
+	MaCase realCase = trouverMaCase(c.getCaseCh().getId());
+	if (realCase.getUsagerChoisi() == null) {
+	  realCase.setUsagerChoisi(user);
+	  em.merge(realCase); /* pas sur que ce soit nécessaire */
+	  break; /* passer à l'user suivant */
+	}
       }
       em.merge(event);
     }
@@ -747,21 +748,21 @@ public class Facade {
    *
    */
   public void userLoader() {
-    try (BufferedReader userReader = new BufferedReader(
-        new FileReader("Volundr/src/main/webapp/loaderFiles/user.txt"))) {
+    try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/loaderFiles/user.txt");
+	BufferedReader userReader = new BufferedReader(new InputStreamReader(in))) {
       String ligne;
 
       while ((ligne = userReader.readLine()) != null) {
-        String[] mots = ligne.split(" ");
-        String prenom = mots[0];
-        String nom = mots[1];
-        String mail = mots[2];
-        String password = mots[3];
-        boolean isAdmin = false;
-        if (mots.length > 4) {
-          isAdmin = Boolean.parseBoolean(mots[4]);
-        }
-        ajoutUtilisateur(nom, prenom, mail, password, isAdmin);
+	String[] mots = ligne.split(" ");
+	String prenom = mots[0];
+	String nom = mots[1];
+	String mail = mots[2];
+	String password = mots[3];
+	boolean isAdmin = false;
+	if (mots.length > 4) {
+	  isAdmin = Boolean.parseBoolean(mots[4]);
+	}
+	ajoutUtilisateur(nom, prenom, mail, password, isAdmin);
       }
 
     } catch (IOException e) {
@@ -776,12 +777,12 @@ public class Facade {
    *
    */
   public void etablissementLoader() {
-    try (BufferedReader etablissementReader = new BufferedReader(
-        new FileReader("Volundr/src/main/webapp/loaderFiles/etablissement.txt"))) {
+    try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/loaderFiles/etablissement.txt");
+	BufferedReader etablissementReader = new BufferedReader(new InputStreamReader(in))) {
       String ligne;
 
       while ((ligne = etablissementReader.readLine()) != null) {
-        ajoutEtablissement(ligne);
+	ajoutEtablissement(ligne);
       }
 
     } catch (IOException e) {
@@ -796,17 +797,17 @@ public class Facade {
    *
    */
   public void salleLoader() {
-    try (BufferedReader etablissementReader = new BufferedReader(
-        new FileReader("Volundr/src/main/webapp/loaderFiles/salle.txt"))) {
+    try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/loaderFiles/salle.txt");
+	BufferedReader etablissementReader = new BufferedReader(new InputStreamReader(in))) {
       String ligne;
 
       while ((ligne = etablissementReader.readLine()) != null) {
-        String[] mots = ligne.split(" ");
-        int etab = Integer.parseInt(mots[0]);
-        String bat = mots[1];
-        int num = Integer.parseInt(mots[2]);
-        int cap = Integer.parseInt(mots[3]);
-        ajoutSalle(bat, num, cap, etab);
+	String[] mots = ligne.split(" ");
+	int etab = Integer.parseInt(mots[0]);
+	String bat = mots[1];
+	int num = Integer.parseInt(mots[2]);
+	int cap = Integer.parseInt(mots[3]);
+	ajoutSalle(bat, num, cap, etab);
       }
     } catch (IOException e) {
       // TODO Auto-generated catch block
@@ -820,20 +821,20 @@ public class Facade {
    *
    */
   public void groupLoader() {
-    try (BufferedReader etablissementReader = new BufferedReader(
-        new FileReader("Volundr/src/main/webapp/loaderFiles/groupe.txt"))) {
+    try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/loaderFiles/groupe.txt");
+	BufferedReader etablissementReader = new BufferedReader(new InputStreamReader(in))) {
       String ligne;
 
       while ((ligne = etablissementReader.readLine()) != null) {
-        String[] mots1 = ligne.split("\\|");
-        String groupeName = mots1[0];
-        String[] mots2 = mots1[1].split(" ");
-        Set<Utilisateur> users = new HashSet<>();
-        for (String mail : mots2) {
-          Utilisateur user = trouverUtilisateur(mail);
-          users.add(user);
-        }
-        ajoutGroupe(groupeName, users);
+	String[] mots1 = ligne.split("\\|");
+	String groupeName = mots1[0];
+	String[] mots2 = mots1[1].split(" ");
+	Set<Utilisateur> users = new HashSet<>();
+	for (String mail : mots2) {
+	  Utilisateur user = trouverUtilisateur(mail);
+	  users.add(user);
+	}
+	ajoutGroupe(groupeName, users);
       }
 
     } catch (IOException e) {
@@ -903,7 +904,7 @@ public class Facade {
     MaCase res = new MaCase();
     for (MaCase c : event.getCases()) {
       if (c.getUsagerChoisi() == user) {
-        res = c;
+	res = c;
       }
     }
     return res;
