@@ -1,4 +1,4 @@
-![image](rapport/inp_n7.png){width="5cm"}
+<img src="rapport/inp_n7.png" style="width:5cm;">
 
 # TLDR: Je veux juste run le projet !!
 
